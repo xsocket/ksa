@@ -71,7 +71,8 @@ public class MybatisAccountDao extends AbstractMybatisDao implements AccountDao 
     public int querySimilarAccountCodeCount( String code ) throws RuntimeException {
         Map<String, String> para = new HashMap<String, String>();
         para.put( "code", code );
-        return this.session.selectOne( "select-finance-account-similar-code-count", para );
+        Integer count = this.session.selectOne( "select-finance-account-similar-code-count", para );
+        return count.intValue();
     }
 
     

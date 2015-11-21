@@ -19,6 +19,7 @@ import com.ksa.dao.DateQueryClause;
 import com.ksa.dao.QueryClause;
 import com.ksa.dao.TextQueryClause;
 import com.ksa.dao.mybatis.session.RowBounds;
+import com.ksa.service.security.util.SecurityUtils;
 import com.ksa.util.StringUtils;
 import com.ksa.web.struts2.action.data.GridDataActionSupport;
 import com.ksa.web.struts2.action.logistics.bookingnote.query.BookingNoteStateQueryClause;
@@ -234,11 +235,34 @@ public class BookingNoteQueryAction extends GridDataActionSupport {
                 }
             }
         }
+        
+        //按权限过滤
+        permissionFilter(clauseList);
+        
         if( clauseList.size() > 0 ) {
             paras.put( "queryClauses", clauseList.toArray() );
         }
         
         return paras;
+    }
+    
+    /**
+     * 根据权限过滤查询参数
+     * @param paras
+     * @return
+     */
+    private void permissionFilter(Collection<String> clauseList) {
+      
+      if(SecurityUtils.isPermitted( "bookingnote:viewall" )) {
+        // 如果具有查看所有数据的权限，则不进行参数过滤
+        return;
+      } else if(SecurityUtils.isPermitted( "bookingnote:edit:view" )) {
+        // 如果仅能查看自己的单子，则进行个人过滤
+        // 只能查看自己创建的 或者 自己负责销售 的单子
+        String userId = SecurityUtils.getCurrentUser().getId();
+        String query = " (bn.CREATOR_ID = '" + userId + "' OR bn.SALER_ID = '" + userId + "') ";
+        clauseList.add(query);
+      }
     }
     
     protected  Map<String, QueryClause> getQueryClauseMap() {

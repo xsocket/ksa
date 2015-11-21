@@ -80,7 +80,8 @@ public class InvoiceQueryAction extends GridDataActionSupport {
                 List<Object> gridDataList = sqlSession.selectList( getQueryDataStatement(), paras, new RowBounds( this.page, this.rows ) );
                 if( gridDataList != null && !gridDataList.isEmpty() ) {
                     gridDataArray = gridDataList.toArray();
-                    gridDataCount = sqlSession.selectOne( getQueryCountStatement(), paras );
+                    Integer queryCount = sqlSession.selectOne( getQueryCountStatement(), paras );
+                    gridDataCount = queryCount.intValue();
                 }
             } catch( Throwable e ) {
                 log.warn( "查询数据失败。", e );
