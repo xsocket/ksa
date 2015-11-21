@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="ksa-component-security" extends="ksa-default" namespace="/component/security">
+	
+		<!-- 用户选择组件 -->
+		<action name="user-selection">
+			<result>/ui/security/component/user-selection.ftl</result>
+		</action>
+		
+		<!-- 角色选择组件 -->
+		<action name="role-selection">
+			<result>/ui/security/component/role-selection.ftl</result>
+		</action>
+		
+		<!-- 权限选择组件 -->
+		<action name="permission-selection">
+			<result>/ui/security/component/permission-selection.ftl</result>
+		</action>
+	</package>
+</struts>

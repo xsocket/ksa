@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	<!-- KSA Mysql环境 -->
+	<bean id="testDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://127.0.0.1/ksa_logistics" />
+		<property name="username" value="root" />
+		<property name="password" value="ksab915" />
+		<!-- <property name="password" value="550428" /> -->
+	</bean> 
+	
+	  
+	<alias name="testDataSource" alias="dataSource" />
+
+	<!-- dao -->
+	<import resource="classpath:spring/dao/dao-config.xml" />
+	
+	<!-- service -->
+	<import resource="classpath*:spring/service/*-service-context.xml" />
+
+</beans>

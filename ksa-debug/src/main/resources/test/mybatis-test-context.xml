@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- H2 测试数据源 -->
+	<bean id="testDataSource" class="com.ksa.h2.H2DataSourceFactoryBean">
+		<property name="url" value="jdbc:h2:mem:" />
+		<property name="initSqlScripts">
+			<list>
+				<!-- 初始化 表结构 与 数据 -->
+				<value>init.sql</value>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="testDataSource" alias="dataSource" />
+
+	<import resource="classpath:spring/dao/dao-config.xml" />
+
+</beans>

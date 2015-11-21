@@ -1,0 +1,40 @@
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	
+	<!-- 提单确认 -->
+	<package name="logistics-billoflading-dialog" extends="ksa-default" namespace="/dialog/logistics/billoflading">
+		<result-types>
+			<!-- 导出word excel文件 -->
+			<result-type name="freemarker-stream" class="com.ksa.web.struts2.views.freemarker.FreemarkerStreamResult">
+				<param name="contentType">application/xhtml+xml</param>
+				<param name="contentDisposition">attachment;filename="${filename}"</param>
+			</result-type>
+		</result-types>
+		
+		<action name="edit-*" class="com.ksa.web.struts2.action.logistics.billoflading.BillOfLadingAction">
+			<result name="success">/ui/logistics/{1}/billoflading.ftl</result>
+		</action>
+		
+		<action name="save-*" class="com.ksa.web.struts2.action.logistics.billoflading.BillOfLadingSaveAction">
+			<result name="success">/ui/logistics/{1}/billoflading.ftl</result>
+			<result name="input">/ui/logistics/{1}/billoflading.ftl</result>
+		</action>
+		
+		<action name="delete-*" class="com.ksa.web.struts2.action.logistics.billoflading.BillOfLadingDeleteAction">
+			<result name="success">/ui/logistics/{1}/billoflading.ftl</result>
+			<result name="input">/ui/logistics/{1}/billoflading.ftl</result>
+		</action>
+		
+		<action name="download-*" class="com.ksa.web.struts2.action.logistics.billoflading.BillOfLadingDownloadAction">
+			<result name="success" type="freemarker-stream">/ui/logistics/{1}/billoflading-${type}.ftl</result>
+		</action>
+		
+		<!-- 新的Excel下载 -->
+		<action name="poi-download" class="com.ksa.web.struts2.action.logistics.billoflading.BillOfLadingPoiDownloadAction" />
+		<action name="poi-download-copy" class="com.ksa.web.struts2.action.logistics.billoflading.BillOfLadingCopyPoiDownloadAction" />
+		
+	</package>
+	
+</struts>

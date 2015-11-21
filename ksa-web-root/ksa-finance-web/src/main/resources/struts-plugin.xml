@@ -1,0 +1,12 @@
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<include file="struts2/struts-finance-component.xml"></include>
+	<include file="struts2/struts-finance-charge.xml"></include>
+	<include file="struts2/struts-finance-charge-single.xml"></include><!-- 将收入/支出分开的费用管理 --> 
+	<include file="struts2/struts-finance-invoice.xml"></include>
+	<include file="struts2/struts-finance-account.xml"></include>
+	<include file="struts2/struts-finance-profit.xml"></include>
+	<include file="struts2/struts-finance-recordbill.xml"></include>
+</struts>

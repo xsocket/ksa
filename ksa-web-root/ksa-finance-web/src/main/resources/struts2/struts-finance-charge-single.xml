@@ -1,0 +1,47 @@
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 费用管理 -->
+	<package name="finance-charge-single" extends="ksa-default" namespace="/ui/finance/charge/single">
+		<action name="default" class="com.ksa.web.struts2.action.finance.charge.single.ChargeSingleAction">
+			<result>/ui/finance/charge-single/default.ftl</result>
+		</action>
+		<action name="checking" class="com.ksa.web.struts2.action.finance.charge.single.ChargeSingleAction">
+			<result>/ui/finance/charge-single/checking.ftl</result>
+		</action>
+	</package>
+	<!-- 费用 portal -->
+<!-- 	<package name="finance-charge-portal" extends="ksa-default" namespace="/portal/finance/charge">
+		<action name="default">
+			<result>/portal/finance/charge/default.ftl</result>
+		</action>
+	</package>	 -->
+	
+	<!-- 费用录入 -->
+	<package name="finance-charge-single-dialog" extends="ksa-default" namespace="/dialog/finance/charge/single">																									
+		<action name="view" class="com.ksa.web.struts2.action.finance.charge.single.ChargeSingleEditAction">
+			<result>/ui/finance/charge-single/view.ftl</result>
+		</action>
+		<action name="save" class="com.ksa.web.struts2.action.finance.charge.single.ChargeSingleSaveAction">
+			<result>/ui/finance/charge-single/view.ftl</result>
+		</action>
+		<action name="state" class="com.ksa.web.struts2.action.finance.charge.single.ChargeSingleStateAction">
+			<result name="success" type="json" />
+			<result name="error" type="json" />
+		</action>
+	</package>
+	
+	<!-- 费用数据查询 -->
+	<package name="finance-charge-single-data" extends="ksa-default" namespace="/data/finance/charge/single">
+		<action name="query" class="com.ksa.web.struts2.action.finance.charge.single.ChargeSingleQueryAction">
+			<result name="success" type="json" >
+				<param name="contentType">application/json</param>
+            	<param name="excludeNullProperties">true</param>
+            	<param name="ignoreHierarchy">false</param>
+            	<param name="enableGZIP">true</param>
+            	<param name="root">gridData</param>
+			</result>
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ksa-bd">
+
+	<resultMap type="com.ksa.model.bd.Currency" id="result-bd-currency">
+		<id column="ID" property="id" javaType="String" />
+		<result column="CODE" property="code" javaType="String" />
+		<result column="NAME" property="name" javaType="String" />
+		<result column="ALIAS" property="alias" javaType="String"/>
+		<result column="NOTE" property="note" javaType="String"/>
+		<result column="EXTRA" property="extra" javaType="String"/>
+		<result column="RANK" property="rank" javaType="int"/>
+	</resultMap>
+	
+	<!-- 查询所有结算货币-->
+	<select id="select-bd-currency" resultMap="result-bd-currency">
+		SELECT ID, CODE, NAME, ALIAS, NOTE, EXTRA, RANK
+		FROM KSA_BD_DATA
+		WHERE TYPE_ID = '00-currency'
+		<if test="value != null">
+			AND ID = #{value}
+		</if>
+		ORDER BY RANK ASC
+	</select>
+	
+</mapper>

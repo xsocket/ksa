@@ -1,0 +1,7 @@
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<include file="struts2/struts-statistics-profit.xml"></include>
+	<include file="struts2/struts-statistics-cargo.xml"></include>
+</struts>

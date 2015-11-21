@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ksa-logistics">
+	<!-- 提单确认模型 -->
+	<resultMap type="com.ksa.model.logistics.BillOfLading" id="result-logistics-billoflading">
+		<id column="ID" property="id" javaType="String" />
+		<result column="TARGET" property="to" javaType="String" />
+		<result column="PUBLISH_DATE" property="publishDate" javaType="String" />
+		<result column="SHIPPER" property="shipper" javaType="String" />
+		<result column="CONSIGNEE" property="consignee" javaType="String" />
+		<result column="NOTIFY" property="notify" javaType="String" />
+		<result column="CODE" property="code" javaType="String" />
+		<result column="DELIVER_TYPE" property="deliverType" javaType="String" />
+		<result column="CUSTOMER_CODE" property="customerCode" javaType="String" />
+		<result column="SELF_CODE" property="selfCode" javaType="String" />
+		<result column="CREATOR" property="creator" javaType="String" />
+		<result column="BILL_TYPE" property="billType" javaType="String" />
+		<result column="NOTE" property="note" javaType="String" />
+		<result column="AGENT" property="agent" javaType="String" />
+		<result column="VESSEL_VOYAGE" property="vesselVoyage" javaType="String" />
+		<result column="LOADING_PORT" property="loadingPort" javaType="String" />
+		<result column="DISCHARGE_PORT" property="dischargePort" javaType="String" />
+		<result column="DESTINATION_PORT" property="destinationPort" javaType="String" />
+		
+		<result column="CARGO_MARK" property="cargoMark" javaType="String" />
+		<result column="CARGO_QUANTITY" property="cargoQuantity" javaType="String" />
+		<result column="CARGO_NAME" property="cargoName" javaType="String" />	
+		<result column="CARGO_WEIGHT" property="cargoWeight" javaType="String" />
+		<result column="CARGO_VOLUMN" property="cargoVolumn" javaType="String" />
+		<result column="CARGO_DESCRIPTION" property="cargoDescription" javaType="String" />
+		<result column="CARGO_QUANTITY_DESCRIPTION" property="cargoQuantityDescription" javaType="String" />
+		
+		<result column="PAY_MODE" property="payMode" javaType="String" />
+		
+		<association column="BOOKINGNOTE_ID" property="bookingNote" select="select-logistics-bookingnote-basic-byid" />
+	</resultMap>
+	
+	<insert id="insert-logistics-billoflading" parameterType="com.ksa.model.logistics.BillOfLading">
+		INSERT INTO KSA_LOGISTICS_BILLOFLADING
+						(  ID, 	TARGET, 	PUBLISH_DATE, 		SHIPPER, 	CONSIGNEE, NOTIFY, CODE,  						
+						DELIVER_TYPE, CUSTOMER_CODE, SELF_CODE, CREATOR, BILL_TYPE,
+						NOTE, AGENT, VESSEL_VOYAGE, LOADING_PORT, DISCHARGE_PORT, DESTINATION_PORT, 
+						CARGO_MARK, CARGO_QUANTITY, CARGO_NAME,CARGO_WEIGHT, CARGO_VOLUMN, CARGO_DESCRIPTION, 
+						CARGO_QUANTITY_DESCRIPTION, PAY_MODE, BOOKINGNOTE_ID  )
+		VALUES ( 	#{id,jdbcType=VARCHAR},  #{to,jdbcType=VARCHAR}, 	#{publishDate,jdbcType=VARCHAR},	#{shipper,jdbcType=VARCHAR}, #{consignee,jdbcType=VARCHAR},#{notify,jdbcType=VARCHAR},#{code,jdbcType=VARCHAR},
+			 		#{deliverType,jdbcType=VARCHAR}, #{customerCode,jdbcType=VARCHAR}, #{selfCode,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{billType,jdbcType=VARCHAR}, 
+			 		#{note,jdbcType=VARCHAR},#{agent,jdbcType=VARCHAR},#{vesselVoyage,jdbcType=VARCHAR},#{loadingPort,jdbcType=VARCHAR},#{dischargePort,jdbcType=VARCHAR}, #{destinationPort,jdbcType=VARCHAR}, 
+			 		#{cargoMark,jdbcType=VARCHAR}, #{cargoQuantity,jdbcType=VARCHAR}, #{cargoName,jdbcType=VARCHAR}, #{cargoWeight,jdbcType=VARCHAR},#{cargoVolumn,jdbcType=VARCHAR},#{cargoDescription,jdbcType=VARCHAR},
+			 		#{cargoQuantityDescription,jdbcType=VARCHAR}, #{payMode,jdbcType=VARCHAR}, #{bookingNote.id} )	
+	</insert>
+	
+	<update id="update-logistics-billoflading" parameterType="com.ksa.model.logistics.BillOfLading">
+		UPDATE KSA_LOGISTICS_BILLOFLADING SET
+			TARGET					= #{to,jdbcType=VARCHAR},
+			PUBLISH_DATE			= #{publishDate,jdbcType=VARCHAR},
+			SHIPPER					= #{shipper,jdbcType=VARCHAR},
+			CONSIGNEE				= #{consignee,jdbcType=VARCHAR},
+			NOTIFY					= #{notify,jdbcType=VARCHAR},
+			CODE						= #{code,jdbcType=VARCHAR},
+			DELIVER_TYPE			= #{deliverType,jdbcType=VARCHAR},
+			CUSTOMER_CODE	= #{customerCode,jdbcType=VARCHAR}, 
+			SELF_CODE				= #{selfCode,jdbcType=VARCHAR}, 
+			CREATOR					= #{creator,jdbcType=VARCHAR}, 
+			BILL_TYPE					= #{billType,jdbcType=VARCHAR}, 
+			NOTE						= #{note,jdbcType=VARCHAR},
+			AGENT						= #{agent,jdbcType=VARCHAR},
+			VESSEL_VOYAGE		= #{vesselVoyage,jdbcType=VARCHAR},
+			LOADING_PORT		= #{loadingPort,jdbcType=VARCHAR},
+			DISCHARGE_PORT	= #{dischargePort,jdbcType=VARCHAR},
+			DESTINATION_PORT= #{destinationPort,jdbcType=VARCHAR},
+			CARGO_MARK			= #{cargoMark,jdbcType=VARCHAR}, 
+			CARGO_QUANTITY	= #{cargoQuantity,jdbcType=VARCHAR}, 
+			CARGO_NAME			= #{cargoName,jdbcType=VARCHAR}, 
+			CARGO_WEIGHT		= #{cargoWeight,jdbcType=VARCHAR},
+			CARGO_VOLUMN	= #{cargoVolumn,jdbcType=VARCHAR},
+			CARGO_DESCRIPTION = #{cargoDescription,jdbcType=VARCHAR},
+			PAY_MODE				= #{payMode,jdbcType=VARCHAR},
+			CARGO_QUANTITY_DESCRIPTION = #{cargoQuantityDescription,jdbcType=VARCHAR}
+		WHERE ID = #{id,jdbcType=VARCHAR}
+	</update>
+	
+	<delete id="delete-logistics-billoflading" parameterType="com.ksa.model.logistics.BillOfLading">
+		DELETE FROM KSA_LOGISTICS_BILLOFLADING WHERE ID = #{id,jdbcType=VARCHAR}
+	</delete>
+	
+	<select id="select-logistics-billoflading-byid" resultMap="result-logistics-billoflading">
+		SELECT * FROM KSA_LOGISTICS_BILLOFLADING
+		WHERE ID = #{id,jdbcType=VARCHAR}
+	</select>
+	<select id="select-logistics-billoflading-bybnid" resultMap="result-logistics-billoflading">
+		SELECT * FROM KSA_LOGISTICS_BILLOFLADING
+		WHERE BOOKINGNOTE_ID = #{bookingNoteId,jdbcType=VARCHAR}
+	</select>
+</mapper>

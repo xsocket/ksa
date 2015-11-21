@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- 依赖 logistics-dao-context 中定义的各个 dao 对象。  -->
+	<bean id="bookingNoteService" class="com.ksa.service.logistics.impl.BookingNoteServiceImpl">
+		<property name="bookingNoteDao" ref="bookingNoteDao" />
+		<property name="bookingNoteCargoDao" ref="bookingNoteCargoDao" />
+	</bean>
+	
+</beans>

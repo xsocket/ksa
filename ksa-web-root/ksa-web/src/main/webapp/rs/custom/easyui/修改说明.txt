@@ -1,0 +1,27 @@
+datagrid.js
+	1. 修改默认属性值：singleSelect=true，rownumbers=true，pagination=true，fitColumns=true, stripe=true
+
+tabs.js
+	1. 修改默认属性值：plain=true
+	
+form.js
+	1. 修改 ajax 提交表单的功能，仅保留表单验证的功能。
+	
+validatebox.js
+	1. 新增了验证规则 script，并增加了验证规则的属性 forceValidte
+validatebox.css
+	1. validatebox-tip 类型的宽度从 250px 减为 150px 
+	
+parser.js
+	1. 将 "form" 插件加入到自动解析队列
+	
+window.js
+	1. 增加 $.open 和 $.close 方法
+	
+combobox.js
+	1. 增加高亮算法
+	2. 改进 filter 算法
+	3. 增加 code 列
+	
+panel.cs
+	1. .panel-noscroll 样式中 overflow 属性加入了 !important

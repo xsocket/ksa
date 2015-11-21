@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ksa-finance">
+
+	<resultMap type="com.ksa.model.logistics.BookingNote" id="result-finance-bookingnote-basic">
+		<id column="ID" property="id" javaType="String" />
+		<result column="CODE" property="code" javaType="String" />
+		<result column="TYPE" property="type" javaType="String" />
+		<result column="SERIAL_NUMBER" property="serialNumber" javaType="int" />
+		<result column="CREATED_DATE" property="createdDate" javaType="Date" />
+		<result column="CHARGE_DATE" property="chargeDate" javaType="Date" />
+		<result column="INVOICE_NUMBER" property="invoiceNumber" javaType="String" />
+		
+		<result column="CARGO_NAME" property="cargoName" javaType="String" />	
+		<result column="CARGO_NOTE" property="cargoNote" javaType="String" />
+		<result column="CARGO_DESCRIPTION" property="cargoDescription" javaType="String" />
+		<result column="CARGO_CONTAINER" property="cargoContainer" javaType="String" />
+		<result column="SHIPPING_MARK" property="shippingMark" javaType="String" />
+		<result column="VOLUMN" property="volumn" javaType="float" />
+		<result column="WEIGHT" property="weight" javaType="float" />
+		<result column="QUANTITY" property="quantity" javaType="int" />
+		<result column="UNIT" property="unit" javaType="String" />
+		<result column="QUANTITY_DESCRIPTION" property="quantityDescription" javaType="String" />
+		
+		<result column="TITLE" property="title" javaType="String" />
+		<result column="MAWB" property="mawb" javaType="String" />
+		<result column="HAWB" property="hawb" javaType="String" />
+		
+		<result column="DEPARTURE" property="departure" javaType="String" />
+		<result column="DEPARTURE_PORT" property="departurePort" javaType="String" />
+		<result column="DEPARTURE_DATE" property="departureDate" javaType="Date" />
+		<result column="DESTINATION" property="destination" javaType="String"/>
+		<result column="DESTINATION_PORT" property="destinationPort" javaType="String"/>
+		<result column="DESTINATION_DATE" property="destinationDate" javaType="Date" />
+		<result column="LOADING_PORT" property="loadingPort" javaType="String" />
+		<result column="DISCHARGE_PORT" property="dischargePort" javaType="String" />
+		<result column="DELIVER_DATE" property="deliverDate" javaType="Date" />
+		
+		<result column="ROUTE" property="route" javaType="String"/>
+		<result column="ROUTE_NAME" property="routeName" javaType="String"/>
+		<result column="ROUTE_CODE" property="routeCode" javaType="String"/>
+		
+		<result column="CUSTOMS_CODE" property="customsCode" javaType="String"/>
+		<result column="CUSTOMS_DATE" property="customsDate" javaType="Date"/>
+		<result column="RETURN_CODE" property="returnCode" javaType="String"/>
+		<result column="RETURN_DATE" property="returnDate" javaType="Date"/>
+		<result column="TAX_CODE" property="taxCode" javaType="String"/>
+		<result column="TAX_DATE1" property="taxDate1" javaType="Date"/>
+		<result column="EXPRESS_CODE" property="expressCode" javaType="String"/>
+		<result column="TAX_DATE2" property="taxDate2" javaType="Date"/>
+		
+		<result column="VEHICLE_TYPE" property="vehicleType" javaType="String"/>
+		<result column="VEHICLE_NUMBER" property="vehicleNumber" javaType="String"/>
+		
+		<result column="STATE" property="state" javaType="int"/>
+
+		<association column="CUSTOMER_ID" property="customer" javaType="com.ksa.model.bd.Partner">
+			<id column="CUSTOMER_ID" property="id" />
+			<result column="CUSTOMER_NAME" property="name" />
+		</association>
+		<association column="SALER_ID" property="saler" javaType="com.ksa.model.security.User">
+			<id column="SALER_ID" property="id" />
+			<result column="SALER_NAME" property="name" />
+		</association>
+		<association column="CREATOR_ID" property="creator" javaType="com.ksa.model.security.User">
+			<id column="CREATOR_ID" property="id" />
+			<result column="CREATOR_NAME" property="name" />
+		</association>
+		<association column="SHIPPER_ID" property="shipper" javaType="com.ksa.model.bd.Partner">
+			<id column="SHIPPER_ID" property="id" />
+			<result column="SHIPPER_NAME" property="name" />
+			<result column="SHIPPER_ALIAS" property="alias" />
+		</association>
+		<association column="CONSIGNEE_ID" property="consignee" javaType="com.ksa.model.bd.Partner">
+			<id column="CONSIGNEE_ID" property="id" />
+			<result column="CONSIGNEE_NAME" property="name" />
+			<result column="CONSIGNEE_ALIAS" property="alias" />
+		</association>
+		<association column="NOTIFY_ID" property="notify" javaType="com.ksa.model.bd.Partner">
+			<id column="NOTIFY_ID" property="id" />
+			<result column="NOTIFY_NAME" property="name" />
+			<result column="NOTIFY_ALIAS" property="alias" />
+		</association>
+		<association column="CARRIER_ID" property="carrier" javaType="com.ksa.model.bd.Partner">
+			<id column="CARRIER_ID" property="id" />
+			<result column="CARRIER_NAME" property="name" />
+		</association>
+		<association column="SHIPPING_AGENT_ID" property="shippingAgent" javaType="com.ksa.model.bd.Partner">
+			<id column="SHIPPING_AGENT_ID" property="id" />
+			<result column="SHIPPING_AGENT_NAME" property="name" />
+		</association>
+		<association column="VEHICLE_TEAM_ID" property="vehicleTeam" javaType="com.ksa.model.bd.Partner">
+			<id column="VEHICLE_TEAM_ID" property="id" />
+			<result column="VEHICLE_TEAM_NAME" property="name" />
+		</association>
+		<association column="CUSTOMS_BROKER_ID" property="customsBroker" javaType="com.ksa.model.bd.Partner">
+			<id column="CUSTOMS_BROKER_ID" property="id" />
+			<result column="CUSTOMS_BROKER_NAME" property="name" />
+		</association>
+		<association column="AGENT_ID" property="agent" javaType="com.ksa.model.bd.Partner">
+			<id column="AGENT_ID" property="id" />
+			<result column="AGENT_NAME" property="name" />
+		</association>
+	</resultMap>
+	
+	<sql id="select-finance-bookingnote-basic">
+		SELECT bn.*,
+			c1.NAME AS CUSTOMER_NAME, 
+			u1.NAME AS CREATOR_NAME, 
+			u2.NAME AS SALER_NAME,
+			p1.NAME AS CARRIER_NAME, 
+			p2.NAME AS SHIPPING_AGENT_NAME, 
+			p3.NAME AS SHIPPER_NAME, p3.ALIAS AS SHIPPER_ALIAS,
+			p4.NAME AS CONSIGNEE_NAME, p4.ALIAS AS CONSIGNEE_ALIAS, 
+			p5.NAME AS NOTIFY_NAME, p5.ALIAS AS NOTIFY_ALIAS,
+			s1.NAME AS AGENT_NAME, 
+			s2.NAME AS CUSTOMS_BROKER_NAME, 
+			s3.NAME AS VEHICLE_TEAM_NAME
+		FROM KSA_LOGISTICS_BOOKINGNOTE bn 
+			LEFT JOIN KSA_BD_PARTNER c1 ON bn.CUSTOMER_ID				= c1.ID
+			LEFT JOIN KSA_SECURITY_USER u1 ON bn.CREATOR_ID 			= u1.ID
+			LEFT JOIN KSA_SECURITY_USER u2 ON bn.SALER_ID 				= u2.ID
+			LEFT JOIN KSA_BD_PARTNER p1 ON bn.CARRIER_ID 					= p1.ID
+			LEFT JOIN KSA_BD_PARTNER p2 ON bn.SHIPPING_AGENT_ID 	= p2.ID
+			LEFT JOIN KSA_BD_PARTNER p3 ON bn.SHIPPER_ID 					= p3.ID
+			LEFT JOIN KSA_BD_PARTNER p4 ON bn.CONSIGNEE_ID 			= p4.ID
+			LEFT JOIN KSA_BD_PARTNER p5 ON bn.NOTIFY_ID 					= p5.ID
+			LEFT JOIN KSA_BD_PARTNER s1 ON bn.AGENT_ID 					= s1.ID
+			LEFT JOIN KSA_BD_PARTNER s2 ON bn.CUSTOMS_BROKER_ID	= s2.ID
+			LEFT JOIN KSA_BD_PARTNER s3 ON bn.VEHICLE_TEAM_ID 		= s3.ID
+	</sql>
+	
+	<!-- 以下是 2013-04-14日添加 为获取单独类型的费用列表 -->
+	<resultMap type="com.ksa.model.finance.BookingNoteCharge" id="result-finance-charge-fetch">
+		<id column="ID" property="id" javaType="String" />
+		<result column="CODE" property="code" javaType="String" />
+		<result column="TYPE" property="type" javaType="String" />
+		<result column="TYPE_SUB" property="subType" javaType="String" />
+		<result column="SERIAL_NUMBER" property="serialNumber" javaType="int" />
+		<result column="CREATED_DATE" property="createdDate" javaType="Date" />
+		<result column="CHARGE_DATE" property="chargeDate" javaType="Date" />	<!-- 记账日期 -->
+		<result column="INVOICE_NUMBER" property="invoiceNumber" javaType="String" />
+		
+		<result column="CARGO_NAME" property="cargoName" javaType="String" />	
+		<result column="CARGO_NOTE" property="cargoNote" javaType="String" />
+		<result column="CARGO_DESCRIPTION" property="cargoDescription" javaType="String" />
+		<result column="CARGO_CONTAINER" property="cargoContainer" javaType="String" />
+		<result column="SHIPPING_MARK" property="shippingMark" javaType="String" />
+		<result column="VOLUMN" property="volumn" javaType="float" />
+		<result column="WEIGHT" property="weight" javaType="float" />
+		<result column="QUANTITY" property="quantity" javaType="int" />
+		<result column="UNIT" property="unit" javaType="String" />
+		<result column="QUANTITY_DESCRIPTION" property="quantityDescription" javaType="String" />
+		
+		<result column="TITLE" property="title" javaType="String" />
+		<result column="MAWB" property="mawb" javaType="String" />
+		<result column="HAWB" property="hawb" javaType="String" />
+		
+		<result column="DEPARTURE" property="departure" javaType="String" />
+		<result column="DEPARTURE_PORT" property="departurePort" javaType="String" />
+		<result column="DEPARTURE_DATE" property="departureDate" javaType="Date" />
+		<result column="DESTINATION" property="destination" javaType="String"/>
+		<result column="DESTINATION_PORT" property="destinationPort" javaType="String"/>
+		<result column="DESTINATION_DATE" property="destinationDate" javaType="Date" />
+		<result column="LOADING_PORT" property="loadingPort" javaType="String" />
+		<result column="DISCHARGE_PORT" property="dischargePort" javaType="String" />
+		<result column="DELIVER_DATE" property="deliverDate" javaType="Date" />
+		
+		<result column="ROUTE" property="route" javaType="String"/>
+		<result column="ROUTE_NAME" property="routeName" javaType="String"/>
+		<result column="ROUTE_CODE" property="routeCode" javaType="String"/>
+		
+		<result column="CUSTOMS_CODE" property="customsCode" javaType="String"/>
+		<result column="CUSTOMS_DATE" property="customsDate" javaType="Date"/>
+		<result column="RETURN_CODE" property="returnCode" javaType="String"/>
+		<result column="RETURN_DATE" property="returnDate" javaType="Date"/>
+		<result column="TAX_CODE" property="taxCode" javaType="String"/>
+		<result column="TAX_DATE1" property="taxDate1" javaType="Date"/>
+		<result column="EXPRESS_CODE" property="expressCode" javaType="String"/>
+		<result column="TAX_DATE2" property="taxDate2" javaType="Date"/>
+		
+		<result column="VEHICLE_TYPE" property="vehicleType" javaType="String"/>
+		<result column="VEHICLE_NUMBER" property="vehicleNumber" javaType="String"/>
+		
+		<result column="STATE" property="state" javaType="int"/>
+
+		<association column="CUSTOMER_ID" property="customer" javaType="com.ksa.model.bd.Partner">
+			<id column="CUSTOMER_ID" property="id" />
+			<result column="CUSTOMER_NAME" property="name" />
+		</association>
+		<association column="SALER_ID" property="saler" javaType="com.ksa.model.security.User">
+			<id column="SALER_ID" property="id" />
+			<result column="SALER_NAME" property="name" />
+		</association>
+		<association column="CREATOR_ID" property="creator" javaType="com.ksa.model.security.User">
+			<id column="CREATOR_ID" property="id" />
+			<result column="CREATOR_NAME" property="name" />
+		</association>
+		<association column="SHIPPER_ID" property="shipper" javaType="com.ksa.model.bd.Partner">
+			<id column="SHIPPER_ID" property="id" />
+			<result column="SHIPPER_NAME" property="name" />
+		</association>
+		<association column="CONSIGNEE_ID" property="consignee" javaType="com.ksa.model.bd.Partner">
+			<id column="CONSIGNEE_ID" property="id" />
+			<result column="CONSIGNEE_NAME" property="name" />
+		</association>
+		<association column="CARRIER_ID" property="carrier" javaType="com.ksa.model.bd.Partner">
+			<id column="CARRIER_ID" property="id" />
+			<result column="CARRIER_NAME" property="name" />
+		</association>
+		<association column="CUSTOMS_BROKER_ID" property="customsBroker" javaType="com.ksa.model.bd.Partner">
+			<id column="CUSTOMS_BROKER_ID" property="id" />
+			<result column="CUSTOMS_BROKER_NAME" property="name" />
+		</association>
+		<association column="AGENT_ID" property="agent" javaType="com.ksa.model.bd.Partner">
+			<id column="AGENT_ID" property="id" />
+			<result column="AGENT_NAME" property="name" />
+		</association>
+	</resultMap>
+	<!-- 利润查询 -->
+	<select id="grid-finance-charge-fetch" resultMap="result-finance-charge-fetch">
+		SELECT bn.*,
+			c1.NAME AS CUSTOMER_NAME, 
+			u1.NAME AS CREATOR_NAME, 
+			u2.NAME AS SALER_NAME,
+			p1.NAME AS SHIPPER_NAME,
+			p2.NAME AS CONSIGNEE_NAME,
+			p3.NAME AS CARRIER_NAME, 
+			p4.NAME AS AGENT_NAME, 
+			p5.NAME AS CUSTOMS_BROKER_NAME
+		FROM KSA_LOGISTICS_BOOKINGNOTE bn 
+			LEFT JOIN KSA_BD_PARTNER 		c1 ON bn.CUSTOMER_ID				= c1.ID
+			LEFT JOIN KSA_SECURITY_USER 	u1 ON bn.CREATOR_ID 				= u1.ID
+			LEFT JOIN KSA_SECURITY_USER 	u2 ON bn.SALER_ID 					= u2.ID
+			LEFT JOIN KSA_BD_PARTNER 		p1 ON bn.SHIPPER_ID 					= p1.ID
+			LEFT JOIN KSA_BD_PARTNER 		p2 ON bn.CONSIGNEE_ID 			= p2.ID
+			LEFT JOIN KSA_BD_PARTNER 		p3 ON bn.CARRIER_ID 					= p3.ID
+			LEFT JOIN KSA_BD_PARTNER 		p4 ON bn.AGENT_ID 					= p4.ID
+			LEFT JOIN KSA_BD_PARTNER 		p5 ON bn.CUSTOMS_BROKER_ID	= p5.ID
+			
+			WHERE  bn.STATE <![CDATA[ <> ]]> -1
+		<if test="queryClauses != null">
+				<foreach item="clause" collection="queryClauses">
+					AND ${clause}
+				</foreach>
+		</if>
+		<if test="_sort != null">
+			ORDER BY ${_sort} ${_order}
+		</if>
+		<if test="_sort == null">
+			ORDER BY bn.CREATED_DATE DESC, bn.SERIAL_NUMBER DESC
+		</if>
+	</select>
+	<select id="count-finance-charge-fetch" resultType="int">
+		SELECT COUNT( bn.ID ) 
+		FROM KSA_LOGISTICS_BOOKINGNOTE bn 
+			LEFT JOIN KSA_BD_PARTNER 		c1 ON bn.CUSTOMER_ID				= c1.ID
+			LEFT JOIN KSA_SECURITY_USER 	u1 ON bn.CREATOR_ID 				= u1.ID
+			LEFT JOIN KSA_SECURITY_USER 	u2 ON bn.SALER_ID 					= u2.ID
+			LEFT JOIN KSA_BD_PARTNER 		p1 ON bn.SHIPPER_ID 					= p1.ID
+			LEFT JOIN KSA_BD_PARTNER 		p2 ON bn.CONSIGNEE_ID 			= p2.ID
+			LEFT JOIN KSA_BD_PARTNER 		p3 ON bn.CARRIER_ID 					= p3.ID
+			LEFT JOIN KSA_BD_PARTNER 		p4 ON bn.AGENT_ID 					= p4.ID
+			LEFT JOIN KSA_BD_PARTNER 		p5 ON bn.CUSTOMS_BROKER_ID	= p5.ID
+			
+			WHERE  bn.STATE <![CDATA[ <> ]]> -1
+		<if test="queryClauses != null">
+				<foreach item="clause" collection="queryClauses">
+					AND ${clause}
+				</foreach>
+		</if>
+	</select>
+</mapper>

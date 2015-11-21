@@ -1,0 +1,161 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.ksa</groupId>
+		<artifactId>ksa-root</artifactId>
+		<version>3.8.4-SANPSHOT</version>
+	</parent>
+
+	<artifactId>ksa-web-root</artifactId>
+	<packaging>pom</packaging>
+
+	<name>ksa-web-root</name>
+	<description>杭州凯思爱物流管理系统 - WEB 模块根模型</description>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<struts.version>2.3.1</struts.version>
+		<sitemesh3.version>3.0-alpha-2</sitemesh3.version>
+		<shiro.version>1.2.0</shiro.version>
+	</properties>
+
+	<dependencies>
+		<!-- provided -->
+		<dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-servlet_2.5_spec</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-jsp_2.1_spec</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
+		<!-- log -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+
+		<!-- sitemesh -->
+		<dependency>
+			<groupId>org.sitemesh</groupId>
+			<artifactId>sitemesh</artifactId>
+		</dependency>
+	
+		<!-- struts2 -->
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-core</artifactId>
+			<version>${struts.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-json-plugin</artifactId>
+			<version>${struts.version}</version>
+		</dependency>
+		
+		<!-- shiro -->		
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-web</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+		
+		<!-- ksa -->
+		<dependency>
+			<groupId>com.ksa</groupId>
+			<artifactId>ksa-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ksa</groupId>
+			<artifactId>ksa-web-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		
+	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- sitemesh -->
+			<dependency>
+				<groupId>org.sitemesh</groupId>
+				<artifactId>sitemesh</artifactId>
+				<version>${sitemesh3.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.mortbay.jetty</groupId>
+					<artifactId>maven-jetty-plugin</artifactId>
+					<version>6.1.25</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<!-- 定义 jetty:run 默认配置  -->
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>maven-jetty-plugin</artifactId>
+				<configuration>
+					<webXml>${basedir}/../ksa-web/src/main/webapp/WEB-INF/web.xml</webXml>
+					<webAppSourceDirectory>${basedir}/../ksa-web/src/main/webapp</webAppSourceDirectory>
+					<classesDirectory>${basedir}/target/classes</classesDirectory>
+					<connectors>
+						<!-- work around file locking on windows -->
+						<connector implementation="org.mortbay.jetty.bio.SocketConnector">
+							<port>8080</port>
+						</connector>
+						<!-- <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector"> <port>8080</port> </connector> -->
+					</connectors>
+
+					<!-- 默认将 war 程序部署在 container 的根目录 -->
+					<contextPath>/</contextPath>
+
+					<!-- 默认将启动模式设置为 manual （手动），当设置为 automatic （自动） 时，参数 scanIntervalSeconds 才会起作用 -->
+					<reload>manual</reload>
+					<!-- <reload>automatic</reload> <scanIntervalSeconds>10</scanIntervalSeconds> -->
+
+					<!-- 设置一个默认的访问日志，放置在 target 文件夹中 -->
+					<requestLog implementation="org.mortbay.jetty.NCSARequestLog">
+						<filename>target/yyyy_mm_dd.request.log</filename>
+						<append>true</append>
+						<extended>false</extended>
+						<logTimeZone>GMT</logTimeZone>
+					</requestLog>
+					
+					<systemProperties>
+						<!-- 设置 jetty server 日志配置文件 -->
+						<systemProperty>
+							<name>log4j.configuration</name>
+							<value>file:///${basedir}/../../ksa-debug/src/main/resources/log4j.properties</value>
+						</systemProperty>
+					</systemProperties>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<modules>
+		<module>ksa-web</module>
+		<module>ksa-security-web</module>
+		<module>ksa-bd-web</module>
+		<module>ksa-logistics-web</module>
+		<module>ksa-finance-web</module>
+		<module>ksa-statistics-web</module>
+		<module>ksa-system-web</module>
+	</modules>
+</project>

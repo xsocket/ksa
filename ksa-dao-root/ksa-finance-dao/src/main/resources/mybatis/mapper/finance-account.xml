@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ksa-finance">
+
+	<resultMap type="com.ksa.model.finance.Account" id="result-finance-account-basic">
+		<id column="ID" property="id" javaType="String" />
+		<result column="CODE" property="code" javaType="String"/>
+		<result column="CREATED_DATE" property="createdDate" javaType="Date" />
+		<result column="DEADLINE" property="deadline" javaType="Date" />
+		<result column="PAYMENT_DATE" property="paymentDate" javaType="Date" />
+		<result column="NOTE" property="note" javaType="String"/>
+		<result column="STATE" property="state" javaType="int" />
+		<result column="DIRECTION" property="direction" javaType="int" />
+		<result column="NATURE" property="nature" javaType="int" />
+		<!-- 结算对象人 -->
+		<association column="TARGET_ID" property="target"   javaType="com.ksa.model.bd.Partner">
+			<id column="TARGET_ID" property="id" />
+			<result column="TARGET_NAME" property="name" />
+		</association>
+		<!-- 创建人 -->
+		<association column="CREATOR_ID" property="creator"   javaType="com.ksa.model.security.User">
+			<id column="CREATOR_ID" property="id" />
+			<result column="CREATOR_NAME" property="name" />
+		</association>
+	</resultMap>
+	
+	<resultMap type="com.ksa.model.finance.Account" id="result-finance-account" extends="result-finance-account-basic">
+		<collection column="ID" property="charges" ofType="com.ksa.model.finance.Charge" select="select-finance-charge-byaccount" />
+		<collection column="ID" property="invoices" ofType="com.ksa.model.finance.Invoice" select="select-finance-invoice-byaccount" />
+	</resultMap>
+	
+	<!-- 插入结算清单 -->
+	<insert id="insert-finance-account" parameterType="com.ksa.model.finance.Account">
+		INSERT INTO KSA_FINANCE_ACCOUNT 
+						( ID, CODE, TARGET_ID, CREATOR_ID, CREATED_DATE,  DEADLINE, PAYMENT_DATE,  NOTE,  STATE, DIRECTION, NATURE )
+		VALUES ( 	#{id}, #{code,jdbcType=VARCHAR},  #{target.id,jdbcType=VARCHAR},  #{creator.id,jdbcType=VARCHAR}, #{createdDate,jdbcType=DATE}, 
+					#{deadline,jdbcType=DATE}, #{paymentDate,jdbcType=DATE}, #{note,jdbcType=VARCHAR},  #{state,jdbcType=NUMERIC},  
+					#{direction,jdbcType=NUMERIC}, #{nature,jdbcType=NUMERIC} )	
+	</insert>
+	
+	<update id="update-finance-account-charges">
+		UPDATE KSA_FINANCE_CHARGE SET
+		ACCOUNT_ID = #{accountId,jdbcType=VARCHAR}
+		WHERE ID IN (
+				<foreach item="charge" collection="charges" separator=" , ">
+					#{charge.id}
+				</foreach>
+			)
+	</update>
+	
+	<!-- 修改结算清单 -->
+	<update id="update-finance-account" parameterType="com.ksa.model.finance.Account">
+		UPDATE KSA_FINANCE_ACCOUNT SET
+<!-- 		CODE					= #{code,jdbcType=VARCHAR},  -->	
+			TARGET_ID	 		= #{target.id,jdbcType=VARCHAR},
+			CREATOR_ID 		= #{creator.id,jdbcType=VARCHAR},  
+			CREATED_DATE 	= #{createdDate,jdbcType=DATE}, 
+			DEADLINE 			= #{deadline,jdbcType=DATE},
+			PAYMENT_DATE	= #{paymentDate,jdbcType=DATE},
+			NOTE 					= #{note,jdbcType=VARCHAR},
+			DIRECTION			= #{direction,jdbcType=NUMERIC},
+			NATURE				= #{nature,jdbcType=NUMERIC}
+		WHERE ID 	= #{id}
+	</update>
+	
+	<!-- 修改结算清单状态 -->
+	<update id="update-finance-account-state" parameterType="com.ksa.model.finance.Account">
+		UPDATE KSA_FINANCE_ACCOUNT SET
+			STATE					= #{state,jdbcType=NUMERIC}
+		WHERE ID 	= #{id}
+	</update>
+	
+	<!-- 删除结算清单 -->
+	<delete id="delete-finance-account" >		
+		DELETE FROM KSA_FINANCE_ACCOUNT WHERE ID = #{id}
+	</delete>
+	
+	<sql id="select-finance-account">
+		SELECT a.ID, a.CODE, a.CREATED_DATE, a.DEADLINE, a.PAYMENT_DATE, a.NOTE, a.STATE, a.DIRECTION,a.NATURE,
+			p.ID as TARGET_ID, p.NAME as TARGET_NAME,
+			u.ID as CREATOR_ID, u.NAME as CREATOR_NAME
+		FROM KSA_FINANCE_ACCOUNT a 
+			LEFT JOIN KSA_BD_PARTNER 		p   ON p.ID   = a.TARGET_ID  
+			LEFT JOIN KSA_SECURITY_USER 	u   ON u.ID   = a.CREATOR_ID  
+	</sql>
+
+	<!-- 按标识查找相应的结算清单 -->
+	<select id="select-finance-account-byid" resultMap="result-finance-account">
+		<include refid="select-finance-account" />
+		WHERE a.ID = #{id}
+	</select>
+	
+	<!-- 获取相似结算单号的个数 -->
+	<select id="select-finance-account-similar-code-count" resultType="int" parameterType="map">
+		SELECT COUNT( * ) FROM KSA_FINANCE_ACCOUNT
+		WHERE CODE LIKE '%${code}%'
+	</select>
+	
+	<!-- 结算单查询 -->
+	<select id="grid-finance-account-query" resultMap="result-finance-account" parameterType="map">
+		<include refid="select-finance-account" />
+		WHERE 1=1
+		<if test="direction != null"> AND a.DIRECTION = ${direction} </if>
+		<if test="nature != null"> AND a.NATURE = ${nature} </if>
+		<if test="noteQueryClauses != null">
+			AND a.ID IN (
+				SELECT c.ACCOUNT_ID
+					FROM KSA_FINANCE_CHARGE c 
+					LEFT JOIN KSA_LOGISTICS_BOOKINGNOTE	 	bn ON bn.ID = c.BOOKINGNOTE_ID
+					WHERE <foreach item="clause" collection="noteQueryClauses" separator=" AND ">
+						${clause}
+					</foreach>
+				)
+		</if>
+		<if test="queryClauses != null">
+			<foreach item="clause" collection="queryClauses" >
+				AND ${clause}
+			</foreach>
+		</if>
+		<if test="_sort != null"> ORDER BY ${_sort} ${_order} </if>
+		<if test="_sort == null"> ORDER BY a.CREATED_DATE DESC </if>
+	</select>
+	<select id="count-finance-account-query" resultType="int" parameterType="map">
+		SELECT COUNT( * )
+		FROM KSA_FINANCE_ACCOUNT a
+		WHERE 1=1
+		<if test="direction != null"> AND a.DIRECTION = ${direction} </if>
+		<if test="nature != null"> AND a.NATURE = ${nature} </if>
+		<if test="noteQueryClauses != null">
+			AND a.ID IN (
+				SELECT c.ACCOUNT_ID
+					FROM KSA_FINANCE_CHARGE c 
+					LEFT JOIN KSA_LOGISTICS_BOOKINGNOTE	 	bn ON bn.ID = c.BOOKINGNOTE_ID
+					WHERE <foreach item="clause" collection="noteQueryClauses" separator=" AND ">
+						${clause}
+					</foreach>
+				)
+		</if>
+		<if test="queryClauses != null">
+			<foreach item="clause" collection="queryClauses" >
+				AND ${clause}
+			</foreach>
+		</if>
+	</select>
+	
+</mapper>

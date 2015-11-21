@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ksa-bd">
+
+	<resultMap type="com.ksa.model.bd.Partner" id="result-bd-partner-combo">
+		<id column="ID" property="id" javaType="String" />
+		<result column="CODE" property="code" javaType="String" />
+		<result column="NAME" property="name" javaType="String" />
+		<result column="PP" property="pp" javaType="int"/>
+	</resultMap>
+	
+	<resultMap type="com.ksa.model.bd.Partner" id="result-bd-partner-basic">
+		<id column="ID" property="id" javaType="String" />
+		<result column="CODE" property="code" javaType="String" />
+		<result column="NAME" property="name" javaType="String" />
+		<result column="ALIAS" property="alias" javaType="String" />
+		<result column="ADDRESS" property="address" javaType="String" />
+		<result column="PP" property="pp" javaType="int"/>
+		<result column="NOTE" property="note" javaType="String"/>
+		<result column="IMPORTANT" property="important" javaType="boolean"/>
+		<result column="RANK" property="rank" javaType="int"/>
+		<association column="SALER_ID" property="saler" javaType="com.ksa.model.security.User">
+			<id column="SALER_ID" property="id" />
+			<result column="SALER_NAME" property="name" />
+		</association>
+		<collection property="types" ofType="com.ksa.model.bd.PartnerType" 
+			column="ID" select="select-bd-partnertype-bypartnerid">
+		</collection>
+	</resultMap>
+	
+	<resultMap type="com.ksa.model.bd.Partner" extends="result-bd-partner-basic" id="result-bd-partner">
+		<collection property="extras" column="ID" ofType="String" select="select-bd-partnertextra-bypartnerid" />
+	</resultMap>
+	
+	<!-- 插入合作伙伴数据 -->
+	<insert id="insert-bd-partner" parameterType="com.ksa.model.bd.Partner">
+		INSERT INTO KSA_BD_PARTNER 
+						(  ID, 	CODE, 	NAME, ALIAS,	ADDRESS,  PP, 		NOTE,  	IMPORTANT, 	RANK, 	SALER_ID )
+		VALUES ( 	#{id,jdbcType=VARCHAR},  #{code,jdbcType=VARCHAR}, 	#{name,jdbcType=VARCHAR}, #{alias,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 			
+						#{pp, jdbcType=NUMERIC},	#{note,jdbcType=VARCHAR}, #{important, jdbcType=NUMERIC}, #{rank, jdbcType=NUMERIC}, #{saler.id,jdbcType=VARCHAR} )	
+	</insert>
+	
+	<!-- 修改合作伙伴数据 -->
+	<update id="update-bd-partner" parameterType="com.ksa.model.bd.Partner">
+		UPDATE KSA_BD_PARTNER SET
+			CODE 			= #{code,jdbcType=VARCHAR},
+			NAME 			= #{name,jdbcType=VARCHAR},
+			ALIAS 			= #{alias,jdbcType=VARCHAR},
+			ADDRESS 	= #{address,jdbcType=VARCHAR},
+			PP				= #{pp, jdbcType=NUMERIC},
+			NOTE 			= #{note,jdbcType=VARCHAR},
+			IMPORTANT	= #{important, jdbcType=NUMERIC},
+			RANK			= #{rank, jdbcType=NUMERIC},
+			SALER_ID		= #{saler.id,jdbcType=VARCHAR}
+		WHERE ID 		= #{id}
+	</update>
+	
+	<!-- 删除合作伙伴数据 -->
+	<delete id="delete-bd-partner" >
+		DELETE FROM KSA_BD_PARTNER WHERE ID = #{id}
+	</delete>
+	
+	<sql id="select-bd-partner">
+		SELECT a.ID, a.CODE, a.NAME,  a.ALIAS, a.ADDRESS, a.PP, a.NOTE, a.IMPORTANT, a.RANK, 
+				s.ID AS SALER_ID, s.NAME AS SALER_NAME
+		FROM KSA_BD_PARTNER a 
+			LEFT JOIN KSA_SECURITY_USER s ON a.SALER_ID = s.ID
+	</sql>
+	
+	<!-- 查询合作伙伴数据 - 通过合作伙伴标识 -->
+	<select id="select-bd-partner-byid" resultMap="result-bd-partner">
+		<include refid="select-bd-partner" />
+		WHERE a.ID = #{id}
+	</select>
+	
+	<!-- 查询合作伙伴数据 - 通过合作伙伴代码 -->
+	<select id="select-bd-partner-bycode" resultMap="result-bd-partner">
+		<include refid="select-bd-partner" />
+		WHERE a.CODE = #{code}
+	</select>
+	
+	<!-- datagrid 相关查询操作-->
+	<select id="grid-bd-partner-all" resultMap="result-bd-partner-basic">
+		<include refid="select-bd-partner" />
+		<if test="search != null">
+			WHERE a.CODE like '%${search}%' 
+				  OR a.NAME like '%${search}%' 
+				  OR a.ALIAS like '%${search}%' 
+		</if>
+		<if test="_sort != null">
+			ORDER BY ${_sort} ${_order}
+		</if>
+		<if test="_sort == null">
+			ORDER BY IMPORTANT DESC, RANK ASC
+		</if>
+	</select>
+	<select id="count-bd-partner-all" resultType="int">
+		SELECT COUNT(*)
+		FROM KSA_BD_PARTNER a
+		<if test="search != null">
+			WHERE a.CODE like '%${search}%' 
+				  OR a.NAME like '%${search}%' 
+				  OR a.ALIAS like '%${search}%' 
+		</if>
+	</select>
+	
+	<!-- combobox 相关查询 -->
+	<select id="combo-bd-partner-all" resultMap="result-bd-partner-combo">
+		SELECT ID, CODE, NAME, PP
+		FROM KSA_BD_PARTNER
+	</select>
+	
+	<select id="combo-bd-partner-bytype" resultMap="result-bd-partner-combo">
+		SELECT d.ID, d.CODE, d.NAME, d.PP
+		FROM KSA_BD_PARTNER d JOIN KSA_BD_PARTNER_TYPE t ON d.ID = t.PARTNER_ID
+		WHERE t.TYPE_ID = #{typeId}
+	</select>
+	
+</mapper>

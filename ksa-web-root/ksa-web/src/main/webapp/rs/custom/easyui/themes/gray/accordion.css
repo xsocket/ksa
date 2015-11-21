@@ -1,0 +1,34 @@
+/*
+	样式修改说明：
+	1. 将展开合并箭头的图像合并；
+
+*/
+.accordion{
+	background:#fff;
+	overflow:hidden;
+}
+.accordion .accordion-header{
+	background:#efefef;
+	border-top-width:0;
+	cursor:pointer;
+}
+.accordion .accordion-header .panel-title{
+	font-weight:normal;
+}
+.accordion .accordion-header-selected .panel-title{
+	font-weight:bold;
+}
+.accordion-noborder .accordion-header{
+	border-width:0 0 1px;
+}
+.accordion-noborder .accordion-body{
+	border-width:0px;
+}
+.accordion-collapse{
+	/* background:url('images/accordion_collapse.png'); */
+	background:url('images/accordion_arrows.png')  no-repeat 0px -16px;
+}
+.accordion-expand{
+	/* background:url('images/accordion_expand.png') no-repeat; */
+	background:url('images/accordion_arrows.png')  no-repeat 0px 0px;
+}

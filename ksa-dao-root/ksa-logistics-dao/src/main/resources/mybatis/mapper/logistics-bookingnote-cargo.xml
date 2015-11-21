@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ksa-logistics">
+
+	<resultMap type="com.ksa.model.logistics.BookingNoteCargo" id="result-logistics-bookingnote-cargo">
+		<id column="ID" property="id" javaType="String" />
+		<result column="NAME" property="name" javaType="String" />
+		<result column="CATEGORY" property="category" javaType="String" />
+		<result column="TYPE" property="type" javaType="String" />
+		<result column="AMOUNT" property="amount" javaType="int" />
+		<association column="BOOKINGNOTE_ID" property="bookingNote" javaType="com.ksa.model.logistics.BookingNote">
+			<id column="BOOKINGNOTE_ID" property="id" />
+		</association>
+	</resultMap>
+	
+	<insert id="insert-logistics-bookingnote-cargo" parameterType="com.ksa.model.logistics.BookingNoteCargo">
+		INSERT INTO KSA_LOGISTICS_BOOKINGNOTE_CARGO
+						(  ID, 	NAME, 		CATEGORY, 	TYPE, 		AMOUNT, 	BOOKINGNOTE_ID	)
+		VALUES ( 	#{id,jdbcType=VARCHAR},  	#{name,jdbcType=VARCHAR},	#{category,jdbcType=VARCHAR}, 	
+			#{type,jdbcType=VARCHAR}, 	#{amount,jdbcType=NUMERIC}, 	#{bookingNote.id,jdbcType=VARCHAR}	)	
+	</insert>
+	
+	<update id="update-logistics-bookingnote-cargo" parameterType="com.ksa.model.logistics.BookingNoteCargo">
+		UPDATE KSA_LOGISTICS_BOOKINGNOTE_CARGO SET
+		  	NAME						= #{name,jdbcType=VARCHAR},
+		  	CATEGORY				= #{category,jdbcType=VARCHAR},
+		  	TYPE							= #{type,jdbcType=VARCHAR},
+		  	AMOUNT					= #{amount,jdbcType=NUMERIC}
+		WHERE 		ID = #{id,jdbcType=VARCHAR}
+	</update>
+	
+	<delete id="delete-logistics-bookingnote-cargo" >
+		DELETE FROM KSA_LOGISTICS_BOOKINGNOTE_CARGO WHERE ID = #{id,jdbcType=VARCHAR}
+	</delete>
+	
+	<select id="select-logistics-bookingnote-cargo-byid" resultMap="result-logistics-bookingnote-cargo">
+		SELECT *
+		FROM KSA_LOGISTICS_BOOKINGNOTE_CARGO
+		WHERE ID = #{id,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="select-logistics-bookingnote-cargo-bynoteid" resultMap="result-logistics-bookingnote-cargo">
+		SELECT *
+		FROM KSA_LOGISTICS_BOOKINGNOTE_CARGO
+		WHERE BOOKINGNOTE_ID = #{noteId,jdbcType=VARCHAR}
+	</select>
+</mapper>

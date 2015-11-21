@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ksa-finance">
+
+	<resultMap type="com.ksa.model.finance.Charge" id="result-finance-charge-basic">
+		<id column="ID" property="id" javaType="String" />
+		<result column="PRICE" property="price" javaType="Float" />
+		<result column="QUANTITY" property="quantity" javaType="Float" />
+		<result column="AMOUNT" property="amount" javaType="float" />
+		<result column="CREATED_DATE" property="createdDate" javaType="Date" />
+		<result column="TYPE" property="type" javaType="String"/>
+		<result column="NOTE" property="note" javaType="String"/>
+		<result column="DIRECTION" property="direction" javaType="int" />
+		<result column="NATURE" property="nature" javaType="int" />
+		<!-- 结算对象 -->
+		<association column="TARGET_ID" property="target"   javaType="com.ksa.model.bd.Partner">
+			<id column="TARGET_ID" property="id" />
+			<result column="TARGET_NAME" property="name" />
+		</association>
+		<!-- 货币 -->
+		<association column="CURRENCY_ID" property="currency"   javaType="com.ksa.model.bd.Currency">
+			<id column="CURRENCY_ID" property="id" />
+			<result column="CURRENCY_CODE" property="code" />
+			<result column="CURRENCY_NAME" property="name" />
+			<result column="CURRENCY_RANK" property="rank" />	<!-- 排序用 -->
+		</association>
+		<!-- 创建人 -->
+		<association column="CREATOR_ID" property="creator"   javaType="com.ksa.model.security.User">
+			<id column="CREATOR_ID" property="id" />
+			<result column="CREATOR_NAME" property="name" />
+		</association>
+		<association column="ACCOUNT_ID" property="account"   javaType="com.ksa.model.finance.Account">
+			<id column="ACCOUNT_ID" property="id" />
+			<id column="ACCOUNT_STATE" property="state" />
+		</association>
+	</resultMap>
+	
+	<!-- 费用信息: 附加了托单信息 -->
+	<resultMap type="com.ksa.model.finance.Charge" id="result-finance-charge-withnote" extends="result-finance-charge-basic" autoMapping="false">	
+		<association column="BOOKINGNOTE_ID" property="bookingNote" select="select-finance-bookingnote-basic-byid" />
+	</resultMap>
+	<!-- 完整费用信息: 附加了托单信息 和 对账/结算单信息 -->
+	<resultMap type="com.ksa.model.finance.Charge" id="result-finance-charge" extends="result-finance-charge-basic" autoMapping="false">	
+		<association column="BOOKINGNOTE_ID" property="bookingNote" select="select-finance-bookingnote-basic-byid" />
+		<association column="ACCOUNT_ID" property="account" select="select-finance-account-byid" />
+	</resultMap>
+	
+	<!-- 插入费用数据 -->
+	<insert id="insert-finance-charge" parameterType="com.ksa.model.finance.Charge">
+		INSERT INTO KSA_FINANCE_CHARGE 
+						( ID, TARGET_ID,	 TYPE,		CURRENCY_ID, 	PRICE, QUANTITY,	AMOUNT, 		CREATED_DATE, 		NOTE, 		
+						CREATOR_ID,	ACCOUNT_ID, BOOKINGNOTE_ID, DIRECTION, NATURE )
+		VALUES ( 	#{id}, #{target.id,jdbcType=VARCHAR},  #{type,jdbcType=VARCHAR}, 	#{currency.id,jdbcType=VARCHAR}, 	
+					#{price,jdbcType=NUMERIC}, #{quantity,jdbcType=NUMERIC}, #{amount},  #{createdDate,jdbcType=DATE}, 	#{note,jdbcType=VARCHAR}, 	
+						#{creator.id,jdbcType=VARCHAR},	#{account.id,jdbcType=VARCHAR}, #{bookingNote.id,jdbcType=VARCHAR},  
+					#{direction,jdbcType=NUMERIC}, #{nature,jdbcType=NUMERIC}  )	
+	</insert>
+	
+	<!-- 修改费用数据 -->
+	<update id="update-finance-charge" parameterType="com.ksa.model.finance.Charge">
+		UPDATE KSA_FINANCE_CHARGE SET
+			TARGET_ID		 		= #{target.id,jdbcType=VARCHAR},
+			CREATOR_ID		 		= #{creator.id,jdbcType=VARCHAR},
+			TYPE					 		= #{type,jdbcType=VARCHAR},
+			CURRENCY_ID 			= #{currency.id,jdbcType=VARCHAR},
+			PRICE 						= #{price,jdbcType=NUMERIC}, 	
+			QUANTITY 				= #{quantity,jdbcType=NUMERIC}, 	 
+			AMOUNT 				= #{amount}, 	
+			NOTE 						= #{note,jdbcType=VARCHAR},
+			ACCOUNT_ID			= #{account.id,jdbcType=VARCHAR},
+			DIRECTION				= #{direction,jdbcType=NUMERIC},
+			NATURE					= #{nature,jdbcType=NUMERIC}
+		WHERE ID 	= #{id}
+	</update>
+	
+	<!-- 删除费用数据 -->
+	<delete id="delete-finance-charge" >		
+		DELETE FROM KSA_FINANCE_CHARGE WHERE ID = #{id}
+	</delete>
+	
+	<sql id="select-finance-charge-basic">
+		SELECT c.*,
+			p.ID as TARGET_ID, p.NAME as TARGET_NAME,
+			d.ID as CURRENCY_ID, d.CODE as CURRENCY_CODE, d.NAME as CURRENCY_NAME, d.RANK as CURRENCY_RANK,
+			u.ID as CREATOR_ID, u.NAME as CREATOR_NAME,
+			a.STATE as ACCOUNT_STATE
+		FROM KSA_FINANCE_CHARGE c 
+			LEFT JOIN KSA_BD_PARTNER		p   ON p.ID = c.TARGET_ID 
+			LEFT JOIN KSA_BD_DATA 			d	 ON d.ID = c.CURRENCY_ID
+			LEFT JOIN KSA_SECURITY_USER 	u   ON u.ID = c.CREATOR_ID 
+			LEFT JOIN KSA_FINANCE_ACCOUNT a ON a.ID = c.ACCOUNT_ID 
+	</sql>
+
+	<!-- 按标识查找相应的费用数据 -->
+	<select id="select-finance-charge-byid" resultMap="result-finance-charge-basic">
+		<include refid="select-finance-charge-basic" />
+		WHERE c.ID = #{id}
+	</select>
+	
+	<!-- 按托单查找对应的费用数据 -->
+	<select id="select-finance-charge-bybookingnote" resultMap="result-finance-charge-basic">
+		<include refid="select-finance-charge-basic" /> 
+		WHERE c.BOOKINGNOTE_ID = #{id}
+			<if test="direction != null">
+				AND DIRECTION = ${direction}
+			</if>
+			<if test="nature != null">
+				AND NATURE = ${nature}
+			</if>
+	</select>
+	
+	<!-- 按费用结算对账单查找对应的费用数据 -->
+	<select id="select-finance-charge-byaccount" resultMap="result-finance-charge-withnote">
+		<include refid="select-finance-charge-basic" />
+		WHERE c.ACCOUNT_ID = #{id}
+	</select>
+	
+	<!-- 完整费用信息的查询 -->
+	<sql id="select-finance-charge"> 
+		<include refid="select-finance-charge-basic"/>
+		LEFT JOIN KSA_LOGISTICS_BOOKINGNOTE		bn ON bn.ID = c.BOOKINGNOTE_ID
+	</sql>
+	<!-- 完整的费用查询 -->
+	<select id="grid-finance-charge-query" resultMap="result-finance-charge-withnote">
+		<include refid="select-finance-charge" />
+		<if test="queryClauses != null">
+			WHERE  
+				<foreach item="clause" collection="queryClauses" separator=" AND ">
+					${clause}
+				</foreach>
+		</if>
+		<if test="_sort != null">
+			ORDER BY ${_sort} ${_order}
+		</if>
+		<if test="_sort == null">
+			ORDER BY c.CREATED_DATE DESC, c.BOOKINGNOTE_ID, c.TARGET_ID
+		</if>
+	</select>
+	<select id="count-finance-charge-query" resultType="int">
+		SELECT COUNT( c.ID )
+		FROM KSA_FINANCE_CHARGE c 
+			LEFT JOIN KSA_BD_PARTNER		p   ON p.ID = c.TARGET_ID 
+			LEFT JOIN KSA_BD_DATA 			d	 ON d.ID = c.CURRENCY_ID
+			LEFT JOIN KSA_SECURITY_USER 	u   ON u.ID = c.CREATOR_ID  
+			LEFT JOIN KSA_LOGISTICS_BOOKINGNOTE		bn ON bn.ID = c.BOOKINGNOTE_ID
+			LEFT JOIN KSA_FINANCE_ACCOUNT				a   ON a.ID = c.ACCOUNT_ID  
+			<if test="queryClauses != null">
+				WHERE  
+					<foreach item="clause" collection="queryClauses" separator=" AND ">
+						${clause}
+					</foreach>
+			</if>
+	</select>
+	
+</mapper>

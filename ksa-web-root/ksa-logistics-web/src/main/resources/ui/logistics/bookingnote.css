@@ -1,0 +1,17 @@
+div.easyui-panel, div#content-container { padding : 10px; }
+
+.control-group { margin-bottom: 0;margin-bottom: 5px\9; }
+
+.form-inline .control-label { width:65px; }
+.form-inline .controls { margin-left: 65px; }
+
+input, textarea { width: 150px; }
+.input-small { width:75px; }
+
+#radio_controls {margin:0 26px;margin:0 20px\9;}
+
+.add-on span input.combo-text {
+	-webkit-border-radius: 0 3px 3px 0;
+     -moz-border-radius: 0 3px 3px 0;
+          	border-radius: 0 3px 3px 0;
+}

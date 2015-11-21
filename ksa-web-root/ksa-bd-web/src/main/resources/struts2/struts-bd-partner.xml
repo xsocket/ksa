@@ -1,0 +1,40 @@
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 合作伙伴管理 -->
+	<package name="bd-partner-default" extends="ksa-default" namespace="/ui/bd/partner">
+		<action name="default" class="com.ksa.web.struts2.action.bd.partner.PartnerAction">
+			<result>/ui/bd/partner/default.ftl</result>
+		</action>
+	</package>
+	
+	<!-- 合作伙伴信息 -->
+	<package name="bd-partner-dialog" extends="ksa-default" namespace="/dialog/bd/partner">
+		<action name="create" class="com.ksa.web.struts2.action.bd.partner.PartnerAction">
+			<result>/ui/bd/partner/create-partner.ftl</result>
+		</action>
+		<action name="insert" class="com.ksa.web.struts2.action.bd.partner.PartnerInsertAction">
+			<result name="success">/ui/bd/partner/edit-partner.ftl</result>
+			<result name="input">/ui/bd/partner/create-partner.ftl</result>
+			<result name="error">/ui/bd/partner/create-partner.ftl</result>
+		</action>
+		
+		<action name="edit" class="com.ksa.web.struts2.action.bd.partner.PartnerEditAction">
+			<result name="success">/ui/bd/partner/edit-partner.ftl</result>
+			<result name="input">/ui/bd/partner/edit-partner.ftl</result>
+			<result name="error">/ui/bd/partner/edit-partner.ftl</result>
+		</action>
+		<action name="update" class="com.ksa.web.struts2.action.bd.partner.PartnerUpdateAction">
+			<result name="success">/ui/bd/partner/edit-partner.ftl</result>
+			<result name="input">/ui/bd/partner/edit-partner.ftl</result>
+			<result name="error">/ui/bd/partner/edit-partner.ftl</result>
+		</action>
+		
+		<action name="delete" class="com.ksa.web.struts2.action.bd.partner.PartnerDeleteAction">
+			<result name="success" type="json" />
+			<result name="input" type="json" />
+			<result name="error" type="json" />
+		</action>
+	</package>
+</struts>

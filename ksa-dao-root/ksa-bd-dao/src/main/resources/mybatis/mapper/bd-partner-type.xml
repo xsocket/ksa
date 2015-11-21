@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ksa-bd">
+
+	<resultMap type="com.ksa.model.bd.PartnerType" id="result-bd-partnertype-basic">
+		<id column="ID" property="id" javaType="String" />
+		<result column="CODE" property="code" javaType="String" />
+		<result column="NAME" property="name" javaType="String" />
+	</resultMap>
+
+	<resultMap type="com.ksa.model.bd.PartnerType" id="result-bd-partnertype">
+		<id column="ID" property="id" javaType="String" />
+		<result column="CODE" property="code" javaType="String" />
+		<result column="NAME" property="name" javaType="String" />
+		<result column="ALIAS" property="alias" javaType="String"/>
+		<result column="NOTE" property="note" javaType="String"/>
+		<result column="EXTRA" property="extra" javaType="String"/>
+		<result column="RANK" property="rank" javaType="int"/>
+	</resultMap>
+	
+	<insert id="insert-bd-partnertype" parameterType="map">
+		INSERT INTO KSA_BD_PARTNER_TYPE ( PARTNER_ID, 	TYPE_ID )
+		VALUES ( #{partneId,jdbcType=VARCHAR}, #{typeId,jdbcType=VARCHAR} )	
+	</insert>
+	
+	<delete id="delete-bd-partnertype" parameterType="map">
+		DELETE FROM KSA_BD_PARTNER_TYPE 
+		WHERE PARTNER_ID = #{partneId,jdbcType=VARCHAR}
+			AND TYPE_ID = #{typeId,jdbcType=VARCHAR}
+	</delete>
+	
+	<select id="select-bd-partnertype-bypartnerid" resultMap="result-bd-partnertype">
+		SELECT d.ID, d.CODE, d.NAME, d.ALIAS, d.NOTE, d.EXTRA, d.RANK
+		FROM KSA_BD_DATA d
+			JOIN KSA_BD_PARTNER_TYPE t ON d.ID = t.TYPE_ID
+		WHERE t.PARTNER_ID = #{id}
+	</select>
+	
+	<select id="grid-bd-partnertype-bypartnerid" resultMap="result-bd-partnertype-basic">
+		SELECT d.ID, d.CODE, d.NAME
+		FROM KSA_BD_DATA d JOIN KSA_BD_PARTNER_TYPE t ON d.ID = t.TYPE_ID
+		WHERE t.PARTNER_ID = #{partnerId}
+		<if test="_sort != null">
+			ORDER BY ${_sort} ${_order}
+		</if>
+	</select>
+	
+	<select id="count-bd-partnertype-bypartnerid" resultType="int">
+		SELECT COUNT(*)
+		FROM KSA_BD_DATA d JOIN KSA_BD_PARTNER_TYPE t ON d.ID = t.TYPE_ID
+		WHERE t.PARTNER_ID = #{partnerId}
+	</select>	
+	
+</mapper>

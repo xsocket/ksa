@@ -1,0 +1,36 @@
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	
+	<!-- 进仓通知书 -->
+	<package name="logistics-warehousenoting-dialog" extends="ksa-default" namespace="/dialog/logistics/warehousenoting">
+		<result-types>
+			<!-- 导出word excel文件 -->
+			<result-type name="freemarker-stream" class="com.ksa.web.struts2.views.freemarker.FreemarkerStreamResult">
+				<param name="contentType">application/xhtml+xml</param>
+				<param name="contentDisposition">attachment;filename="${filename}"</param>
+			</result-type>
+		</result-types>
+		
+		<action name="edit-*" class="com.ksa.web.struts2.action.logistics.warehousenoting.WarehouseNotingAction">
+			<result name="success">/ui/logistics/{1}/warehouse-noting.ftl</result>
+		</action>
+		
+		<action name="save-*" class="com.ksa.web.struts2.action.logistics.warehousenoting.WarehouseNotingSaveAction">
+			<result name="success">/ui/logistics/{1}/warehouse-noting.ftl</result>
+			<result name="input">/ui/logistics/{1}/warehouse-noting.ftl</result>
+		</action>
+		
+		<action name="delete-*" class="com.ksa.web.struts2.action.logistics.warehousenoting.WarehouseNotingDeleteAction">
+			<result name="success">/ui/logistics/{1}/warehouse-noting.ftl</result>
+			<result name="input">/ui/logistics/{1}/warehouse-noting.ftl</result>
+		</action>
+		
+		<action name="download-*" class="com.ksa.web.struts2.action.logistics.warehousenoting.WarehouseNotingDownloadAction">
+			<result name="success" type="freemarker-stream">/ui/logistics/{1}/warehouse-noting-${type}.ftl</result>
+		</action>
+		
+	</package>
+	
+</struts>

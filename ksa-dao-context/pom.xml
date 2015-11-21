@@ -1,0 +1,40 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.ksa</groupId>
+    <artifactId>ksa-root</artifactId>
+    <version>3.8.4-SANPSHOT</version>
+  </parent>
+
+  <artifactId>ksa-dao-context</artifactId>
+  <packaging>jar</packaging>
+
+  <name>ksa-dao-context</name>
+  <description>杭州凯思爱物流管理系统 - DAO 模块运行环境设定</description>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <!-- 默认基于 Mybaits 框架实现 Dao 模块 -->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis</artifactId>
+      <version>3.1.1</version>
+    </dependency>
+    <!-- 当采用 spring ioc 时需要 -->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis-spring</artifactId>
+      <version>1.1.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.ksa</groupId>
+      <artifactId>ksa-core</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+</project>

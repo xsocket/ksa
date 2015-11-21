@@ -1,0 +1,62 @@
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 角色管理 -->
+	<package name="security-role-default" extends="ksa-default" namespace="/ui/security/role">
+		<action name="default" class="com.ksa.web.struts2.action.security.role.RoleAction">
+			<result>/ui/security/role/default.ftl</result>
+		</action>
+	</package>
+	
+	<!-- 角色信息 -->
+	<package name="security-role-dialog" extends="ksa-default" namespace="/dialog/security/role">
+		<action name="create" class="com.ksa.web.struts2.action.security.role.RoleAction">
+			<result>/ui/security/role/create-role.ftl</result>
+		</action>
+		<action name="insert" class="com.ksa.web.struts2.action.security.role.RoleInsertAction">
+			<result name="success">/ui/security/role/edit-role.ftl</result>
+			<result name="input">/ui/security/role/create-role.ftl</result>
+			<result name="error">/ui/security/role/create-role.ftl</result>
+		</action>
+		
+		<action name="edit" class="com.ksa.web.struts2.action.security.role.RoleEditAction">
+			<result name="success">/ui/security/role/edit-role.ftl</result>
+			<result name="input">/ui/security/role/edit-role.ftl</result>
+			<result name="error">/ui/security/role/edit-role.ftl</result>
+		</action>
+		<action name="update" class="com.ksa.web.struts2.action.security.role.RoleUpdateAction">
+			<result name="success">/ui/security/role/edit-role.ftl</result>
+			<result name="input">/ui/security/role/edit-role.ftl</result>
+			<result name="error">/ui/security/role/edit-role.ftl</result>
+		</action>
+		
+		<action name="delete" class="com.ksa.web.struts2.action.security.role.RoleDeleteAction">
+			<result name="success" type="json" />
+			<result name="input" type="json" />
+			<result name="error" type="json" />
+		</action>
+		
+		<!-- 角色所含用户及权限的异步增删操作 -->
+		<action name="insert-user" class="com.ksa.web.struts2.action.security.role.RoleUserInsertAction">
+			<result name="success" type="json" />
+			<result name="input" type="json" />
+			<result name="error" type="json" />
+		</action>
+		<action name="delete-user" class="com.ksa.web.struts2.action.security.role.RoleUserDeleteAction">
+			<result name="success" type="json" />
+			<result name="input" type="json" />
+			<result name="error" type="json" />
+		</action>
+		<action name="insert-permission" class="com.ksa.web.struts2.action.security.role.RolePermissionInsertAction">
+			<result name="success" type="json" />
+			<result name="input" type="json" />
+			<result name="error" type="json" />
+		</action>
+		<action name="delete-permission" class="com.ksa.web.struts2.action.security.role.RolePermissionDeleteAction">
+			<result name="success" type="json" />
+			<result name="input" type="json" />
+			<result name="error" type="json" />
+		</action>
+	</package>
+</struts>

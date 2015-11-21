@@ -1,0 +1,7 @@
+form { padding: 5px; }
+
+.form-inline .control-label { width:85px; }
+.form-inline .controls { margin-left: 85px; }
+
+select, input, textarea { width: 150px; }
+.input-xlarge { width: 403px; }

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemesh>
+
+	<!-- exclude setting -->
+	<mapping path="/data/*" exclue="true" />
+	<mapping path="/login.jsp" exclue="true" />
+	
+	<!-- 托单业务表单 -->
+	<mapping path="/dialog/logistics/bookingnote/*" decorator="/WEB-INF/decorators/dialog.jsp" />
+	<mapping path="/dialog/logistics/create-*" decorator="/WEB-INF/decorators/dialog.jsp" />
+	
+	<!-- Fusion Chart 窗口 -->
+	<mapping path="/dialog/chart/*" decorator="/WEB-INF/decorators/chart.jsp" />
+	
+	<!-- 需要打印的托单业务表单 -->
+	<mapping path="/dialog/logistics/*" decorator="/WEB-INF/decorators/print.jsp" />
+	
+	<!-- 弹出窗口 -->
+	<mapping path="/dialog/*" decorator="/WEB-INF/decorators/dialog.jsp" />
+	
+	<!-- 弹出组件窗口 -->
+	<mapping path="/component/*" decorator="/WEB-INF/decorators/component.jsp" />
+	
+	<!-- portal 组件 -->
+	<mapping path="/portal/*" decorator="/WEB-INF/decorators/portal.jsp" />
+
+	<!-- 安全设置 -->
+	<mapping>
+		<path>/ui/security/*</path>
+		<decorator>/WEB-INF/decorators/system.jsp</decorator>
+		<decorator>/WEB-INF/decorators/main.jsp</decorator>
+	</mapping>
+	
+	<!-- 基础数据设置 -->
+	<mapping>
+		<path>/ui/bd/*</path>
+		<decorator>/WEB-INF/decorators/bd.jsp</decorator>
+		<decorator>/WEB-INF/decorators/main.jsp</decorator>
+	</mapping>
+
+
+	<!-- Map default decorator. This shall be applied to all paths if no other paths match. -->
+	<mapping decorator="/WEB-INF/decorators/main.jsp" />
+</sitemesh>

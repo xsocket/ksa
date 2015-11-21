@@ -1,0 +1,23 @@
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	
+	<!-- manifest -->
+	<package name="logistics-manifest-dialog" extends="ksa-default" namespace="/dialog/logistics/manifest">
+		<action name="edit-*" class="com.ksa.web.struts2.action.logistics.manifest.ManifestAction">
+			<result name="success">/ui/logistics/{1}/manifest.ftl</result>
+		</action>
+		
+		<action name="save-*" class="com.ksa.web.struts2.action.logistics.manifest.ManifestSaveAction">
+			<result name="success">/ui/logistics/{1}/manifest.ftl</result>
+			<result name="input">/ui/logistics/{1}/manifest.ftl</result>
+		</action>
+		
+		<action name="delete-*" class="com.ksa.web.struts2.action.logistics.manifest.ManifestDeleteAction">
+			<result name="success">/ui/logistics/{1}/manifest.ftl</result>
+			<result name="input">/ui/logistics/{1}/manifest.ftl</result>
+		</action>
+	</package>
+	
+</struts>

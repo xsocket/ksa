@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ksa-logistics">
+	<!-- MANIEST 模型 -->
+	<resultMap type="com.ksa.model.logistics.Manifest" id="result-logistics-manifest">
+		<id column="ID" property="id" javaType="String" />
+		<result column="SALER" property="saler" javaType="String" />
+
+		<result column="CODE" property="code" javaType="String" />
+		<result column="LOADING_PORT" property="loadingPort" javaType="String" />
+		<result column="DESTINATION_PORT" property="destinationPort" javaType="String" />
+		<result column="FLIGHT_DATE" property="flightDate" javaType="String" />
+		<result column="AGENT" property="agent" javaType="String" />
+		
+		<result column="HAWB" property="hawb" javaType="String" />
+		<result column="CARGO_NAME" property="cargoName" javaType="String" />	
+		<result column="CARGO_WEIGHT" property="cargoWeight" javaType="String" />
+		<result column="FINAL_DESTINATION" property="finalDestination" javaType="String" />
+		<result column="SHIPPER" property="shipper" javaType="String" />
+		<result column="CONSIGNEE" property="consignee" javaType="String" />
+		<result column="RE" property="re" javaType="String" />
+		
+		<result column="TOTAL_HAWB" property="totalHawb" javaType="String" />
+		<result column="TOTAL_PACKAGES" property="totalPackages" javaType="String" />
+		
+		<result column="SALER_TEL" property="salerTel" javaType="String" />
+		<result column="SALER_FAX" property="salerFax" javaType="String" />
+		<result column="SALER_EMAIL" property="salerEmail" javaType="String" />
+		
+		<association column="BOOKINGNOTE_ID" property="bookingNote" select="select-logistics-bookingnote-basic-byid" />
+	</resultMap>
+	
+	<insert id="insert-logistics-manifest" parameterType="com.ksa.model.logistics.Manifest">
+		INSERT INTO KSA_LOGISTICS_MANIFEST
+						(  ID, SALER, 	CODE, FLIGHT_DATE,	LOADING_PORT, DESTINATION_PORT, AGENT,
+						 	HAWB, CARGO_NAME, CARGO_WEIGHT, FINAL_DESTINATION,
+						 	SHIPPER, CONSIGNEE, RE, 
+						 	TOTAL_HAWB, TOTAL_PACKAGES,
+						BOOKINGNOTE_ID,
+						SALER_TEL, SALER_FAX, SALER_EMAIL  )
+		VALUES ( 	#{id,jdbcType=VARCHAR}, #{saler,jdbcType=VARCHAR},  #{code,jdbcType=VARCHAR}, #{flightDate,jdbcType=VARCHAR},#{loadingPort,jdbcType=VARCHAR}, #{destinationPort,jdbcType=VARCHAR}, #{agent,jdbcType=VARCHAR},
+					#{hawb,jdbcType=VARCHAR}, #{cargoName,jdbcType=VARCHAR}, #{cargoWeight,jdbcType=VARCHAR}, #{finalDestination,jdbcType=VARCHAR},
+			 		#{shipper,jdbcType=VARCHAR}, 	#{consignee,jdbcType=VARCHAR},#{re,jdbcType=VARCHAR}, 
+			 		#{totalHawb,jdbcType=VARCHAR},#{totalPackages,jdbcType=VARCHAR},
+			 		#{bookingNote.id},
+			 		#{salerTel,jdbcType=VARCHAR}, #{salerFax,jdbcType=VARCHAR}, #{salerEmail,jdbcType=VARCHAR}  )	
+	</insert>
+	
+	<update id="update-logistics-manifest" parameterType="com.ksa.model.logistics.Manifest">
+		UPDATE KSA_LOGISTICS_MANIFEST SET
+			SALER						= #{saler,jdbcType=VARCHAR},
+			CODE						= #{code,jdbcType=VARCHAR},
+			FLIGHT_DATE			= #{flightDate,jdbcType=VARCHAR},
+			LOADING_PORT		= #{loadingPort,jdbcType=VARCHAR},
+			DESTINATION_PORT= #{destinationPort,jdbcType=VARCHAR},
+			AGENT						= #{agent,jdbcType=VARCHAR},
+			
+			HAWB						= #{hawb,jdbcType=VARCHAR},
+			CARGO_NAME			= #{cargoName,jdbcType=VARCHAR},  
+			CARGO_WEIGHT		= #{cargoWeight,jdbcType=VARCHAR},
+			FINAL_DESTINATION = #{finalDestination,jdbcType=VARCHAR},
+			SHIPPER					= #{shipper,jdbcType=VARCHAR},
+			CONSIGNEE				= #{consignee,jdbcType=VARCHAR},
+			RE								= #{re,jdbcType=VARCHAR},
+			
+			TOTAL_HAWB			= #{totalHawb,jdbcType=VARCHAR},
+			TOTAL_PACKAGES	= #{totalPackages,jdbcType=VARCHAR},
+			
+			SALER_TEL				= #{salerTel,jdbcType=VARCHAR},
+			SALER_FAX				= #{salerFax,jdbcType=VARCHAR},
+			SALER_EMAIL			= #{salerEmail,jdbcType=VARCHAR}
+		WHERE ID = #{id,jdbcType=VARCHAR}
+	</update>
+	
+	<delete id="delete-logistics-manifest" parameterType="com.ksa.model.logistics.Manifest">
+		DELETE FROM KSA_LOGISTICS_MANIFEST WHERE ID = #{id,jdbcType=VARCHAR}
+	</delete>
+	
+	<select id="select-logistics-manifest-byid" resultMap="result-logistics-manifest">
+		SELECT * FROM KSA_LOGISTICS_MANIFEST
+		WHERE ID = #{id,jdbcType=VARCHAR}
+	</select>
+	<select id="select-logistics-manifest-bybnid" resultMap="result-logistics-manifest">
+		SELECT * FROM KSA_LOGISTICS_MANIFEST
+		WHERE BOOKINGNOTE_ID = #{bookingNoteId,jdbcType=VARCHAR}
+	</select>
+</mapper>

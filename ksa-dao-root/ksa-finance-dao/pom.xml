@@ -1,0 +1,28 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.ksa</groupId>
+    <artifactId>ksa-dao-root</artifactId>
+    <version>3.8.4-SANPSHOT</version>
+  </parent>
+
+  <artifactId>ksa-finance-dao</artifactId>
+  <packaging>jar</packaging>
+
+  <name>ksa-finance-dao</name>
+  <description>杭州凯思爱物流管理系统 - 财务管理 DAO 模块</description>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.ksa</groupId>
+      <artifactId>ksa-bd-dao</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+</project>

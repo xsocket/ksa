@@ -1,0 +1,40 @@
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 货币汇率管理 -->
+	<package name="bd-currency-default" extends="ksa-default" namespace="/ui/bd/currency">
+		<action name="default" class="com.ksa.web.struts2.action.bd.currency.RateAction">
+			<result>/ui/bd/currency/default.ftl</result>
+		</action>
+		<action name="save" class="com.ksa.web.struts2.action.bd.currency.RateSaveAction">
+			<result name="success" type="json" />
+			<result name="input" type="json" />
+			<result name="error" type="json" />
+		</action>
+	</package>
+	
+	<!-- 按日期管理的汇率 -->
+	<package name="bd-currency-date" extends="ksa-default" namespace="/dialog/bd/currency/date">
+		<action name="default" class="com.ksa.web.struts2.action.bd.currency.DateRateAction">
+			<result>/ui/bd/currency/date/default.ftl</result>
+		</action>
+	</package>
+	
+	<!-- 按客户管理的汇率 -->
+	<package name="bd-currency-partner" extends="ksa-default" namespace="/dialog/bd/currency/partner">
+		<action name="default" class="com.ksa.web.struts2.action.bd.currency.PartnerRateAction">
+			<result>/ui/bd/currency/partner/default.ftl</result>
+		</action>
+	</package>
+	
+	<!-- 获取汇率数据表格 -->
+	<package name="bd-griddata-default" extends="ksa-griddata-default" namespace="/data/grid/currency">
+		<action name="date" class="com.ksa.web.struts2.action.bd.currency.data.DateRateGridDataAction">
+			<result name="success" type="json" />
+		</action>
+		<action name="partner" class="com.ksa.web.struts2.action.bd.currency.data.PartnerRateGridDataAction">
+			<result name="success" type="json" />
+		</action>
+	</package>
+</struts>

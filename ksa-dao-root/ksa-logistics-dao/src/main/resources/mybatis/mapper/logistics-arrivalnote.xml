@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ksa-logistics">
+	<!-- 提单确认模型 -->
+	<resultMap type="com.ksa.model.logistics.ArrivalNote" id="result-logistics-arrivalnote">
+		<id column="ID" property="id" javaType="String" />
+		<result column="ARRIVAL_DATE" property="date" javaType="String" />
+		<result column="CODE" property="code" javaType="String" />
+		<result column="SHIPPER" property="shipper" javaType="String" />
+		<result column="CONSIGNEE" property="consignee" javaType="String" />
+		<result column="VESSEL" property="vessel" javaType="String" />
+		<result column="VOYAGE" property="voyage" javaType="String" />
+		<result column="MAWB" property="mawb" javaType="String" />
+		<result column="HAWB" property="hawb" javaType="String" />
+		<result column="CONTAINER" property="container" javaType="String" />
+		<result column="SEAL" property="seal" javaType="String" />
+		<result column="ETA" property="eta" javaType="String" />
+		<result column="CY" property="cy" javaType="String" />
+		<result column="AGENT" property="agent" javaType="String" />
+		<result column="LOADING_PORT" property="loadingPort" javaType="String" />
+		<result column="DISCHARGE_PORT" property="dischargePort" javaType="String" />
+		<result column="DELIVER_PLACE" property="deliverPlace" javaType="String" />
+		
+		<result column="CARGO_MARK" property="cargoMark" javaType="String" />
+		<result column="CARGO_WEIGHT" property="cargoWeight" javaType="String" />
+		<result column="CARGO_VOLUMN" property="cargoVolumn" javaType="String" />
+		<result column="CARGO_DESCRIPTION" property="cargoDescription" javaType="String" />
+		<result column="CARGO" property="cargo" javaType="String" />
+		<result column="CARGO_PKG" property="pkg" javaType="String" />
+		<result column="CARGO_COUNT" property="count" javaType="String" />
+		
+		<result column="FREIGHT" property="freight" javaType="String" />
+		<result column="CHARGE" property="charge" javaType="String" />
+		<result column="RATE" property="rate" javaType="String" />
+		
+		<association column="BOOKINGNOTE_ID" property="bookingNote" select="select-logistics-bookingnote-basic-byid" />
+	</resultMap>
+	
+	<insert id="insert-logistics-arrivalnote" parameterType="com.ksa.model.logistics.ArrivalNote">
+		INSERT INTO KSA_LOGISTICS_ARRIVALNOTE
+						(  ID, 	ARRIVAL_DATE, 	CODE, 		SHIPPER, 	CONSIGNEE, 					
+						VESSEL, VOYAGE, MAWB, HAWB, CONTAINER, SEAL, ETA,
+						CY, LOADING_PORT, DISCHARGE_PORT, DELIVER_PLACE, 
+						CARGO_MARK, CARGO_WEIGHT, CARGO_VOLUMN, CARGO_DESCRIPTION, 
+						CARGO, CARGO_PKG, CARGO_COUNT, FREIGHT, CHARGE, RATE, BOOKINGNOTE_ID  )
+		VALUES ( 	#{id,jdbcType=VARCHAR},  #{date,jdbcType=VARCHAR}, 	#{code,jdbcType=VARCHAR},	#{shipper,jdbcType=VARCHAR}, #{consignee,jdbcType=VARCHAR},
+			 		#{vessel,jdbcType=VARCHAR}, #{voyage,jdbcType=VARCHAR}, #{mawb,jdbcType=VARCHAR}, #{hawb,jdbcType=VARCHAR}, #{container,jdbcType=VARCHAR},  #{seal,jdbcType=VARCHAR}, #{eta,jdbcType=VARCHAR},
+			 		#{cy,jdbcType=VARCHAR},#{loadingPort,jdbcType=VARCHAR},#{dischargePort,jdbcType=VARCHAR}, #{deliverPlace,jdbcType=VARCHAR}, 
+			 		#{cargoMark,jdbcType=VARCHAR}, #{cargoWeight,jdbcType=VARCHAR},#{cargoVolumn,jdbcType=VARCHAR},#{cargoDescription,jdbcType=VARCHAR},
+			 		#{cargo,jdbcType=VARCHAR}, #{pkg,jdbcType=VARCHAR}, #{count,jdbcType=VARCHAR}, #{freight,jdbcType=VARCHAR}, #{charge,jdbcType=VARCHAR}, #{rate,jdbcType=VARCHAR}, #{bookingNote.id} )	
+	</insert>
+	
+	<update id="update-logistics-arrivalnote" parameterType="com.ksa.model.logistics.ArrivalNote">
+		UPDATE KSA_LOGISTICS_ARRIVALNOTE SET
+			ARRIVAL_DATE			= #{date,jdbcType=VARCHAR},
+			CODE						= #{code,jdbcType=VARCHAR},
+			SHIPPER					= #{shipper,jdbcType=VARCHAR},
+			CONSIGNEE				= #{consignee,jdbcType=VARCHAR},
+			VESSEL						= #{vessel,jdbcType=VARCHAR},
+			VOYAGE					= #{voyage,jdbcType=VARCHAR},
+			MAWB						= #{mawb,jdbcType=VARCHAR},
+			HAWB						= #{hawb,jdbcType=VARCHAR}, 
+			CONTAINER				= #{container,jdbcType=VARCHAR}, 
+			SEAL							= #{seal,jdbcType=VARCHAR}, 
+			ETA							= #{eta,jdbcType=VARCHAR},
+			CY							= #{cy,jdbcType=VARCHAR},
+			LOADING_PORT		= #{loadingPort,jdbcType=VARCHAR},
+			DISCHARGE_PORT	= #{dischargePort,jdbcType=VARCHAR},
+			DELIVER_PLACE		= #{deliverPlace,jdbcType=VARCHAR},
+			CARGO_MARK			= #{cargoMark,jdbcType=VARCHAR}, 
+			CARGO_WEIGHT		= #{cargoWeight,jdbcType=VARCHAR},
+			CARGO_VOLUMN	= #{cargoVolumn,jdbcType=VARCHAR},
+			CARGO_DESCRIPTION = #{cargoDescription,jdbcType=VARCHAR},
+			
+			CARGO						= #{cargo,jdbcType=VARCHAR}, 
+			CARGO_PKG				= #{pkg,jdbcType=VARCHAR}, 
+			CARGO_COUNT 		= #{count,jdbcType=VARCHAR},
+			
+			CHARGE					= #{charge,jdbcType=VARCHAR}, 
+			FREIGHT					= #{freight,jdbcType=VARCHAR}, 
+			RATE				 			= #{rate,jdbcType=VARCHAR}
+		WHERE ID = #{id,jdbcType=VARCHAR}
+	</update>
+	
+	<delete id="delete-logistics-arrivalnote" parameterType="com.ksa.model.logistics.ArrivalNote">
+		DELETE FROM KSA_LOGISTICS_ARRIVALNOTE WHERE ID = #{id,jdbcType=VARCHAR}
+	</delete>
+	
+	<select id="select-logistics-arrivalnote-byid" resultMap="result-logistics-arrivalnote">
+		SELECT * FROM KSA_LOGISTICS_ARRIVALNOTE
+		WHERE ID = #{id,jdbcType=VARCHAR}
+	</select>
+	<select id="select-logistics-arrivalnote-bybnid" resultMap="result-logistics-arrivalnote">
+		SELECT * FROM KSA_LOGISTICS_ARRIVALNOTE
+		WHERE BOOKINGNOTE_ID = #{bookingNoteId,jdbcType=VARCHAR}
+	</select>
+</mapper>

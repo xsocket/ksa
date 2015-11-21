@@ -1,0 +1,35 @@
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	
+	<!-- 到货通知单 -->
+	<package name="logistics-arrivalnote-dialog" extends="ksa-default" namespace="/dialog/logistics/arrivalnote">
+		<result-types>
+			<!-- 导出word excel文件 -->
+			<result-type name="freemarker-stream" class="com.ksa.web.struts2.views.freemarker.FreemarkerStreamResult">
+				<param name="contentType">application/xhtml+xml</param>
+				<param name="contentDisposition">attachment;filename="${filename}"</param>
+			</result-type>
+		</result-types>
+		
+		<action name="edit-*" class="com.ksa.web.struts2.action.logistics.arrivalnote.ArrivalNoteAction">
+			<result name="success">/ui/logistics/{1}/arrivalnote.ftl</result>
+		</action>
+		
+		<action name="save-*" class="com.ksa.web.struts2.action.logistics.arrivalnote.ArrivalNoteSaveAction">
+			<result name="success">/ui/logistics/{1}/arrivalnote.ftl</result>
+			<result name="input">/ui/logistics/{1}/arrivalnote.ftl</result>
+		</action>
+		
+		<action name="delete-*" class="com.ksa.web.struts2.action.logistics.arrivalnote.ArrivalNoteDeleteAction">
+			<result name="success">/ui/logistics/{1}/arrivalnote.ftl</result>
+			<result name="input">/ui/logistics/{1}/arrivalnote.ftl</result>
+		</action>
+		
+		<action name="download-*" class="com.ksa.web.struts2.action.logistics.arrivalnote.ArrivalNoteDownloadAction">
+			<result name="success" type="freemarker-stream">/ui/logistics/{1}/arrivalnote-${type}.ftl</result>
+		</action>
+	</package>
+	
+</struts>

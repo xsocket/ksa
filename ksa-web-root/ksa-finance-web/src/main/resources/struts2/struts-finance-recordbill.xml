@@ -1,0 +1,39 @@
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 面单下载 -->
+	<package name="finance-recordbill-default" extends="ksa-default" namespace="/ui/finance/recordbill">
+		<result-types>
+			<!-- 导出excel文件 -->
+			<result-type name="freemarker-stream" class="com.ksa.web.struts2.views.freemarker.FreemarkerStreamResult">
+				<param name="contentType">application/xhtml+xml</param>
+				<param name="contentDisposition">attachment;filename="${filename}"</param>
+			</result-type>
+		</result-types>
+		
+		<action name="download" class="com.ksa.web.struts2.action.finance.business.RecordBillAction">
+			<result name="success" type="freemarker-stream">/ui/finance/business/recordbill-ex.ftl</result>
+			<result name="successSE" type="freemarker-stream">/ui/finance/business/recordbill-ex.ftl</result>
+			<result name="successSI" type="freemarker-stream">/ui/finance/business/recordbill-im.ftl</result>
+			<result name="successAE" type="freemarker-stream">/ui/finance/business/recordbill-ex.ftl</result>
+			<result name="successAI" type="freemarker-stream">/ui/finance/business/recordbill-im.ftl</result>
+			<result name="successLY" type="freemarker-stream">/ui/finance/business/recordbill-ex.ftl</result>
+		</action>
+	</package>
+	
+	<!-- Debit Note 下载 -->
+	<package name="finance-debitnote-default" extends="ksa-default" namespace="/ui/finance/debitnote">
+		<result-types>
+			<!-- 导出excel文件 -->
+			<result-type name="freemarker-stream" class="com.ksa.web.struts2.views.freemarker.FreemarkerStreamResult">
+				<param name="contentType">application/xhtml+xml</param>
+				<param name="contentDisposition">attachment;filename="${filename}"</param>
+			</result-type>
+		</result-types>
+		
+		<action name="download" class="com.ksa.web.struts2.action.finance.business.DebitNoteAction">
+			<result name="success" type="freemarker-stream">/ui/finance/business/debitNote.ftl</result>
+		</action>
+	</package>
+</struts>

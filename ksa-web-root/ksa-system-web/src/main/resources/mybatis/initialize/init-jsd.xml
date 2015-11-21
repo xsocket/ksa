@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ksa-initialize">
+
+	<resultMap type="com.ksa.system.initialize.model.JieSuanDan" id="result-init-jsd">			
+		<id column="DaiMa" property="daiMa" javaType="String" />
+		<result column="KeHu" property="keHu" javaType="String" />
+		<result column="JinE" property="jinE" javaType="Float" />
+		<result column="JieZhiRQ" property="jieZhiRQ" javaType="Date" />
+		<result column="KaiDanRQ" property="kaiDanRQ" javaType="Date" />
+		<result column="BeiZhu" property="beiZhu" javaType="String" />
+	</resultMap>
+	<!-- 某一托单的所有费用信息（收+支） -->
+	<select id="select-init-jsd" resultMap="result-init-jsd">
+		select DaiMa, KeHu, JinE, JieZhiRQ, KaiDanRQ, BeiZhu
+		from F_JieSuanDan where DaiMa = #{value}
+	</select>
+	
+</mapper>

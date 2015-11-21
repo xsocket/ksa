@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ksa-security">
+
+	<resultMap type="com.ksa.model.security.Role" id="result-security-role-basic">
+		<id column="ID" property="id" javaType="String" />
+		<result column="NAME" property="name" javaType="String" />
+		<result column="DESCRIPTION" property="description" javaType="String" />
+	</resultMap>
+	
+	<resultMap type="com.ksa.model.security.Role" id="result-security-role" extends="result-security-role-basic">
+		<collection property="permissions" ofType="com.ksa.model.security.Permission" 
+			column="ID" select="select-security-permission-byroleid">
+		</collection>
+	</resultMap>
+	
+	<!-- 插入角色 -->
+	<insert id="insert-security-role" parameterType="com.ksa.model.security.User">
+		INSERT INTO KSA_SECURITY_ROLE 
+						( ID, 		NAME, 		DESCRIPTION )
+		VALUES ( 	#{id}, 	#{name,jdbcType=VARCHAR}, 	#{description,jdbcType=VARCHAR} )	
+	</insert>
+	
+	<!-- 修改角色 -->
+	<update id="update-security-role" parameterType="com.ksa.model.security.User">
+		UPDATE KSA_SECURITY_ROLE SET
+			NAME 				= #{name,jdbcType=VARCHAR},
+			DESCRIPTION 	= #{description,jdbcType=VARCHAR}
+		WHERE 	ID 		= #{id}
+	</update>
+	
+	<!-- 删除角色 -->
+	<delete id="delete-security-role" >
+		DELETE FROM KSA_SECURITY_ROLE WHERE ID = #{id}
+	</delete>
+	
+	<sql id="select-security-role">
+		SELECT ID, NAME, DESCRIPTION
+		FROM KSA_SECURITY_ROLE
+	</sql>
+
+	<!-- 查询所有角色 -->
+	<select id="select-security-role-all" resultMap="result-security-role-basic">
+		<include refid="select-security-role"/>
+	</select>
+	
+	<!-- 查询具体角色 -->
+	<select id="select-security-role-byid" resultMap="result-security-role">
+		<include refid="select-security-role"/>
+		WHERE ID = #{id}
+	</select>
+	
+	<!-- 查询用户角色 -->
+	<select id="select-security-role-byuserid" resultMap="result-security-role">
+		SELECT r.ID, r.NAME, r.DESCRIPTION
+		FROM KSA_SECURITY_ROLE r JOIN KSA_SECURITY_USERROLE u ON r.ID = u.ROLE_ID 
+		WHERE u.USER_ID = #{id}
+	</select>
+
+	<!-- 插入角色权限 -->
+	<insert id="insert-security-rolepermission" parameterType="map">
+		INSERT INTO KSA_SECURITY_ROLEPERMISSION ( ROLE_ID, PERMISSION_ID )
+		VALUES ( 	#{roleId}, 	#{permissionId} )	
+	</insert>
+	<!-- 删除角色权限 -->
+	<delete id="delete-security-rolepermission" parameterType="map">
+		DELETE FROM KSA_SECURITY_ROLEPERMISSION
+		WHERE ROLE_ID = #{roleId} AND PERMISSION_ID = #{permissionId}
+	</delete>
+
+
+
+
+	
+	<!-- 数据获取操作-->
+	<select id="combo-security-role-all" resultMap="result-security-role-basic">
+		<include refid="select-security-role"/>
+	</select>
+	
+	<select id="grid-security-role-all" resultMap="result-security-role-basic">
+		<include refid="select-security-role"/>
+		<if test="_sort != null">
+			ORDER BY ${_sort} ${_order}
+		</if>
+	</select>
+	
+	<select id="count-security-role-all" resultType="int">
+		SELECT COUNT(*)
+		FROM KSA_SECURITY_ROLE
+	</select>
+	
+	<select id="grid-security-role-byuser" resultMap="result-security-role-basic">
+		<include refid="select-security-role"/>
+			JOIN KSA_SECURITY_USERROLE ON ID = ROLE_ID
+		WHERE USER_ID = #{userId,jdbcType=VARCHAR}
+		<if test="_sort != null">
+			ORDER BY ${_sort} ${_order}
+		</if>
+	</select>
+	
+	<select id="count-security-role-byuser" resultType="int">
+		SELECT COUNT(*)
+		FROM KSA_SECURITY_ROLE 
+			JOIN KSA_SECURITY_USERROLE ON ID = ROLE_ID
+		WHERE USER_ID = #{userId,jdbcType=VARCHAR}
+	</select>
+	
+</mapper>

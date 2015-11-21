@@ -1,0 +1,50 @@
+/*
+	样式修改说明：
+	1. 兼容 bootstrap 隐藏 invalid box 的背景图像
+	2. 加入类似 bootstrap 的 border-color 和 box-shadow 属性  
+*/
+.validatebox-invalid{
+	/* background:#FFFFEE url('images/validatebox_warning.png') no-repeat right 1px; */
+	background-color: #FFE !important;
+}
+
+input.validatebox-invalid,select.validatebox-invalid,textarea.validatebox-invalid {
+	color: #b94a48;
+	border-color: #b94a48;
+}
+input.validatebox-invalid:focus,select.validatebox-invalid :focus,textarea.validatebox-invalid:focus {
+	border-color: #953b39;
+	-webkit-box-shadow: 0 0 6px #d59392;
+	-moz-box-shadow: 0 0 6px #d59392;
+	box-shadow: 0 0 6px #d59392;
+}
+
+.validatebox-tip{
+	position:absolute;
+	/*将宽度从 250px 减为 150px */
+	width:120px;
+	height:auto;
+	display:none;
+	z-index:9900000;
+}
+.validatebox-tip-content{
+	display:inline-block;
+	position:absolute;
+	top:0px;
+	left:10px;
+	padding:3px 5px;
+	border:1px solid #CC9933;
+	background:#FFFFCC;
+	z-index:9900001;
+	font-size:12px;
+}
+.validatebox-tip-pointer{
+	background:url('images/validatebox_pointer.gif') no-repeat left top;
+	display:inline-block;
+	width:10px;
+	height:19px;
+	position:absolute;
+	left:1px;
+	top:0px;
+	z-index:9900002;
+}

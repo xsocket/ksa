@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ksa-bd">
+
+	<resultMap type="com.ksa.model.bd.CurrencyRate" id="result-bd-rate">
+		<id column="ID" property="id" javaType="String" />
+		<result column="RATE" property="rate" javaType="float"/>
+		<association column="CURRENCY_ID" property="currency" javaType="com.ksa.model.bd.Currency">
+			<id column="CURRENCY_ID" property="id" javaType="String" />
+			<result column="CURRENCY_CODE" property="code" javaType="String" />
+			<result column="CURRENCY_NAME" property="name" javaType="String" />
+			<result column="CURRENCY_RATE" property="extra" javaType="String" />
+		</association>
+	</resultMap>
+	<resultMap type="com.ksa.model.bd.CurrencyRate" extends="result-bd-rate" id="result-bd-rate-bydate">
+		<result column="MONTH" property="month" javaType="Date"/>
+	</resultMap>
+	<resultMap type="com.ksa.model.bd.CurrencyRate" extends="result-bd-rate" id="result-bd-rate-bypartner">
+		<association column="PARTNER_ID" property="partner" javaType="com.ksa.model.bd.Partner">
+			<id column="PARTNER_ID" property="id" javaType="String" />
+			<result column="PARTNER_CODE" property="code" javaType="String" />
+			<result column="PARTNER_NAME" property="name" javaType="String" />
+		</association>
+	</resultMap>
+	
+	<!-- 按日期插入汇率 -->
+	<insert id="insert-bd-rate-bydate" parameterType="com.ksa.model.bd.CurrencyRate">
+		INSERT INTO KSA_BD_CURRENCY_RATE_BYDATE 
+						( ID, 	 CURRENCY_ID,		MONTH, 		RATE )
+		VALUES ( 	#{id,jdbcType=VARCHAR},  #{currency.id,jdbcType=VARCHAR}, 	#{month,jdbcType=DATE}, 	#{rate} )	
+	</insert>
+	<!-- 按客户插入汇率 -->
+	<insert id="insert-bd-rate-bypartner" parameterType="com.ksa.model.bd.CurrencyRate">
+		INSERT INTO KSA_BD_CURRENCY_RATE_BYPARTNER 
+						( ID, 	 CURRENCY_ID,		PARTNER_ID, 		RATE )
+		VALUES ( 	#{id,jdbcType=VARCHAR},  #{currency.id,jdbcType=VARCHAR},  #{partner.id,jdbcType=VARCHAR}, 	#{rate} )	
+	</insert>
+	
+	<!-- 按日期更新汇率 -->
+	<update id="update-bd-rate-bydate" parameterType="com.ksa.model.bd.CurrencyRate">
+		UPDATE KSA_BD_CURRENCY_RATE_BYDATE SET
+			RATE		= #{rate}
+		WHERE ID 	= #{id}
+	</update>
+	<!-- 按客户更新汇率 -->
+	<update id="update-bd-rate-bypartner" parameterType="com.ksa.model.bd.CurrencyRate">	
+		UPDATE KSA_BD_CURRENCY_RATE_BYPARTNER SET
+			RATE		= #{rate}
+		WHERE ID 	= #{id}
+	</update>
+	
+	<!-- 按日期删除汇率 -->
+	<delete id="delete-bd-rate-bydate" >
+		DELETE FROM KSA_BD_CURRENCY_RATE_BYDATE WHERE ID = #{id}
+	</delete>
+	<!-- 按客户删除汇率 -->
+	<delete id="delete-bd-rate-bypartner" >
+		DELETE FROM KSA_BD_CURRENCY_RATE_BYPARTNER WHERE ID = #{id}
+	</delete>
+	
+	<select id="select-bd-rate-latest" resultMap="result-bd-rate-bydate">
+		SELECT r.ID, r.RATE, r.MONTH, 
+			r.CURRENCY_ID, d.CODE as CURRENCY_CODE, d.NAME as CURRENCY_NAME, d.EXTRA as CURRENCY_RATE
+		FROM KSA_BD_CURRENCY_RATE_BYDATE r
+			JOIN KSA_BD_DATA d ON r.CURRENCY_ID = d.ID
+			JOIN (
+				SELECT CURRENCY_ID, MAX( MONTH ) as LATEST_MONTH FROM KSA_BD_CURRENCY_RATE_BYDATE
+				WHERE MONTH <![CDATA[ <= ]]> #{date}
+				GROUP BY CURRENCY_ID
+			) t ON r.CURRENCY_ID = t.CURRENCY_ID AND r.MONTH = t.LATEST_MONTH
+		<if test="currencyId != null">
+			WHERE r.CURRENCY_ID = #{currencyId}
+		</if>
+		ORDER BY d.RANK
+	</select>
+	
+	<!-- 按日期查询汇率 -->
+	<select id="select-bd-rate-bydate" resultMap="result-bd-rate-bydate">
+		SELECT r.ID, r.RATE, r.MONTH, 
+			r.CURRENCY_ID, d.CODE as CURRENCY_CODE, d.NAME as CURRENCY_NAME, d.EXTRA as CURRENCY_RATE
+		FROM KSA_BD_CURRENCY_RATE_BYDATE r
+			JOIN KSA_BD_DATA d ON r.CURRENCY_ID = d.ID
+		WHERE r.MONTH >= #{startDate} AND r.MONTH <![CDATA[ < ]]> #{endDate} 
+			<if test="currencyId != null">
+				AND r.CURRENCY_ID = #{currencyId}
+			</if>
+		ORDER BY r.MONTH
+	</select>
+	<select id="select-bd-rate-bydate-byid" resultMap="result-bd-rate-bydate">
+		SELECT r.ID, r.RATE, r.MONTH, 
+			r.CURRENCY_ID, d.CODE as CURRENCY_CODE, d.NAME as CURRENCY_NAME, d.EXTRA as CURRENCY_RATE
+		FROM KSA_BD_CURRENCY_RATE_BYDATE r
+			JOIN KSA_BD_DATA d ON r.CURRENCY_ID = d.ID
+		WHERE r.Id = #{id}
+	</select>
+	<select id="select-bd-rate-all" resultMap="result-bd-rate-bydate">
+		SELECT r.ID, r.RATE, r.MONTH, 
+			r.CURRENCY_ID, d.CODE as CURRENCY_CODE, d.NAME as CURRENCY_NAME, d.EXTRA as CURRENCY_RATE
+		FROM KSA_BD_CURRENCY_RATE_BYDATE r
+			JOIN KSA_BD_DATA d ON r.CURRENCY_ID = d.ID ORDER BY r.MONTH DESC
+	</select>
+	
+	<!-- 按客户查询汇率 -->
+	<select id="select-bd-rate-bypartner" resultMap="result-bd-rate-bypartner">
+		SELECT r.ID, r.RATE,
+			r.CURRENCY_ID, d.CODE as CURRENCY_CODE, d.NAME as CURRENCY_NAME, d.EXTRA as CURRENCY_RATE,
+			r.PARTNER_ID, c.CODE as PARTNER_CODE, c.NAME as PARTNER_NAME
+		FROM KSA_BD_CURRENCY_RATE_BYPARTNER r
+			JOIN KSA_BD_DATA d ON r.CURRENCY_ID = d.ID
+			JOIN KSA_BD_PARTNER c ON r.PARTNER_ID = c.ID
+		WHERE r.PARTNER_ID = #{partnerId} 
+			<if test="currencyId != null">
+				AND r.CURRENCY_ID = #{currencyId}
+			</if>
+		ORDER BY d.RANK
+	</select>
+	<select id="select-bd-rate-bypartner-byid" resultMap="result-bd-rate-bypartner">
+		SELECT r.ID, r.RATE,
+			r.CURRENCY_ID, d.CODE as CURRENCY_CODE, d.NAME as CURRENCY_NAME, d.EXTRA as CURRENCY_RATE,
+			r.PARTNER_ID, c.CODE as PARTNER_CODE, c.NAME as PARTNER_NAME
+		FROM KSA_BD_CURRENCY_RATE_BYPARTNER r
+			JOIN KSA_BD_DATA d ON r.CURRENCY_ID = d.ID
+			JOIN KSA_BD_PARTNER c ON r.PARTNER_ID = c.ID
+		WHERE r.Id = #{id}
+	</select>
+	
+</mapper>

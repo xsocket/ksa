@@ -1,0 +1,81 @@
+/*
+	样式修改说明：
+	1. 兼容 bootstrap 中的 .pagination 样式
+	2. 将 pagination 的图片合并
+
+*/
+.pagination {
+	margin: 0;
+	height: 30px;
+	zoom:1;
+}
+
+.pagination a, .pagination span  {
+	float: none;
+	padding: 0 4px 0 1px;
+	line-height: 18px;
+	background-color: transparent;
+}
+.pagination span {
+	border: none;
+}
+.pagination table{
+	float:left;
+	height:30px;
+}
+.pagination td{
+	border:0;
+}
+.pagination-btn-separator{
+	float:left;
+	height:24px;
+	border-left:1px solid #ccc;
+	border-right:1px solid #fff;
+	margin:3px 1px;
+}
+.pagination-num{
+	border:1px solid #ccc;
+	margin:0 2px;
+	width: inherit;
+	height: inherit;
+	margin-bottom: 0 !important;
+}
+.pagination .pagination-num {
+	padding: 1px 3px 1px 1px;
+	width: 34px;
+	text-align: center;
+}
+.pagination-page-list{
+	margin:0 6px 0 10px;
+	width: inherit;
+	height: 20px;
+	padding: 0;
+}
+.pagination-info{
+	float:right;
+	padding-right:6px;
+	padding-top:8px;
+	font-size:12px;
+	margin-right:10px;
+}
+.pagination span{
+	font-size:12px;
+}
+.pagination-first{
+	background:url('images/pagination_tools.png') no-repeat;
+}
+.pagination-prev{
+	background:url('images/pagination_tools.png') no-repeat -16px 0;
+}
+.pagination-next{
+	background:url('images/pagination_tools.png') no-repeat  -32px 0;
+}
+.pagination-last{
+	background:url('images/pagination_tools.png') no-repeat  -48px 0;
+}
+.pagination-load{
+	background:url('images/pagination_tools.png') no-repeat  -64px 0;
+}
+.pagination-loading{
+	background:url('images/pagination_loading.gif') no-repeat;
+}

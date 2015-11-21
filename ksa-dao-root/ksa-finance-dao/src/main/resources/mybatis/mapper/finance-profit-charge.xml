@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ksa-finance">
+
+	<resultMap type="com.ksa.model.finance.BookingNoteProfit$ProfitCharge" id="result-finance-profit-charge">
+		<id column="ID" property="id" javaType="String" />
+		<result column="AMOUNT" property="amount" javaType="float" />
+		<result column="TYPE" property="type" javaType="String"/>
+		<result column="DIRECTION" property="direction" javaType="int" />
+		<result column="ACCOUNT_ID" property="accountId" javaType="String" />
+		<result column="ACCOUNT_STATE" property="accountState" javaType="int" />
+		<!-- 货币 -->
+		<association column="CURRENCY_ID" property="currency"   javaType="com.ksa.model.bd.Currency">
+			<id column="CURRENCY_ID" property="id" />
+			<result column="CURRENCY_CODE" property="code" />
+			<result column="CURRENCY_NAME" property="name" />
+			<result column="CURRENCY_RANK" property="rank" />	<!-- 排序用 -->
+		</association>
+	</resultMap>
+	
+	<!-- 按托单查找对应的费用数据 -->
+	<select id="select-finance-profit-charge" resultMap="result-finance-profit-charge">
+		SELECT c.*,
+			a.STATE AS ACCOUNT_STATE,
+			d.ID as CURRENCY_ID, d.CODE as CURRENCY_CODE, d.NAME as CURRENCY_NAME, d.RANK as CURRENCY_RANK
+		FROM KSA_FINANCE_CHARGE c
+			LEFT JOIN KSA_BD_DATA 	d	 ON d.ID = c.CURRENCY_ID
+			LEFT JOIN KSA_FINANCE_ACCOUNT 	a	 ON a.ID = c.ACCOUNT_ID
+		WHERE c.BOOKINGNOTE_ID = #{id}
+	</select>
+	
+	<!-- 按托单查找对应的境外费用数据 -->
+	<select id="select-finance-profit-charge-foreign" resultMap="result-finance-profit-charge">
+		SELECT c.*,
+			a.STATE AS ACCOUNT_STATE,
+			d.ID as CURRENCY_ID, d.CODE as CURRENCY_CODE, d.NAME as CURRENCY_NAME, d.RANK as CURRENCY_RANK
+		FROM KSA_FINANCE_CHARGE c
+			LEFT JOIN KSA_BD_DATA 	d	 ON d.ID = c.CURRENCY_ID
+			LEFT JOIN KSA_FINANCE_ACCOUNT 	a	 ON a.ID = c.ACCOUNT_ID
+		WHERE c.BOOKINGNOTE_ID = #{id} AND c.NATURE = -1
+	</select>
+	
+	<!-- 按托单查找对应的境外费用数据 -->
+	<select id="select-finance-profit-charge-native" resultMap="result-finance-profit-charge">
+		SELECT c.*,
+			a.STATE AS ACCOUNT_STATE,
+			d.ID as CURRENCY_ID, d.CODE as CURRENCY_CODE, d.NAME as CURRENCY_NAME, d.RANK as CURRENCY_RANK
+		FROM KSA_FINANCE_CHARGE c
+			LEFT JOIN KSA_BD_DATA 	d	 ON d.ID = c.CURRENCY_ID
+			LEFT JOIN KSA_FINANCE_ACCOUNT 	a	 ON a.ID = c.ACCOUNT_ID
+		WHERE c.BOOKINGNOTE_ID = #{id} AND c.NATURE = 1
+	</select>
+</mapper>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ksa-finance">
+
+	<resultMap type="com.ksa.model.finance.Invoice" id="result-finance-invoice">
+		<id column="ID" property="id" javaType="String" />
+		<result column="CODE" property="code" javaType="String"/>
+		<result column="INVOICE_NUMBER" property="number" javaType="String"/>
+		<result column="TAX_NUMBER" property="taxNumber" javaType="String"/>
+		<result column="TYPE" property="type" javaType="String"/>
+		<result column="AMOUNT" property="amount" javaType="float" />
+		<result column="CREATED_DATE" property="createdDate" javaType="Date" />
+		<result column="NOTE" property="note" javaType="String"/>
+		<result column="DIRECTION" property="direction" javaType="int" />
+		<result column="NATURE" property="nature" javaType="int" />
+		<!-- 货币 -->
+		<association column="CURRENCY_ID" property="currency"   javaType="com.ksa.model.bd.Currency">
+			<id column="CURRENCY_ID" property="id" />
+			<result column="CURRENCY_CODE" property="code" />
+			<result column="CURRENCY_NAME" property="name" />
+		</association>
+		<!-- 创建人 -->
+		<association column="CREATOR_ID" property="creator"   javaType="com.ksa.model.security.User">
+			<id column="CREATOR_ID" property="id" />
+			<result column="CREATOR_NAME" property="name" />
+		</association>
+		<!-- 票据结算单位 -->
+		<association column="TARGET_ID" property="target"   javaType="com.ksa.model.bd.Partner">
+			<id column="TARGET_ID" property="id" />
+			<result column="TARGET_NAME" property="name" />
+		</association>
+		<!-- 票据对账的结算单 -->
+		<association column="ACCOUNT_ID" property="account"   javaType="com.ksa.model.finance.Account">
+			<id column="ACCOUNT_ID" property="id" />
+			<result column="ACCOUNT_CODE" property="code" />
+			<result column="ACCOUNT_STATE" property="state" />
+		</association>
+	</resultMap>
+	
+	<!-- 插入发票数据 -->
+	<insert id="insert-finance-invoice" parameterType="com.ksa.model.finance.Invoice">
+		INSERT INTO KSA_FINANCE_INVOICE 
+						( ID, 	 CODE,		INVOICE_NUMBER, 		TAX_NUMBER, 		TYPE, 		AMOUNT, 		CREATED_DATE,  NOTE,
+						CREATOR_ID,	ACCOUNT_ID, CURRENCY_ID, TARGET_ID, DIRECTION, NATURE )
+		VALUES ( 	#{id},  #{code,jdbcType=VARCHAR}, 	#{number,jdbcType=VARCHAR}, 	#{taxNumber,jdbcType=VARCHAR}, 	#{type,jdbcType=VARCHAR}, 	#{amount}, 	
+					#{createdDate,jdbcType=DATE}, 	#{note,jdbcType=VARCHAR}, 	
+						#{creator.id,jdbcType=VARCHAR},	#{account.id,jdbcType=VARCHAR}, #{currency.id,jdbcType=VARCHAR}, 
+						#{target.id,jdbcType=VARCHAR}, #{direction,jdbcType=NUMERIC}, #{nature,jdbcType=NUMERIC} )	
+	</insert>
+	
+	<!-- 修改发票数据 -->
+	<update id="update-finance-invoice" parameterType="com.ksa.model.finance.Invoice">
+		UPDATE KSA_FINANCE_INVOICE SET
+			CODE 						= #{code,jdbcType=VARCHAR},
+			INVOICE_NUMBER 	= #{number,jdbcType=VARCHAR},
+			TAX_NUMBER 			= #{taxNumber,jdbcType=VARCHAR},
+			TYPE 						= #{type,jdbcType=VARCHAR},
+			AMOUNT 				= #{amount}, 	
+			CREATED_DATE 		= #{createdDate,jdbcType=DATE}, 
+			NOTE 						= #{note,jdbcType=VARCHAR},
+			CREATOR_ID 			= #{creator.id,jdbcType=VARCHAR},  
+			ACCOUNT_ID			= #{account.id,jdbcType=VARCHAR},
+			CURRENCY_ID 			= #{currency.id,jdbcType=VARCHAR}, 			
+			TARGET_ID 				= #{target.id,jdbcType=VARCHAR}, 
+			DIRECTION				= #{direction,jdbcType=NUMERIC}, 
+			NATURE					= #{nature,jdbcType=NUMERIC}
+		WHERE ID 	= #{id}
+	</update>
+	
+	<!-- 修改发票对应的结算单 -->
+	<update id="update-finance-invoice-account">
+		UPDATE KSA_FINANCE_INVOICE SET
+			ACCOUNT_ID = #{account.id,jdbcType=VARCHAR}
+		WHERE ID 	= #{id}
+	</update>
+	
+	<!-- 删除发票数据 -->
+	<delete id="delete-finance-invoice" >		
+		DELETE FROM KSA_FINANCE_INVOICE WHERE ID = #{id}
+	</delete>
+	
+	<sql id="select-finance-invoice">
+		SELECT i.*,
+			c.CODE as CURRENCY_CODE, c.NAME as CURRENCY_NAME,
+			p.NAME as TARGET_NAME,
+			u.NAME as CREATOR_NAME,
+			a.CODE as ACCOUNT_CODE, a.STATE as ACCOUNT_STATE
+		FROM KSA_FINANCE_INVOICE i 
+			LEFT JOIN KSA_BD_DATA 					c 	ON c.ID	= i.CURRENCY_ID
+			LEFT JOIN KSA_BD_PARTNER 				p 	ON p.ID 	= i.TARGET_ID
+			LEFT JOIN KSA_SECURITY_USER 			u  ON u.ID   	= i.CREATOR_ID
+			LEFT JOIN KSA_FINANCE_ACCOUNT 	a  ON a.ID   	= i.ACCOUNT_ID    
+	</sql>
+
+	<!-- 按标识查找相应的发票数据 -->
+	<select id="select-finance-invoice-byid" resultMap="result-finance-invoice">
+		<include refid="select-finance-invoice" />
+		WHERE i.ID = #{id}
+	</select>
+	
+	<!-- 按发票结算对账单查找对应的发票数据 -->
+	<select id="select-finance-invoice-byaccount" resultMap="result-finance-invoice">
+		<include refid="select-finance-invoice" />
+		WHERE i.ACCOUNT_ID = #{id}
+	</select>
+	
+	<!-- 完整的发票查询 -->
+	<select id="grid-finance-invoice-query" resultMap="result-finance-invoice">
+		<include refid="select-finance-invoice" />
+		<if test="queryClauses != null">
+			WHERE  
+				<foreach item="clause" collection="queryClauses" separator=" AND ">
+					${clause}
+				</foreach>
+		</if>
+		<if test="_sort != null">
+			ORDER BY ${_sort} ${_order}
+		</if>
+		<if test="_sort == null">
+			ORDER BY i.CREATED_DATE  DESC, i.TARGET_ID
+		</if>
+	</select>
+	<select id="count-finance-invoice-query" resultType="int">
+		SELECT COUNT( i.ID )
+		FROM KSA_FINANCE_INVOICE i 
+			LEFT JOIN KSA_FINANCE_ACCOUNT	a 	ON a.ID 	= i.ACCOUNT_ID
+			LEFT JOIN KSA_BD_DATA 			c 	ON c.ID 	= i.CURRENCY_ID
+			LEFT JOIN KSA_BD_PARTNER 		p 	ON p.ID 	= i.TARGET_ID
+			LEFT JOIN KSA_SECURITY_USER 	u  ON u.ID   = i.CREATOR_ID  
+			<if test="queryClauses != null">
+				WHERE  
+					<foreach item="clause" collection="queryClauses" separator=" AND ">
+						${clause}
+					</foreach>
+			</if>
+	</select>
+</mapper>

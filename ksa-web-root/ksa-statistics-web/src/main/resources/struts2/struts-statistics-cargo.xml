@@ -1,0 +1,24 @@
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 货物及箱量统计 -->
+	<package name="statistics-cargo-default" extends="ksa-default" namespace="/ui/statistics/cargo">
+		<action name="default" class="com.ksa.web.struts2.action.statistics.cargo.CargoAction">
+			<result>/ui/statistics/cargo/default.ftl</result>
+		</action>
+	</package>
+	
+	<!-- 货物数据查询 -->
+	<package name="statistics-cargo-data" extends="ksa-default" namespace="/data/statistics/cargo">
+		<action name="query" class="com.ksa.web.struts2.action.statistics.cargo.CargoQueryAction">
+			<result name="success" type="json" >
+				<param name="contentType">application/json</param>
+            	<param name="excludeNullProperties">true</param>
+            	<param name="ignoreHierarchy">false</param>
+            	<param name="enableGZIP">true</param>
+            	<param name="root">gridData</param>
+			</result>
+		</action>
+	</package>
+</struts>

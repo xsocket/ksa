@@ -1,0 +1,23 @@
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	
+	<!-- 订舱通知书 -->
+	<package name="logistics-warehousebooking-dialog" extends="ksa-default" namespace="/dialog/logistics/warehousebooking">
+		<action name="edit-*" class="com.ksa.web.struts2.action.logistics.warehousebooking.WarehouseBookingAction">
+			<result name="success">/ui/logistics/{1}/warehouse-booking.ftl</result>
+		</action>
+		
+		<action name="save-*" class="com.ksa.web.struts2.action.logistics.warehousebooking.WarehouseBookingSaveAction">
+			<result name="success">/ui/logistics/{1}/warehouse-booking.ftl</result>
+			<result name="input">/ui/logistics/{1}/warehouse-booking.ftl</result>
+		</action>
+		
+		<action name="delete-*" class="com.ksa.web.struts2.action.logistics.warehousebooking.WarehouseBookingDeleteAction">
+			<result name="success">/ui/logistics/{1}/warehouse-booking.ftl</result>
+			<result name="input">/ui/logistics/{1}/warehouse-booking.ftl</result>
+		</action>
+	</package>
+	
+</struts>

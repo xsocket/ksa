@@ -1,0 +1,26 @@
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 利润统计 -->
+	<package name="statistics-profit-default" extends="ksa-default" namespace="/ui/statistics/profit">
+		<action name="default" class="com.ksa.web.struts2.action.statistics.profit.ProfitAction">
+			<result>/ui/statistics/profit/default.ftl</result>
+		</action>
+	</package>
+	
+	<!-- 利润统计 - 图表 -->
+	<package name="statistics-profit-chart" extends="ksa-default" namespace="/dialog/chart/profit">
+		<action name="default" class="com.ksa.web.struts2.action.statistics.profit.ChartAction">
+			<result>/ui/statistics/profit/chart.ftl</result>
+		</action>
+	</package>
+	
+	<!-- 费用利润查询 -->
+	<package name="statistics-profit-data" extends="ksa-default" namespace="/data/chart/profit">
+		<action name="*" class="com.ksa.web.struts2.action.statistics.profit.ChartQueryAction">
+			<result name="success">/ui/statistics/profit/data/{1}.ftl</result>
+			<result name="error">/ui/statistics/profit/data/Error.ftl</result>
+		</action>
+	</package>
+</struts>

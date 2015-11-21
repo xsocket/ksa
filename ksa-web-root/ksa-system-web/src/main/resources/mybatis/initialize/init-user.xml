@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ksa-initialize">
+
+	<resultMap type="com.ksa.system.initialize.model.YongHu" id="result-init-yonghu">
+		<id column="User_ID" property="id" javaType="String" />
+		<result column="User_Pass" property="password" javaType="String" />
+		<result column="User_Name" property="username" javaType="String" />
+		<result column="Tel" property="telephone" javaType="String" />
+		<result column="Email" property="email" javaType="String" />
+		<result column="LiShu" property="role" javaType="String" />
+	</resultMap>
+	<!-- 查询所有币种数据 -->
+	<select id="select-init-yonghu" resultMap="result-init-yonghu">
+		select User_ID, User_Pass, User_Name, Tel, Email, LiShu 
+		from UserList
+	</select>
+	
+</mapper>

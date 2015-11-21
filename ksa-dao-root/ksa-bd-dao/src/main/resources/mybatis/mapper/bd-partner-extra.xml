@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ksa-bd">
+	
+	<select id="select-bd-partnertextra-bypartnerid" resultType="String">
+		SELECT EXTRA
+		FROM KSA_BD_PARTNER_EXTRA
+		WHERE PARTNER_ID = #{id}
+	</select>
+	
+	<insert id="insert-bd-partnertextra" parameterType="map">
+		INSERT INTO KSA_BD_PARTNER_EXTRA ( PARTNER_ID, 	EXTRA )
+		VALUES ( #{partneId,jdbcType=VARCHAR}, #{extra,jdbcType=VARCHAR} )	
+	</insert>
+	
+	<delete id="delete-bd-partnertextra" parameterType="map">
+		DELETE FROM KSA_BD_PARTNER_EXTRA 
+		WHERE PARTNER_ID = #{partneId,jdbcType=VARCHAR}
+			AND EXTRA = #{extra,jdbcType=VARCHAR}
+	</delete>
+	
+	<!-- datagrid 相关查询操作-->
+	<select id="grid-bd-partner-extra"  resultType="String">
+		SELECT ALIAS as EXTRA FROM KSA_BD_PARTNER
+		WHERE ID = #{id}
+		UNION
+		SELECT EXTRA
+		FROM KSA_BD_PARTNER_EXTRA
+		WHERE PARTNER_ID = #{id}
+	</select>
+	<select id="count-bd-partner-extra" resultType="int">
+		SELECT ( COUNT(*) + 1 )
+		FROM KSA_BD_PARTNER_EXTRA
+		WHERE PARTNER_ID = #{id}
+	</select>
+	
+</mapper>

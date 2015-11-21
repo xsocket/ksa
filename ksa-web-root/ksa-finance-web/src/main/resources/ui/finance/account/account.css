@@ -1,0 +1,24 @@
+form, div#dialog_container { padding: 5px; }
+
+/* 结算单明细部分 */
+.control-group { margin-bottom: 0;margin-bottom: 5px\9; }
+
+.form-inline .control-label { width:75px; }
+.form-inline .controls { margin-left: 75px; }
+
+input, textarea { width: 150px; }
+.input-small { width:75px; }
+.input-xxlarge { width: 634px; }
+
+.add-on span input.combo-text {
+	-webkit-border-radius: 0 3px 3px 0;
+     -moz-border-radius: 0 3px 3px 0;
+          	border-radius: 0 3px 3px 0;
+}
+
+/* 费用列表部分 */
+div.charge-container { float:left; width:75%; height:100%; margin:0; }
+div.currency-container { float:left; width:25%; height:100%; margin:0; }
+
+/** 工具栏 */
+div.bottom-bar  span.title {margin:3px 20px 0 0;}

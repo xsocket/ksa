@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ksa-security">
+
+	<resultMap type="com.ksa.model.security.Permission" id="result-security-permission">
+		<id column="ID" property="id" javaType="String" />
+		<result column="NAME" property="name" javaType="String" />
+		<result column="DESCRIPTION" property="description" javaType="String" />
+	</resultMap>
+	
+	<sql id="select-security-permission">
+		SELECT ID, NAME, DESCRIPTION
+		FROM KSA_SECURITY_PERMISSION
+	</sql>
+
+	<!-- 查询所有权限 -->
+	<select id="select-security-permission-all" resultMap="result-security-permission">
+		<include refid="select-security-permission"/>
+	</select>
+	
+	<!-- 查询具体权限 -->
+	<select id="select-security-permission-byid" resultMap="result-security-permission">
+		<include refid="select-security-permission"/>
+		WHERE ID = #{id}
+	</select>
+	
+	<!-- 查询角色权限 -->
+	<select id="select-security-permission-byroleid" resultMap="result-security-permission">
+		SELECT p.ID, p.NAME, p.DESCRIPTION
+		FROM KSA_SECURITY_PERMISSION p JOIN KSA_SECURITY_ROLEPERMISSION r ON p.ID = r.PERMISSION_ID 
+		WHERE r.ROLE_ID = #{id}
+	</select>
+
+	
+	<!-- 数据获取操作-->
+	<select id="combo-security-permission-all" resultMap="result-security-permission">
+		<include refid="select-security-permission"/>
+	</select>
+	
+	<select id="grid-security-permission-all" resultMap="result-security-permission">
+		<include refid="select-security-permission"/>
+		<if test="_sort != null">
+			ORDER BY ${_sort} ${_order}
+		</if>
+	</select>
+	
+	<select id="count-security-permission-all" resultType="int">
+		SELECT COUNT(*)
+		FROM KSA_SECURITY_PERMISSION
+	</select>
+	
+	<select id="grid-security-permission-byrole" resultMap="result-security-permission">
+		<include refid="select-security-permission"/>
+			JOIN KSA_SECURITY_ROLEPERMISSION ON ID = PERMISSION_ID
+		WHERE ROLE_ID = #{roleId,jdbcType=VARCHAR}
+		<if test="_sort != null">
+			ORDER BY ${_sort} ${_order}
+		</if>
+	</select>
+	
+	<select id="count-security-permission-byrole" resultType="int">
+		SELECT COUNT(*)
+		FROM KSA_SECURITY_PERMISSION
+			JOIN KSA_SECURITY_ROLEPERMISSION ON ID = PERMISSION_ID
+		WHERE ROLE_ID = #{roleId,jdbcType=VARCHAR}
+	</select>
+	
+</mapper>

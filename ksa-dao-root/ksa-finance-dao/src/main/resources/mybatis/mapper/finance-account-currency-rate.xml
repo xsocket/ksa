@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ksa-finance">
+
+	<resultMap type="com.ksa.model.finance.AccountCurrencyRate" id="result-finance-rate">
+		<id column="ID" property="id" javaType="String" />
+		<result column="RATE" property="rate" javaType="float"/>
+		<association column="CURRENCY_ID" property="currency" javaType="com.ksa.model.bd.Currency">
+			<id column="CURRENCY_ID" property="id" javaType="String" />
+			<result column="CURRENCY_CODE" property="code" javaType="String" />
+			<result column="CURRENCY_NAME" property="name" javaType="String" />
+			<result column="CURRENCY_RATE" property="extra" javaType="String" />
+		</association>
+		<association column="ACCOUNT_ID" property="account" javaType="com.ksa.model.finance.Account">
+			<id column="ACCOUNT_ID" property="id" javaType="String" />
+			<result column="ACCOUNT_CODE" property="code" javaType="String" />
+		</association>
+	</resultMap>
+	
+	<!-- 按结算单插入汇率 -->
+	<insert id="insert-finance-account-rate" parameterType="com.ksa.model.finance.AccountCurrencyRate">
+		INSERT INTO KSA_FINANCE_CURRENCY_RATE_BYACCOUNT 
+						( ID, 	 CURRENCY_ID,		ACCOUNT_ID, 		RATE )
+		VALUES ( 	#{id,jdbcType=VARCHAR},  #{currency.id,jdbcType=VARCHAR},  #{account.id,jdbcType=VARCHAR}, 	#{rate} )	
+	</insert>
+	<!-- 按结算单更新汇率 -->
+	<update id="update-finance-account-rate" parameterType="com.ksa.model.finance.AccountCurrencyRate">	
+		UPDATE KSA_FINANCE_CURRENCY_RATE_BYACCOUNT SET
+			RATE		= #{rate}
+		WHERE ID 	= #{id}
+	</update>
+	<!-- 按结算单删除汇率 -->
+	<delete id="delete-finance-account-rate" >
+		DELETE FROM KSA_FINANCE_CURRENCY_RATE_BYACCOUNT WHERE ID = #{id}
+	</delete>
+	
+	<!-- 按结算单查询汇率 -->
+	<select id="select-finance-account-rates" resultMap="result-finance-rate">
+		SELECT r.ID, r.RATE,
+			d.ID as CURRENCY_ID, d.CODE as CURRENCY_CODE, d.NAME as CURRENCY_NAME, d.EXTRA as CURRENCY_RATE,
+			a.ID as ACCOUNT_ID, a.CODE as ACCOUNT_CODE
+		FROM KSA_FINANCE_CURRENCY_RATE_BYACCOUNT r
+			JOIN KSA_BD_DATA 					d ON d.ID = r.CURRENCY_ID
+			JOIN KSA_FINANCE_ACCOUNT 	a ON a.ID = r.ACCOUNT_ID
+		WHERE r.ACCOUNT_ID = #{accountId} 
+			<!-- 
+			<if test="currencyId != null">
+				AND r.CURRENCY_ID = #{currencyId}
+			</if> 
+			-->
+		ORDER BY d.RANK
+	</select>
+	
+	<!-- 按结算单查询汇率 -->
+	<select id="select-finance-account-rate-byid" resultMap="result-finance-rate">
+		SELECT r.ID, r.RATE,
+			d.ID as CURRENCY_ID, d.CODE as CURRENCY_CODE, d.NAME as CURRENCY_NAME, d.EXTRA as CURRENCY_RATE,
+			a.ID as ACCOUNT_ID, a.CODE as ACCOUNT_CODE
+		FROM KSA_FINANCE_CURRENCY_RATE_BYACCOUNT r
+			JOIN KSA_BD_DATA 					d ON d.ID = r.CURRENCY_ID
+			JOIN KSA_FINANCE_ACCOUNT 	a ON a.ID = r.ACCOUNT_ID
+		WHERE r.id = #{id}
+	</select>
+	
+</mapper>

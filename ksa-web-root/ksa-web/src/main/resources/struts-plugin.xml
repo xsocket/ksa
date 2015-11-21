@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="ksa-index" extends="ksa-default" namespace="/">
+		<action name="">
+			<result name="success" type="redirect">
+			  <param name="location">index.action</param>
+			</result>
+		</action>
+		<action name="index">
+			<result name="success" type="dispatcher">/WEB-INF/index.jsp</result>
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ksa-logistics">
+	<!-- 提单确认模型 -->
+	<resultMap type="com.ksa.model.logistics.WarehouseNoting" id="result-logistics-warehousenoting">
+		<id column="ID" property="id" javaType="String" />
+		<result column="SALER_TEL" property="salerTel" javaType="String" />
+		<result column="SALER_FAX" property="salerFax" javaType="String" />
+		<result column="SALER_EMAIL" property="salerEmail" javaType="String" />
+		<result column="SALER" property="saler" javaType="String" />
+		<result column="TARGET" property="to" javaType="String" />
+		<result column="CODE" property="code" javaType="String" />
+		<result column="CREATED_DATE" property="createdDate" javaType="String" />
+		<result column="CARGO_NAME" property="cargoName" javaType="String" />	
+		<result column="CARGO_WEIGHT" property="cargoWeight" javaType="String" />
+		<result column="CARGO_VOLUMN" property="cargoVolumn" javaType="String" />
+		<result column="CARGO_QUANTITY" property="cargoQuantity" javaType="String" />
+		<result column="CUSTOMER" property="customer" javaType="String" />	
+		<result column="LOADING_PORT" property="loadingPort" javaType="String" />
+		<result column="DISCHARGE_PORT" property="dischargePort" javaType="String" />
+		<result column="VESSEL_VOYAGE" property="vesselVoyage" javaType="String" />
+		<result column="DESTINATION" property="destination" javaType="String" />
+		<result column="DEPARTURE_DATE" property="departureDate" javaType="String" />
+		<result column="MAWB" property="mawb" javaType="String" />
+		<result column="ENTRY_DATE" property="entryDate" javaType="String" />
+		<result column="INFORM_DATE" property="informDate" javaType="String" />
+		<result column="ADDRESS" property="address" javaType="String" />
+		<result column="CONTACT" property="contact" javaType="String" />
+		<result column="TELEPHONE" property="telephone" javaType="String" />
+		<result column="FAX" property="fax" javaType="String" />
+		
+		<association column="BOOKINGNOTE_ID" property="bookingNote" select="select-logistics-bookingnote-basic-byid" />
+	</resultMap>
+	
+	<insert id="insert-logistics-warehousenoting" parameterType="com.ksa.model.logistics.WarehouseNoting">
+		INSERT INTO KSA_LOGISTICS_WAREHOUSENOTING
+						(  ID, SALER, 	TARGET, 	CODE,  CREATED_DATE,
+						CARGO_NAME, CARGO_WEIGHT, CARGO_VOLUMN, CARGO_QUANTITY, 
+						CUSTOMER,LOADING_PORT, DISCHARGE_PORT, VESSEL_VOYAGE, 
+						DESTINATION, DEPARTURE_DATE, MAWB, ENTRY_DATE, INFORM_DATE,
+						ADDRESS, 	CONTACT, 	TELEPHONE,  FAX,
+						BOOKINGNOTE_ID, SALER_TEL, SALER_FAX, SALER_EMAIL  )
+		VALUES ( 	#{id,jdbcType=VARCHAR}, #{saler,jdbcType=VARCHAR}, #{to,jdbcType=VARCHAR}, 	#{code,jdbcType=VARCHAR}, #{createdDate,jdbcType=VARCHAR},
+			 		#{cargoName,jdbcType=VARCHAR}, #{cargoWeight,jdbcType=VARCHAR},#{cargoVolumn,jdbcType=VARCHAR},#{cargoQuantity,jdbcType=VARCHAR},
+			 		#{customer,jdbcType=VARCHAR}, #{loadingPort,jdbcType=VARCHAR},#{dischargePort,jdbcType=VARCHAR},#{vesselVoyage,jdbcType=VARCHAR},
+			 		#{destination,jdbcType=VARCHAR}, #{departureDate,jdbcType=VARCHAR},#{mawb,jdbcType=VARCHAR},#{entryDate,jdbcType=VARCHAR},  #{informDate,jdbcType=VARCHAR},
+			 		#{address,jdbcType=VARCHAR}, #{contact,jdbcType=VARCHAR},#{telephone,jdbcType=VARCHAR},#{fax,jdbcType=VARCHAR},  
+			 		#{bookingNote.id}, #{salerTel,jdbcType=VARCHAR}, #{salerFax,jdbcType=VARCHAR}, #{salerEmail,jdbcType=VARCHAR} )	
+	</insert>
+	
+	<update id="update-logistics-warehousenoting" parameterType="com.ksa.model.logistics.WarehouseNoting">
+		UPDATE KSA_LOGISTICS_WAREHOUSENOTING SET
+			SALER						= #{saler,jdbcType=VARCHAR},
+			TARGET					= #{to,jdbcType=VARCHAR},
+			CODE						= #{code,jdbcType=VARCHAR},
+			CREATED_DATE		= #{createdDate,jdbcType=VARCHAR},
+			CARGO_NAME			= #{cargoName,jdbcType=VARCHAR}, 
+			CARGO_WEIGHT		= #{cargoWeight,jdbcType=VARCHAR},
+			CARGO_VOLUMN	= #{cargoVolumn,jdbcType=VARCHAR},
+			CARGO_QUANTITY	= #{cargoQuantity,jdbcType=VARCHAR}, 
+			CUSTOMER				= #{customer,jdbcType=VARCHAR}, 
+			LOADING_PORT		= #{loadingPort,jdbcType=VARCHAR},
+			DISCHARGE_PORT	= #{dischargePort,jdbcType=VARCHAR},
+			VESSEL_VOYAGE		= #{vesselVoyage,jdbcType=VARCHAR}, 
+			DESTINATION			= #{destination,jdbcType=VARCHAR},
+			DEPARTURE_DATE	= #{departureDate,jdbcType=VARCHAR},
+			MAWB						= #{mawb,jdbcType=VARCHAR}, 
+			ENTRY_DATE			= #{entryDate,jdbcType=VARCHAR},
+			INFORM_DATE			= #{informDate,jdbcType=VARCHAR},
+			ADDRESS					= #{address,jdbcType=VARCHAR}, 
+			CONTACT					= #{contact,jdbcType=VARCHAR},
+			TELEPHONE				= #{telephone,jdbcType=VARCHAR},
+			FAX							= #{fax,jdbcType=VARCHAR},
+			SALER_TEL				= #{salerTel,jdbcType=VARCHAR},
+			SALER_FAX				= #{salerFax,jdbcType=VARCHAR},
+			SALER_EMAIL			= #{salerEmail,jdbcType=VARCHAR}
+		WHERE ID = #{id,jdbcType=VARCHAR}
+	</update>
+	
+	<delete id="delete-logistics-warehousenoting" parameterType="com.ksa.model.logistics.WarehouseNoting">
+		DELETE FROM KSA_LOGISTICS_WAREHOUSENOTING WHERE ID = #{id,jdbcType=VARCHAR}
+	</delete>
+	
+	<select id="select-logistics-warehousenoting-byid" resultMap="result-logistics-warehousenoting">
+		SELECT * FROM KSA_LOGISTICS_WAREHOUSENOTING
+		WHERE ID = #{id,jdbcType=VARCHAR}
+	</select>
+	<select id="select-logistics-warehousenoting-bybnid" resultMap="result-logistics-warehousenoting">
+		SELECT * FROM KSA_LOGISTICS_WAREHOUSENOTING
+		WHERE BOOKINGNOTE_ID = #{bookingNoteId,jdbcType=VARCHAR}
+	</select>
+</mapper>

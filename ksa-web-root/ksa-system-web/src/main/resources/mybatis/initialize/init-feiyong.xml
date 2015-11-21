@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ksa-initialize">
+
+	<resultMap type="com.ksa.system.initialize.model.FeiYong" id="result-init-feiyong">
+		<id column="BianHao" property="id" javaType="int" />
+		<result column="TuoDanHao" property="tuoDanHao" javaType="String" />
+		<result column="JieSuanDX" property="jieSuanDX" javaType="String" />
+		<result column="FeiYXM" property="feiYongXM" javaType="String" />
+		<result column="BiZhong" property="biZhong" javaType="String" />
+		<result column="ShuLiang" property="shuLiang" javaType="Float" />
+		<result column="DanJia" property="danJia" javaType="Float" />
+		<result column="JinE" property="jinE" javaType="Float" />
+		<result column="CaoZuoYuan" property="caoZuoYuan" javaType="String" />
+		<result column="BeiZhu" property="beiZhu" javaType="String" />
+		<result column="DIRECTION" property="direction" javaType="int" />
+	</resultMap>
+	<!-- 某一托单的所有费用信息（收+支） -->
+	<select id="select-init-feiyong-bytuodan" resultMap="result-init-feiyong">
+		select TuoDanHao, JieSuanDX, FeiYXM, BiZhong, ShuLiang, DanJia, JinE, CaoZuoYuan, BeiZhu, 1 as DIRECTION
+		from F_FeiYongQD_Shou where TuoDanHao = #{value}
+		union
+		select TuoDanHao, JieSuanDX, FeiYXM, BiZhong, ShuLiang, DanJia, JinE, CaoZuoYuan, BeiZhu, -1 as DIRECTION
+		from F_FeiYongQD_Fu where TuoDanHao = #{value}
+	</select>
+	
+</mapper>

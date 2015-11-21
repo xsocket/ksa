@@ -1,0 +1,19 @@
+/* 基本信息部分 */
+.control-group { margin-bottom: 0;}
+.form-inline input { width: 130px; }
+.form-inline div.input-append input { width:102px; }
+.form-inline .control-label { width:65px; }
+.form-inline .controls { margin-left:65px; }
+.form-inline .control-label.narrow { width:50px; }
+.form-inline .controls.narrow { margin-left: 50px; }
+
+/* 费用列表部分 */
+div.charge-container { float:left; width:50%; height:100%; margin:0; }
+
+/** 工具栏 */
+div.bottom-bar  span.title {margin:3px 20px 0 0;}
+
+/* 费用编辑窗口部分 */
+input { width: 130px; }
+form.form-inline textarea { width: 342px; }
+#charge_window { overflow: hidden; }

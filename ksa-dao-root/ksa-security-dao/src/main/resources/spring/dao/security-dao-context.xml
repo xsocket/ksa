@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- 依赖 ksa-dao-context 项目中，/spring/dao-config.xml 的定义。  -->
+	
+	<!-- User DAO -->
+	<bean id="userDao" class="com.ksa.dao.security.mybatis.MybatisUserDao" parent="mybatisDao" />
+	
+	<!-- Role DAO -->
+	<bean id="roleDao" class="com.ksa.dao.security.mybatis.MybatisRoleDao" parent="mybatisDao" />
+	
+	<!-- Permission DAO -->
+	<bean id="permissionDao" class="com.ksa.dao.security.mybatis.MybatisPermissionDao" parent="mybatisDao" />
+	
+</beans>

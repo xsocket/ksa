@@ -1,0 +1,45 @@
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 物流信息管理 -->
+	<package name="logistics-default" extends="ksa-default" namespace="/ui/logistics">
+		<action name="default" class="com.ksa.web.struts2.action.logistics.DefaultAction">
+			<result>/ui/logistics/default.ftl</result>
+		</action>
+		<action name="return-notify" class="com.ksa.web.struts2.action.logistics.DefaultAction">
+			<result>/ui/logistics/return-notify.ftl</result>
+		</action>
+	</package>
+	
+	<!-- 托单列表 -->
+	<package name="logistics-portal" extends="ksa-default" namespace="/portal/logistics">
+		<action name="default">
+			<result>/portal/logistics/default.ftl</result>
+		</action>
+		<action name="return-notify">
+			<result>/portal/logistics/return-notify.ftl</result>
+		</action>
+	</package>
+	
+	<!-- 物流信息详细数据 -->
+	<package name="logistics-dialog" extends="ksa-default" namespace="/dialog/logistics">
+		<action name="create-*" class="com.ksa.web.struts2.action.logistics.DefaultAction">
+			<param name="type">{1}</param>
+			<result name="success">/ui/logistics/{1}/create.ftl</result>
+		</action>
+		<action name="edit-*" class="com.ksa.web.struts2.action.logistics.DefaultAction">
+			<param name="type">{1}</param>
+			<result name="success">/ui/logistics/{1}/edit.ftl</result>
+		</action>
+	</package>
+	
+	<include file="struts2/struts-bookingnote.xml"></include>
+	<include file="struts2/struts-arrivalnote.xml"></include>
+	<include file="struts2/struts-billoflading.xml"></include>
+	<include file="struts2/struts-warehousenoting.xml"></include>
+	<include file="struts2/struts-warehousebooking.xml"></include>
+	<include file="struts2/struts-manifest.xml"></include>
+	<include file="struts2/struts-logistics-component.xml"></include>
+	
+</struts>

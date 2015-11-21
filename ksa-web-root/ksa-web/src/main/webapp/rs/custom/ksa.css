@@ -1,0 +1,235 @@
+/*
+	1. 自定义样式  
+	2. bootstrap 样式的修改
+	3. easyui 样式的修改
+*/
+
+/* 业务托单logo 样式 */
+.logistics-logo {
+	position:absolute;	
+	right:20px;
+	height:80px;
+	width:120px;
+}
+
+/* 工具栏 - bar */
+.fixed-bar,
+.tool-bar,
+.top-bar,
+.bottom-bar {
+	padding: 10px 30px ;	/* 左右间距加大 */
+	background-color: #f5f5f5;
+	text-align: right;
+}
+.fixed-bar .dropdown-menu,
+.tool-bar .dropdown-menu,
+.top-bar .dropdown-menu,
+.bottom-bar .dropdown-menu {
+	text-align: left;
+}
+
+.fixed-bar:before,
+.fixed-bar:after,
+.tool-bar:before,
+.tool-bar:after,
+.top-bar:before,
+.top-bar:after
+.bottom-bar:before,
+.bottom-bar:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+
+.fixed-bar:after,
+.tool-bar:after,
+.top-bar:after,
+.bottom-bar:after {
+  clear: both;
+}
+
+.fixed-bar .title ,
+.tool-bar .title ,
+.top-bar .title ,
+.bottom-bar .title {
+	float:left;
+	margin:0;
+}
+
+.fixed-bar .btn + .btn ,
+.tool-bar .btn + .btn ,
+.top-bar .btn + .btn ,
+.bottom-bar .btn + .btn {
+	margin-bottom: 0;
+  	margin-left: 5px;	/* 按钮键的间距加大 */
+}
+.fixed-bar .btn + .btn-group ,
+.tool-bar .btn + .btn-group ,
+.top-bar .btn + .btn-group ,
+.bottom-bar .btn + .btn-group {
+	margin-bottom: 0;
+  	margin-left: 5px;	/* 按钮键的间距加大 */
+}
+.fixed-bar .btn.dropdown-toggle,
+.tool-bar .btn.dropdown-toggle,
+.top-bar .btn.dropdown-toggle,
+.bottom-bar .btn.dropdown-toggle {
+	margin-left:0;
+}
+
+.top-bar {
+	padding-bottom: 9px;
+	margin-top: 0;
+	margin-bottom:5px;
+	border-bottom: 1px solid #ddd;
+	-webkit-box-shadow: inset 0 -1px 0 #ffffff;
+	   -moz-box-shadow: inset 0 -1px 0 #ffffff;
+                box-shadow: inset 0 -1px 0 #ffffff;
+}
+
+.bottom-bar {
+	padding-top: 9px;
+	margin-bottom: 0;
+	border-top: 1px solid #ddd;
+	text-align: right;
+	-webkit-box-shadow: inset 0 1px 0 #ffffff;
+	   -moz-box-shadow: inset 0 1px 0 #ffffff;
+                box-shadow: inset 0 1px 0 #ffffff;
+}
+
+.fixed-bar {
+	position: fixed;
+	right: 0;
+	left: 0;
+	z-index: 1000;
+	opacity: 0.9;
+  	filter: alpha(opacity=90);
+}
+
+.top-bar.fixed-bar {
+	top: 0;
+}
+
+.bottom-bar.fixed-bar {
+	bottom: 0;
+}
+
+
+/* navbar */
+.navbar .nav > li > a {
+	padding: 10px;
+}
+
+.navbar-inverse .navbar-inner {
+	padding-right: 20px;
+	padding-left: 20px;
+	background: url("img/navbar-bg.png");
+}
+.navbar-inverse .brand, 
+.navbar-inverse .nav > li > a {
+	color:#fff;
+	opacity: 0.6;
+  	filter: alpha(opacity=60);
+	-webkit-transition: all .2s linear;
+	-moz-transition: all .2s linear;
+	transition: all .2s linear;
+	font-weight: bold;
+}
+.navbar-inverse .brand:hover,
+.navbar-inverse .nav > li > a:focus,
+.navbar-inverse .nav > li > a:hover {
+  	opacity: 1;
+  	filter: alpha(opacity=100);
+}
+.navbar-inverse .nav .active > a:hover, 
+.navbar-inverse .nav .active > a:focus {
+	opacity: 1;
+  	filter: alpha(opacity=100);
+}
+
+.navbar-inverse .nav > li > a > [class^="icon-"],
+.navbar-inverse .nav > li > a > [class*=" icon-"] {
+	background-image: url("img/glyphicons-halflings-white.png");
+}
+
+/* sidebar */
+.well.sidebar {
+	padding: 10px 0;
+}
+.nav .nav-header {
+	color: #F90; margin-top: 5px; font-weight: bold;
+}
+
+/* form */
+input[disabled], select[disabled], textarea[disabled], input[readonly], select[readonly], textarea[readonly] {
+	background-color: #F8F8F8;
+}
+input.combo-text[readonly] {
+	cursor: pointer;
+	background-color: #FFF;
+}
+label.control-label {
+	font-size:12px;
+}
+.control-group input[type='text'], .control-group textarea {
+	font-weight: bold;
+}
+
+	/* 缩小 label 的长度  */
+.form-horizontal .control-label {
+	width: 100px;
+}
+.form-horizontal .controls {
+	margin-left: 100px;
+}
+.form-horizontal .input-prepend,
+.form-horizontal .input-append {
+	margin-left: 0;
+}
+
+	/* inline*/
+.form-inline .control-group {	
+	display:inline-block;
+	*display: inline;
+}
+.form-inline .control-label {
+	width: 100px;
+	float:left;
+	padding-top: 5px;
+	text-align: right;
+}
+.form-inline .controls {
+	margin-left: 100px;
+}
+.form-inline .input-prepend,
+.form-inline .input-append {
+	margin-left: 0;
+}
+
+.input-mini { width:45px; }
+
+	/* fieldset */
+legend {
+	margin-bottom: 10px;
+	font-size: 12px;
+	line-height: 20px;
+	color: #08C;
+}
+legend + .control-group {
+	margin-top: 10px;
+}
+
+
+/* struts2 相关 */
+.alert ul, .alert ol {
+	margin-bottom : 0;
+	font-weight: bold;
+}
+
+/* loading 样式的按钮 */
+.loading > [class^="icon-"],
+.loading > [class*=" icon-"],
+.loading > .icon-white {
+	background-image: url("img/loading.gif");
+	background-position: 0 0;
+}

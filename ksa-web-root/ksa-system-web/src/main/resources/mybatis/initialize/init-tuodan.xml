@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ksa-initialize">
+
+	<resultMap type="com.ksa.system.initialize.model.TuoDan" id="result-init-tuodan">
+		<id column="BianHao" property="bianHao" javaType="String" />
+		<result column="Date" property="createdDate" javaType="Date" />
+		<result column="KeHM_E" property="keHuDaiMa" javaType="String" />
+		<result column="FaPBH" property="faPiaoBH" javaType="String" />
+		<result column="YueFen" property="yueFen" javaType="Date" />
+		<result column="XiaoSRY" property="xiaoShouRY" javaType="String" />
+		<result column="CaoZY" property="caoZuoY" javaType="String" />
+		<result column="BaoGH" property="baoGuanHang" javaType="String" />
+		<result column="BaoGDH" property="baoGuanDanHao" javaType="String" />
+		<result column="DaiLi" property="daiLi" javaType="String" />
+		<result column="TuiDRQ" property="tuiDanRQ" javaType="String" />
+		
+		<result column="MaiTou" property="maiTou" javaType="String" />
+		<result column="PinMing" property="pinMing" javaType="String" />
+		<result column="ShuLiang" property="shuLiang" javaType="int" />
+		<result column="ShuLiang_DanWei" property="shuLiangDW" javaType="String" />
+		<result column="ShuLiang_eng" property="shuLiangEnglish" javaType="String" />
+		<result column="TiJi" property="tiJi" javaType="String" />
+		<result column="MaoZhong" property="maoZhong" javaType="String" />
+		<result column="Zhu_TiDan" property="zhuTiDan" javaType="String" />
+		<result column="Fu_TiDan" property="fuTiDan" javaType="String" />
+		<result column="Zhu_FaHR_E" property="faHuoRen" javaType="String" />
+		<result column="Zhu_ShouHR_E" property="shouHuoRen" javaType="String" />
+		<result column="Zhu_TongZR_E" property="tongZhiRen" javaType="String" />
+		
+		<result column="DEPARTURE" property="departure" javaType="String" />
+		<result column="DESTINATION" property="destination" javaType="String" />
+		<result column="DEPARTURE_PORT" property="departurePort" javaType="String" />
+		<result column="DESTINATION_PORT" property="destinationPort" javaType="String" />
+		<result column="LOADING_PORT" property="loadingPort" javaType="String" />
+		<result column="DISCHARGE_PORT" property="dischargePort" javaType="String" />
+		<result column="DEPARTURE_DATE" property="departureDate" javaType="Date" />
+		<result column="DESTINATION_DATE" property="destinationDate" javaType="Date" />
+		<result column="DELIVER_DATE" property="deliverDate" javaType="Date" />
+		
+		<result column="HangXian" property="hangXian" javaType="String" />
+		<result column="ChuanMing" property="chuanMing" javaType="String" />
+		<result column="HangCi" property="hangci" javaType="String" />
+		
+		<result column="ChuanDai_E" property="chuanDai" javaType="String" />
+		<result column="ChengYR_E" property="chengYunRen" javaType="String" />
+		
+		<result column="XiangLei" property="xiangLei" javaType="String" />
+		<result column="XiangXing" property="xiangXing" javaType="String" />
+		<result column="XiangLiang" property="xiangLiang" javaType="String" />
+		
+		<result column="ChePH" property="chePaiHao" javaType="String" />
+		<result column="CheXing" property="cheXing" javaType="String" />
+		<result column="BeiZhu" property="beiZhu" javaType="String" />
+		
+		<result column="KaiPTT" property="kaiPiaoTT" javaType="String" />
+		<result column="JSDDaiMa" property="jsdDaiMa" javaType="String" />
+		<result column="Del_Flag" property="deleted" javaType="boolean" />
+		
+	</resultMap>
+	<!-- 查询所有客户 -->
+	<select id="select-init-tuodan" resultMap="result-init-tuodan">
+		SELECT BianHao
+	      ,Date
+	      ,KeHM_E
+	      ,FaPBH
+	      ,YueFen
+	      ,XiaoSRY
+	      ,CaoZY
+	      ,BaoGH
+	      ,'' as BaoGDH
+	      ,DaiLi
+	      ,TuiDRQ
+	      ,MaiTou
+	      ,PinMing
+	      ,ShuLiang
+	      ,ShuLiang_DanWei
+	      ,ShuLiang_eng
+	      ,TiJi
+	      ,MaoZhong
+	      ,Zhu_TiDan
+	      ,Fu_TiDan
+	      ,Zhu_FaHR_E
+	      ,Zhu_ShouHR_E
+	      ,Zhu_TongZR_E
+	      ,ShouHD_C as DEPARTURE
+	      ,ZhuangHG_C as LOADING_PORT
+	      ,XieHG_C as DISCHARGE_PORT
+	      ,JiaoHD_C as DESTINATION
+	      ,QiYG_C as DEPARTURE_PORT
+	      ,MuDG_C as DESTINATION_PORT
+	      ,KaoGR as DESTINATION_DATE
+	      ,LiGR as DEPARTURE_DATE
+	      ,KaoGR as DELIVER_DATE
+	      ,HangXian
+	      ,ChuanMing
+	      ,HangCi
+	      ,ChengYR_E
+	      ,ChuanDai_E
+	      ,XiangLei
+	      ,XiangXing
+	      ,XiangLiang
+	      ,ChePH
+	      ,CheXing
+	      ,BeiZhu
+	      ,KaiPTT
+	      ,JSDDaiMa
+	      ,Del_Flag
+	  FROM TuoShu_SE
+	  
+	  union
+	  
+	  SELECT BianHao
+	      ,Date
+	      ,KeHM_E
+	      ,FaPBH
+	      ,YueFen
+	      ,XiaoSRY
+	      ,CaoZY
+	      ,BaoGH
+	      ,BaoGDH
+	      ,DaiLi
+	      ,TuiDRQ
+		  ,'' as MaiTou
+	      ,PinMing
+	      ,ShuLiang
+	      ,ShuLiang_DanWei
+		  ,'' as ShuLiang_eng
+	      ,TiJi
+	      ,MaoZhong
+	      ,TiDH as Zhu_TiDan
+	      ,'' as Fu_TiDan
+	      ,FaHR_E as Zhu_FaHR_E
+	      ,ShouHR_E as Zhu_ShouHR_E
+	      ,TongZR_E as Zhu_TongZR_E
+		  ,ZhuangHG_C as DEPARTURE_PORT
+	      ,ZhuangHG_C as LOADING_PORT
+	      ,XieHG_C as DESCHARGE_PORT
+		  ,XieHG_C as DESTINATION_PORT
+		  ,'' as DEPARTURE
+	      ,JiaoHD_C as DESTINATION
+		  ,null as DEPARTURE_DATE
+	      ,KaoGR as DESTINATION_DATE
+	      ,SongHR as DELIVER_DATE
+	      ,HangXian
+	      ,ChuanMing
+	      ,HangCi
+	      ,ChuanDai_E
+		  ,'' as ChengYR_E
+	      ,XiangLei
+	      ,XiangXing
+	      ,XiangLiang
+	      ,ChePH
+	      ,CheXing
+	      ,BeiZhu
+	      ,KaiPTT
+	      ,JSDDaiMa
+	      ,Del_Flag
+	  FROM TuoShu_SI
+	  
+	  union
+	  
+	  SELECT BianHao
+	      ,Date
+	      ,KeHM_E
+	      ,FaPBH
+	      ,YueFen
+	      ,XiaoSRY
+	      ,CaoZY
+	      ,BaoGH
+		  ,'' as BaoGDH
+	      ,DaiLi
+	      ,TuiDRQ
+	
+	      ,MaiTou
+	      ,PinMing
+	      ,JianShu as ShuLiang
+	      ,JianShu_DanWei as ShuLiang_DaiWei
+	      ,ShuLiang_eng
+	      ,TiJi
+	      ,GW_E as MaoZhong
+	      ,MAWB as Zhu_TiDan
+	      ,HAWB as Fu_TiDan
+	      ,Shipper_E as Zhu_FaHR_E
+	      ,Consiqnee_E as Zhu_ShouHR_E
+	      ,Notify_E as Zhu_TongZR_E
+	
+	      ,Departure_C as DEPARTURE
+	      ,Destination_C as DESTINATION
+		  ,Departure_C as DEPARTURE_PORT
+	      ,Destination_C as DESTINATION_PORT
+		  ,'' as LOADING_PORT
+		  ,'' as DISCHARGE_PORT
+	      ,QiFRQ as DEPARTURE_DATE
+	      ,DaoDRQ as DESTINATION_DATE
+		  ,null as DELIVER_DATE
+	
+	      ,HangXian
+	      ,HangBan as ChuanMing
+		  ,HangBan as HangCi
+	
+		  ,'' as ChuanDai_E
+	      ,ChengYR_E
+		  ,'' as XiangLei
+		  ,'' as XiangXing
+		  ,'' as XiangLiang
+	
+	      ,ChePH
+	      ,CheXing
+		  ,'' as BeiZhu
+	
+	      ,KaiPTT
+	      ,JSDDaiMa
+	      ,Del_Flag
+	  FROM HuoYun.dbo.TuoShu_AE
+	  
+	  union
+	  
+	  SELECT BianHao
+	      ,Date
+	      ,KeHM_E
+	      ,FaPBH
+	      ,YueFen
+	      ,XiaoSRY
+	      ,CaoZY
+	      ,BaoGH
+		  ,'' as BaoGDH
+	      ,DaiLi
+	      ,TuiDRQ
+	
+	      ,MaiTou
+	      ,PinMing
+	      ,JianShu as ShuLiang
+	      ,JianShu_DanWei as ShuLiang_DaiWei
+	      ,'' as ShuLiang_eng
+	      ,TiJi
+	      ,GW_E as MaoZhong
+	      ,MAWB as Zhu_TiDan
+	      ,HAWB as Fu_TiDan
+	      ,Shipper_E as Zhu_FaHR_E
+	      ,Consiqnee_E as Zhu_ShouHR_E
+	      ,Notify_E as Zhu_TongZR_E
+	
+	      ,Departure_C as DEPARTURE
+	      ,Destination_C as DESTINATION
+		  ,Departure_C as DEPARTURE_PORT
+	      ,Destination_C as DESTINATION_PORT
+		  ,'' as LOADING_PORT
+		  ,'' as DISCHARGE_PORT
+	      ,QiFRQ as DEPARTURE_DATE
+	      ,DaoDRQ as DESTINATION_DATE
+		  ,null as DELIVER_DATE
+	
+	      ,HangXian
+	      ,HangBan as ChuanMing
+		  ,HangBan as HangCi
+	
+		  ,'' as ChuanDai_E
+	      ,ChengYR_E
+		  ,'' as XiangLei
+		  ,'' as XiangXing
+		  ,'' as XiangLiang
+	
+	      ,ChePH
+	      ,CheXing
+		  ,'' as BeiZhu
+	
+	      ,KaiPTT
+	      ,JSDDaiMa
+	      ,Del_Flag
+	  FROM HuoYun.dbo.TuoShu_AI
+	</select>
+	
+</mapper>

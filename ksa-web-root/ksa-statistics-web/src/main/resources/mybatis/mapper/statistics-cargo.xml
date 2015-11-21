@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ksa-statistics">
+
+	<!-- 完整的托单数据 -->
+	<resultMap type="com.ksa.model.logistics.BookingNote" id="result-statistics-cargo">
+		<id column="ID" property="id" javaType="String" />
+		<result column="CODE" property="code" javaType="String" />
+		<result column="TYPE" property="type" javaType="String" />
+		<result column="SERIAL_NUMBER" property="serialNumber" javaType="int" />
+		<result column="CREATED_DATE" property="createdDate" javaType="Date" />
+		<result column="INVOICE_NUMBER" property="invoiceNumber" javaType="String" />
+		
+		<result column="CARGO_NAME" property="cargoName" javaType="String" />	
+		<result column="CARGO_NOTE" property="cargoNote" javaType="String" />
+		<result column="CARGO_DESCRIPTION" property="cargoDescription" javaType="String" />
+		<result column="CARGO_CONTAINER" property="cargoContainer" javaType="String" />
+		<result column="SHIPPING_MARK" property="shippingMark" javaType="String" />
+		<result column="VOLUMN" property="volumn" javaType="float" />
+		<result column="WEIGHT" property="weight" javaType="float" />
+		<result column="QUANTITY" property="quantity" javaType="int" />
+		<result column="UNIT" property="unit" javaType="String" />
+		<result column="QUANTITY_DESCRIPTION" property="quantityDescription" javaType="String" />
+		
+		<result column="TITLE" property="title" javaType="String" />
+		<result column="MAWB" property="mawb" javaType="String" />
+		<result column="HAWB" property="hawb" javaType="String" />
+		
+		<result column="DEPARTURE" property="departure" javaType="String" />
+		<result column="DEPARTURE_PORT" property="departurePort" javaType="String" />
+		<result column="DEPARTURE_DATE" property="departureDate" javaType="Date" />
+		<result column="DESTINATION" property="destination" javaType="String"/>
+		<result column="DESTINATION_PORT" property="destinationPort" javaType="String"/>
+		<result column="DESTINATION_DATE" property="destinationDate" javaType="Date" />
+		<result column="LOADING_PORT" property="loadingPort" javaType="String" />
+		<result column="DISCHARGE_PORT" property="dischargePort" javaType="String" />
+		<result column="DELIVER_DATE" property="deliverDate" javaType="Date" />
+		
+		<result column="ROUTE" property="route" javaType="String"/>
+		<result column="ROUTE_NAME" property="routeName" javaType="String"/>
+		<result column="ROUTE_CODE" property="routeCode" javaType="String"/>
+		
+		<result column="CUSTOMS_CODE" property="customsCode" javaType="String"/>
+		<result column="CUSTOMS_DATE" property="customsDate" javaType="Date"/>
+		<result column="RETURN_CODE" property="returnCode" javaType="String"/>
+		<result column="RETURN_DATE" property="returnDate" javaType="Date"/>
+		<result column="TAX_CODE" property="taxCode" javaType="String"/>
+		<result column="TAX_DATE1" property="taxDate1" javaType="Date"/>
+		<result column="EXPRESS_CODE" property="expressCode" javaType="String"/>
+		<result column="TAX_DATE2" property="taxDate2" javaType="Date"/>
+		
+		<result column="VEHICLE_TYPE" property="vehicleType" javaType="String"/>
+		<result column="VEHICLE_NUMBER" property="vehicleNumber" javaType="String"/>
+		
+		<result column="STATE" property="state" javaType="int"/>
+
+		<association column="CUSTOMER_ID" property="customer" javaType="com.ksa.model.bd.Partner">
+			<id column="CUSTOMER_ID" property="id" />
+			<result column="CUSTOMER_NAME" property="name" />
+		</association>
+		<association column="SALER_ID" property="saler" javaType="com.ksa.model.security.User">
+			<id column="SALER_ID" property="id" />
+			<result column="SALER_NAME" property="name" />
+		</association>
+		<association column="CREATOR_ID" property="creator" javaType="com.ksa.model.security.User">
+			<id column="CREATOR_ID" property="id" />
+			<result column="CREATOR_NAME" property="name" />
+		</association>
+		<association column="SHIPPER_ID" property="shipper" javaType="com.ksa.model.bd.Partner">
+			<id column="SHIPPER_ID" property="id" />
+			<result column="SHIPPER_NAME" property="name" />
+		</association>
+		<association column="CONSIGNEE_ID" property="consignee" javaType="com.ksa.model.bd.Partner">
+			<id column="CONSIGNEE_ID" property="id" />
+			<result column="CONSIGNEE_NAME" property="name" />
+		</association>
+		<association column="CARRIER_ID" property="carrier" javaType="com.ksa.model.bd.Partner">
+			<id column="CARRIER_ID" property="id" />
+			<result column="CARRIER_NAME" property="name" />
+		</association>
+		<association column="SHIPPING_AGENT_ID" property="shippingAgent" javaType="com.ksa.model.bd.Partner">
+			<id column="SHIPPING_AGENT_ID" property="id" />
+			<result column="SHIPPING_AGENT_NAME" property="name" />
+		</association>
+		<association column="VEHICLE_TEAM_ID" property="vehicleTeam" javaType="com.ksa.model.bd.Partner">
+			<id column="VEHICLE_TEAM_ID" property="id" />
+			<result column="VEHICLE_TEAM_NAME" property="name" />
+		</association>
+		<association column="CUSTOMS_BROKER_ID" property="customsBroker" javaType="com.ksa.model.bd.Partner">
+			<id column="CUSTOMS_BROKER_ID" property="id" />
+			<result column="CUSTOMS_BROKER_NAME" property="name" />
+		</association>
+		<association column="AGENT_ID" property="agent" javaType="com.ksa.model.bd.Partner">
+			<id column="AGENT_ID" property="id" />
+			<result column="AGENT_NAME" property="name" />
+		</association>
+		
+		<collection column="ID" property="cargos" ofType="com.ksa.model.logistics.BookingNoteCargo" select="select-statistics-bookingnote-cargo-bynoteid" />
+	</resultMap>
+	
+	<select id="grid-statistics-cargo-query" resultMap="result-statistics-cargo">
+		SELECT bn.*,
+			c1.NAME AS CUSTOMER_NAME, 
+			u1.NAME AS CREATOR_NAME, 
+			u2.NAME AS SALER_NAME,
+		 	p1.NAME AS SHIPPER_NAME, 
+			p2.NAME AS CONSIGNEE_NAME,
+			p3.NAME AS AGENT_NAME, 
+			p4.NAME AS CUSTOMS_BROKER_NAME, 
+			p5.NAME AS VEHICLE_TEAM_NAME,
+			p6.NAME AS CARRIER_NAME, 
+		 	p7.NAME AS SHIPPING_AGENT_NAME
+		FROM KSA_LOGISTICS_BOOKINGNOTE bn 
+			LEFT JOIN KSA_BD_PARTNER c1 ON bn.CUSTOMER_ID				= c1.ID
+			LEFT JOIN KSA_SECURITY_USER u1 ON bn.CREATOR_ID 				= u1.ID
+			LEFT JOIN KSA_SECURITY_USER u2 ON bn.SALER_ID 					= u2.ID
+			LEFT JOIN KSA_BD_PARTNER p1 ON bn.SHIPPER_ID 					= p1.ID
+			LEFT JOIN KSA_BD_PARTNER p2 ON bn.CONSIGNEE_ID 				= p2.ID
+			LEFT JOIN KSA_BD_PARTNER p3 ON bn.AGENT_ID 						= p3.ID
+			LEFT JOIN KSA_BD_PARTNER p4 ON bn.CUSTOMS_BROKER_ID	= p4.ID
+			LEFT JOIN KSA_BD_PARTNER p5 ON bn.VEHICLE_TEAM_ID 		= p5.ID
+			LEFT JOIN KSA_BD_PARTNER p6 ON bn.CARRIER_ID 					= p6.ID
+			LEFT JOIN KSA_BD_PARTNER p7 ON bn.SHIPPING_AGENT_ID 	= p7.ID
+		<if test="queryClauses != null">
+			WHERE 
+				<foreach item="clause" collection="queryClauses" separator=" AND ">
+					${clause}
+				</foreach>
+		</if>
+		<if test="_sort != null">
+			ORDER BY ${_sort} ${_order}
+		</if>
+		<if test="_sort == null">
+			ORDER BY SERIAL_NUMBER DESC
+		</if>
+	</select>
+	
+	<select id="count-statistics-cargo-query" resultType="int">
+		SELECT COUNT( ID )
+		FROM KSA_LOGISTICS_BOOKINGNOTE
+		<if test="queryClause != null">
+			WHERE 
+				<foreach item="clause" collection="queryClause" separator=" AND ">
+					${clause}
+				</foreach>
+		</if>
+	</select>
+	
+	
+	<resultMap type="com.ksa.model.logistics.BookingNoteCargo" id="result-statistics-bookingnote-cargo">
+		<id column="ID" property="id" javaType="String" />
+		<result column="NAME" property="name" javaType="String" />
+		<result column="CATEGORY" property="category" javaType="String" />
+		<result column="TYPE" property="type" javaType="String" />
+		<result column="AMOUNT" property="amount" javaType="int" />
+		<association column="BOOKINGNOTE_ID" property="bookingNote" javaType="com.ksa.model.logistics.BookingNote">
+			<id column="BOOKINGNOTE_ID" property="id" />
+		</association>
+	</resultMap>
+	
+	<select id="select-statistics-bookingnote-cargo-bynoteid" resultMap="result-statistics-bookingnote-cargo">
+		SELECT *
+		FROM KSA_LOGISTICS_BOOKINGNOTE_CARGO
+		WHERE BOOKINGNOTE_ID = #{noteId,jdbcType=VARCHAR}
+	</select>
+</mapper>

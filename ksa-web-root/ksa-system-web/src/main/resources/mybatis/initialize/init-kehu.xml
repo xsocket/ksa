@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ksa-initialize">
+
+	<resultMap type="com.ksa.system.initialize.model.KeHu" id="result-init-kehu">
+		<id column="DaiMa" property="daiMa" javaType="String" />
+		<result column="ZhongWMC" property="zhongWMC" javaType="String" />
+		<result column="ZhongWJC" property="zhongWJC" javaType="String" />
+		<result column="ZhongWDZ" property="zhongWDZ" javaType="String" />
+		<result column="TiDanXieFa" property="tiDan" javaType="String" />
+		<result column="BeiZhu" property="beiZhu" javaType="String" />
+		<result column="ChangYong" property="changYong" javaType="boolean" />
+		<result column="FuKuanZQ" property="fuKuanZQ" javaType="String" />
+	</resultMap>
+	<!-- 查询所有客户 -->
+	<select id="select-init-kehu" resultMap="result-init-kehu">
+		select DaiMa, ZhongWMC, ZhongWJC, ZhongWDZ, '' as LeiXing, TiDanXieFa, BeiZhu, ChangYong, FuKuanZQ
+		from KeHu
+	</select>
+	
+	<!-- 查询所有来往单位 -->
+	<select id="select-init-laiwdw" resultMap="result-init-kehu">
+		select DaiMa, ZhongWMC, ZhongWJC, ZhongWDZ, LeiXing, '' as TiDanXieFa, BeiZhu, ChangYong, FuKuanZQ
+		from LaiWDW
+	</select>
+	
+</mapper>

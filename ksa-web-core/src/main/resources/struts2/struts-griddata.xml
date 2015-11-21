@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<package name="ksa-griddata-default" extends="ksa-default" namespace="/data/grid">
+		<result-types>
+			<result-type name="json" class="org.apache.struts2.json.JSONResult" default="true" >
+				<param name="contentType">application/json</param>
+            	<param name="excludeNullProperties">true</param>
+            	<param name="ignoreHierarchy">false</param>
+            	<param name="enableGZIP">true</param>
+            	<param name="root">gridData</param>
+			</result-type>
+		</result-types>
+		<action name="*" class="com.ksa.web.struts2.action.data.DefaultGridDataAction">
+			<result name="success" type="json" />
+		</action>
+	</package>
+
+</struts>

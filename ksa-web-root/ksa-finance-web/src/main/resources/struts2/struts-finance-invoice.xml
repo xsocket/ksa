@@ -1,0 +1,45 @@
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 发票管理 -->
+	<package name="finance-invoice-default" extends="ksa-default" namespace="/ui/finance/invoice">
+		<action name="default" class="com.ksa.web.struts2.action.finance.invoice.InvoiceAction">
+			<result>/ui/finance/invoice/default.ftl</result>
+		</action>
+	</package>
+	
+	<!-- 发票录入 -->
+	<package name="finance-invoice-dialog" extends="ksa-default" namespace="/dialog/finance/invoice">	
+		<action name="create" class="com.ksa.web.struts2.action.finance.invoice.InvoiceAction">
+			<result>/ui/finance/invoice/view.ftl</result>
+		</action>
+		<action name="edit" class="com.ksa.web.struts2.action.finance.invoice.InvoiceEditAction">
+			<result>/ui/finance/invoice/view.ftl</result>
+		</action>
+		<action name="save" class="com.ksa.web.struts2.action.finance.invoice.InvoiceSaveAction">
+			<result>/ui/finance/invoice/view.ftl</result>
+		</action>
+		<action name="delete" class="com.ksa.web.struts2.action.finance.invoice.InvoiceDeleteAction">
+			<result name="success" type="json" />
+			<result name="error" type="json" />
+		</action>
+		<action name="assign" class="com.ksa.web.struts2.action.finance.invoice.InvoiceAssignAction">
+			<result name="success" type="json" />
+			<result name="error" type="json" />
+		</action>
+	</package>
+	
+	<!-- 发票数据查询 -->
+	<package name="finance-invoice-data" extends="ksa-default" namespace="/data/finance/invoice">
+		<action name="query" class="com.ksa.web.struts2.action.finance.invoice.InvoiceQueryAction">
+			<result name="success" type="json" >
+				<param name="contentType">application/json</param>
+            	<param name="excludeNullProperties">true</param>
+            	<param name="ignoreHierarchy">false</param>
+            	<param name="enableGZIP">true</param>
+            	<param name="root">gridData</param>
+			</result>
+		</action>
+	</package>
+</struts>

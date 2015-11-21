@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 选择组件 -->
+	<package name="finance-component-default" extends="ksa-default" namespace="/component/finance">
+		<action name="charge-selection" class="com.ksa.web.struts2.action.finance.component.FinanceSelectionAction">
+			<result>/ui/finance/component/charge-selection.ftl</result>
+		</action>
+		<action name="invoice-selection" class="com.ksa.web.struts2.action.finance.component.FinanceSelectionAction">
+			<result>/ui/finance/component/invoice-selection.ftl</result>
+		</action>
+		<action name="bookingnote-selection" ><!-- 从费用的视角选择托单 -->
+			<result>/ui/finance/component/bookingnote-selection.ftl</result>
+		</action>
+		<action name="charge-template-selection" 
+			class="com.ksa.web.struts2.action.finance.charge.single.ChargeSingleAction"><!-- 选择费用模板 -->
+			<result>/ui/finance/component/charge-template-selection.ftl</result>
+		</action>
+	</package>
+</struts>

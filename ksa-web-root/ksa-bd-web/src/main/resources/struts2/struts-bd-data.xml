@@ -1,0 +1,40 @@
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 基础数据管理 -->
+	<package name="bd-data-default" extends="ksa-default" namespace="/ui/bd/data">
+		<action name="default" class="com.ksa.web.struts2.action.bd.data.BasicDataAction">
+			<result>/ui/bd/data/default.ftl</result>
+		</action>
+	</package>
+	
+	<!-- 基本代码信息 -->
+	<package name="bd-data-dialog" extends="ksa-default" namespace="/dialog/bd/data">
+		<action name="create" class="com.ksa.web.struts2.action.bd.data.BasicDataAction">
+			<result>/ui/bd/data/create-data.ftl</result>
+		</action>
+		<action name="insert" class="com.ksa.web.struts2.action.bd.data.BasicDataInsertAction">
+			<result name="success">/ui/bd/data/edit-data.ftl</result>
+			<result name="input">/ui/bd/data/create-data.ftl</result>
+			<result name="error">/ui/bd/data/create-data.ftl</result>
+		</action>
+		
+		<action name="edit" class="com.ksa.web.struts2.action.bd.data.BasicDataEditAction">
+			<result name="success">/ui/bd/data/edit-data.ftl</result>
+			<result name="input">/ui/bd/data/edit-data.ftl</result>
+			<result name="error">/ui/bd/data/edit-data.ftl</result>
+		</action>
+		<action name="update" class="com.ksa.web.struts2.action.bd.data.BasicDataUpdateAction">
+			<result name="success">/ui/bd/data/edit-data.ftl</result>
+			<result name="input">/ui/bd/data/edit-data.ftl</result>
+			<result name="error">/ui/bd/data/edit-data.ftl</result>
+		</action>
+		
+		<action name="delete" class="com.ksa.web.struts2.action.bd.data.BasicDataDeleteAction">
+			<result name="success" type="json" />
+			<result name="input" type="json" />
+			<result name="error" type="json" />
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,25 @@
+.combobox-item{
+	padding:2px;
+	font-size:12px;
+	padding:3px;
+	padding-right:0px;
+	cursor: pointer;
+}
+/* CUSTOM : 下俩列表条纹选择项 */
+.combobox-item:nth-child(odd) {
+	background-color: #f9f9f9;
+}
+.combobox-item-hover{
+	/*background:#fafafa;*/
+	background:#FBEC88 !important;
+}
+.combobox-item-selected{
+	/*background:#FBEC88;*/
+	background-color : #08C !important;
+	color : white;
+}
+/* CUSTOM : highlight */
+.combobox-item .highlight {
+	color : red;
+	font-weight: bold;
+}

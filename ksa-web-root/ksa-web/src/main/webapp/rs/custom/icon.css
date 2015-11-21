@@ -1,0 +1,68 @@
+/* 自定义 icon */
+.c-icon-logo {
+	background:url("icons/logo.png") no-repeat;
+}
+.c-icon-blank{
+	background:url('icons/blank.gif') no-repeat;
+}
+.c-icon-add{
+	background:url('icons/edit_add.png') no-repeat;
+}
+.c-icon-edit{
+	background:url('icons/pencil.png') no-repeat;
+}
+.c-icon-remove{
+	background:url('icons/edit_remove.png') no-repeat;
+}
+.c-icon-save{
+	background:url('icons/filesave.png') no-repeat;
+}
+.c-icon-cut{
+	background:url('icons/cut.png') no-repeat;
+}
+.c-icon-ok{
+	background:url('icons/ok.png') no-repeat;
+}
+.c-icon-no{
+	background:url('icons/no.png') no-repeat;
+}
+.c-icon-cancel{
+	background:url('icons/cancel.png') no-repeat;
+}
+.c-icon-reload{
+	background:url('icons/reload.png') no-repeat;
+}
+.c-icon-search{
+	background:url('icons/search.png') no-repeat;
+}
+.c-icon-print{
+	background:url('icons/print.png') no-repeat;
+}
+.c-icon-help{
+	background:url('icons/help.png') no-repeat;
+}
+.c-icon-undo{
+	background:url('icons/undo.png') no-repeat;
+}
+.c-icon-redo{
+	background:url('icons/redo.png') no-repeat;
+}
+.c-icon-back{
+	background:url('icons/back.png') no-repeat;
+}
+.c-icon-sum{
+	background:url('icons/sum.png') no-repeat;
+}
+.c-icon-tip{
+	background:url('icons/tip.png') no-repeat;
+}
+
+.c-icon-mini-add{
+	background:url('icons/mini_add.png') no-repeat 2px 2px;
+}
+.c-icon-mini-edit{
+	background:url('icons/mini_edit.png') no-repeat 2px 2px;
+}
+.c-icon-mini-refresh{
+	background:url('icons/mini_refresh.png') no-repeat 3px 2px;
+}

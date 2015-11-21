@@ -1,0 +1,36 @@
+/* 风格同 top-bar */
+.compositequery-toolbar  {
+	height:28px;
+	background:#f5f5f5;
+	padding:1px 2px;
+	border-bottom: 1px solid #ddd;
+	-webkit-box-shadow: inset 0 -1px 0 #ffffff;
+	   -moz-box-shadow: inset 0 -1px 0 #ffffff;
+                box-shadow: inset 0 -1px 0 #ffffff;
+}
+.compositequery-toolbar  .btn { margin: 3px 5px; float:left; }
+.compositequery-toolbar .compositequery-btn-separator {
+	float:left;
+	height:24px;
+	border-left:1px solid #ccc;
+	border-right:1px solid #fff;
+	margin:2px 1px;
+}
+
+.compositequery-form .condition-block {
+  padding: 5px 3px;
+  background-color: #F9F9F9;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid #ddd;
+	-webkit-box-shadow: inset 0 -1px 0 #ffffff;
+	   -moz-box-shadow: inset 0 -1px 0 #ffffff;
+                box-shadow: inset 0 -1px 0 #ffffff;
+}
+.compositequery-form .condition-block:nth-child(odd) { background-color: #FFF; }
+
+.compositequery-form .condition-block input { margin-bottom:0; }
+.compositequery-form .condition-block input[readonly] { background-color: #fff; cursor: pointer; }
+.compositequery-form .condition-block label { width: 20px; display:inline-block; overflow: hidden; text-align:right; margin-right:5px; }
+.compositequery-form .condition-block div { margin-top: 3px; }
+.compositequery-form .condition-block input.combo-text { font-weight:bolder; }
+.compositequery-form .condition-block div input.combo-text { font-weight:normal; }

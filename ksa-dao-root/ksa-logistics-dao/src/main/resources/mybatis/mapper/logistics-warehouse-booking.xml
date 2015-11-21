@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ksa-logistics">
+	<!-- 订舱通知模型 -->
+	<resultMap type="com.ksa.model.logistics.WarehouseBooking" id="result-logistics-warehousebooking">
+		<id column="ID" property="id" javaType="String" />
+		<result column="SALER_TEL" property="salerTel" javaType="String" />
+		<result column="SALER_FAX" property="salerFax" javaType="String" />
+		<result column="SALER_EMAIL" property="salerEmail" javaType="String" />
+		<result column="SALER" property="saler" javaType="String" />
+		<result column="SHIPPER" property="shipper" javaType="String" />
+		<result column="CONSIGNEE" property="consignee" javaType="String" />
+		<result column="NOTIFY" property="notify" javaType="String" />
+
+		<result column="CODE" property="code" javaType="String" />
+		<result column="CREATED_DATE" property="createdDate" javaType="String" />
+		<result column="DEPARTURE_PORT" property="departurePort" javaType="String" />
+		<result column="DESTINATION_PORT" property="destinationPort" javaType="String" />
+		
+		<result column="SWITCH_SHIP" property="switchShip" javaType="String" />
+		<result column="GROUPING" property="grouping" javaType="String" />
+		<result column="TRANSPORT_MODE" property="transportMode" javaType="String" />
+		<result column="PAYMENT_MODE" property="paymentMode" javaType="String" />
+		<result column="FREIGHT_CHARGE" property="freightCharge" javaType="String" />
+		
+		<result column="CARGO_CONTAINER" property="cargoContainer" javaType="String" />
+		<result column="SHIPPING_MARK" property="shippingMark" javaType="String" />
+		<result column="CARGO_NAME" property="cargoName" javaType="String" />	
+		<result column="CARGO_WEIGHT" property="cargoWeight" javaType="String" />
+		<result column="CARGO_VOLUMN" property="cargoVolumn" javaType="String" />
+		<result column="CARGO_QUANTITY" property="cargoQuantity" javaType="String" />
+		<result column="TOTAL_WEIGHT" property="totalWeight" javaType="String" />
+		<result column="TOTAL_VOLUMN" property="totalVolumn" javaType="String" />
+		<result column="TOTAL_QUANTITY" property="totalQuantity" javaType="String" />
+		
+		<result column="NOTE" property="note" javaType="String" />
+		
+		<association column="BOOKINGNOTE_ID" property="bookingNote" select="select-logistics-bookingnote-basic-byid" />
+	</resultMap>
+	
+	<insert id="insert-logistics-warehousebooking" parameterType="com.ksa.model.logistics.WarehouseBooking">
+		INSERT INTO KSA_LOGISTICS_WAREHOUSEBOOKING
+						(  ID, SALER, 	SHIPPER, CONSIGNEE, NOTIFY,
+						 	CODE,  CREATED_DATE,	DEPARTURE_PORT, DESTINATION_PORT,
+						 	SWITCH_SHIP, GROUPING, TRANSPORT_MODE, PAYMENT_MODE, FREIGHT_CHARGE,
+						 	CARGO_CONTAINER, SHIPPING_MARK, CARGO_NAME, 
+						 	CARGO_WEIGHT, CARGO_VOLUMN, CARGO_QUANTITY,
+						 	TOTAL_WEIGHT, TOTAL_VOLUMN, TOTAL_QUANTITY,  
+							NOTE,
+						BOOKINGNOTE_ID, SALER_TEL, SALER_FAX, SALER_EMAIL  )
+		VALUES ( 	#{id,jdbcType=VARCHAR}, #{saler,jdbcType=VARCHAR}, #{shipper,jdbcType=VARCHAR}, 	#{consignee,jdbcType=VARCHAR},#{notify,jdbcType=VARCHAR},
+					#{code,jdbcType=VARCHAR}, #{createdDate,jdbcType=VARCHAR},#{departurePort,jdbcType=VARCHAR}, #{destinationPort,jdbcType=VARCHAR},
+					#{switchShip,jdbcType=VARCHAR}, #{grouping,jdbcType=VARCHAR},#{transportMode,jdbcType=VARCHAR}, #{paymentMode,jdbcType=VARCHAR}, #{freightCharge,jdbcType=VARCHAR}, 
+			 		#{cargoContainer,jdbcType=VARCHAR}, #{shippingMark,jdbcType=VARCHAR}, #{cargoName,jdbcType=VARCHAR}, 
+			 		#{cargoWeight,jdbcType=VARCHAR},#{cargoVolumn,jdbcType=VARCHAR},#{cargoQuantity,jdbcType=VARCHAR},
+			 		#{totalWeight,jdbcType=VARCHAR},#{totalVolumn,jdbcType=VARCHAR},#{totalQuantity,jdbcType=VARCHAR},
+			 		#{note,jdbcType=VARCHAR},
+			 		#{bookingNote.id}, #{salerTel,jdbcType=VARCHAR}, #{salerFax,jdbcType=VARCHAR}, #{salerEmail,jdbcType=VARCHAR} )	
+	</insert>
+	
+	<update id="update-logistics-warehousebooking" parameterType="com.ksa.model.logistics.WarehouseBooking">
+		UPDATE KSA_LOGISTICS_WAREHOUSEBOOKING SET
+			SALER						= #{saler,jdbcType=VARCHAR},
+			SHIPPER					= #{shipper,jdbcType=VARCHAR},
+			CONSIGNEE				= #{consignee,jdbcType=VARCHAR},
+			NOTIFY					= #{notify,jdbcType=VARCHAR},
+			
+			CODE						= #{code,jdbcType=VARCHAR},
+			CREATED_DATE		= #{createdDate,jdbcType=VARCHAR},
+			DEPARTURE_PORT	= #{departurePort,jdbcType=VARCHAR},
+			DESTINATION_PORT= #{destinationPort,jdbcType=VARCHAR},
+			
+			SWITCH_SHIP			= #{switchShip,jdbcType=VARCHAR}, 
+			GROUPING				= #{grouping,jdbcType=VARCHAR},
+			TRANSPORT_MODE = #{transportMode,jdbcType=VARCHAR}, 
+			PAYMENT_MODE		= #{paymentMode,jdbcType=VARCHAR}, 
+			FREIGHT_CHARGE	= #{freightCharge,jdbcType=VARCHAR}, 
+			
+			CARGO_CONTAINER= #{cargoContainer,jdbcType=VARCHAR}, 
+			SHIPPING_MARK		= #{shippingMark,jdbcType=VARCHAR}, 
+			CARGO_NAME			= #{cargoName,jdbcType=VARCHAR},  
+			CARGO_WEIGHT		= #{cargoWeight,jdbcType=VARCHAR},
+			CARGO_VOLUMN	= #{cargoVolumn,jdbcType=VARCHAR},
+			CARGO_QUANTITY	= #{cargoQuantity,jdbcType=VARCHAR}, 
+			TOTAL_WEIGHT		= #{totalWeight,jdbcType=VARCHAR},
+			TOTAL_VOLUMN		= #{totalVolumn,jdbcType=VARCHAR},
+			TOTAL_QUANTITY	= #{totalQuantity,jdbcType=VARCHAR},
+			NOTE						= #{note,jdbcType=VARCHAR},
+			SALER_TEL				= #{salerTel,jdbcType=VARCHAR},
+			SALER_FAX				= #{salerFax,jdbcType=VARCHAR},
+			SALER_EMAIL			= #{salerEmail,jdbcType=VARCHAR}
+		WHERE ID = #{id,jdbcType=VARCHAR}
+	</update>
+	
+	<delete id="delete-logistics-warehousebooking" parameterType="com.ksa.model.logistics.WarehouseBooking">
+		DELETE FROM KSA_LOGISTICS_WAREHOUSEBOOKING WHERE ID = #{id,jdbcType=VARCHAR}
+	</delete>
+	
+	<select id="select-logistics-warehousebooking-byid" resultMap="result-logistics-warehousebooking">
+		SELECT * FROM KSA_LOGISTICS_WAREHOUSEBOOKING
+		WHERE ID = #{id,jdbcType=VARCHAR}
+	</select>
+	<select id="select-logistics-warehousebooking-bybnid" resultMap="result-logistics-warehousebooking">
+		SELECT * FROM KSA_LOGISTICS_WAREHOUSEBOOKING
+		WHERE BOOKINGNOTE_ID = #{bookingNoteId,jdbcType=VARCHAR}
+	</select>
+</mapper>

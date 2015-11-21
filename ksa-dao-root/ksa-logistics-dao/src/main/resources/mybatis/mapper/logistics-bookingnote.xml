@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ksa-logistics">
+	<resultMap type="com.ksa.model.logistics.BookingNote" id="result-logistics-bookingnote-singletable">
+		<id column="ID" property="id" javaType="String" />
+		<result column="CODE" property="code" javaType="String" />
+		<result column="TYPE" property="type" javaType="String" />
+		<result column="TYPE_SUB" property="subType" javaType="String" />
+		<result column="SERIAL_NUMBER" property="serialNumber" javaType="int" />
+		<result column="CREATED_DATE" property="createdDate" javaType="Date" />
+		<result column="CHARGE_DATE" property="chargeDate" javaType="Date" />	<!-- 记账日期 -->
+		<result column="INVOICE_NUMBER" property="invoiceNumber" javaType="String" />
+		
+		<result column="CARGO_NAME" property="cargoName" javaType="String" />	
+		<result column="CARGO_NOTE" property="cargoNote" javaType="String" />
+		<result column="CARGO_DESCRIPTION" property="cargoDescription" javaType="String" />
+		<result column="CARGO_CONTAINER" property="cargoContainer" javaType="String" />
+		<result column="SHIPPING_MARK" property="shippingMark" javaType="String" />
+		<result column="VOLUMN" property="volumn" javaType="float" />
+		<result column="WEIGHT" property="weight" javaType="float" />
+		<result column="QUANTITY" property="quantity" javaType="int" />
+		<result column="UNIT" property="unit" javaType="String" />
+		<result column="QUANTITY_DESCRIPTION" property="quantityDescription" javaType="String" />
+		
+		<result column="TITLE" property="title" javaType="String" />
+		<result column="MAWB" property="mawb" javaType="String" />
+		<result column="HAWB" property="hawb" javaType="String" />
+		
+		<result column="DEPARTURE" property="departure" javaType="String" />
+		<result column="DEPARTURE_PORT" property="departurePort" javaType="String" />
+		<result column="DEPARTURE_DATE" property="departureDate" javaType="Date" />
+		<result column="DESTINATION" property="destination" javaType="String"/>
+		<result column="DESTINATION_PORT" property="destinationPort" javaType="String"/>
+		<result column="DESTINATION_DATE" property="destinationDate" javaType="Date" />
+		<result column="LOADING_PORT" property="loadingPort" javaType="String" />
+		<result column="DISCHARGE_PORT" property="dischargePort" javaType="String" />
+		<result column="DELIVER_DATE" property="deliverDate" javaType="Date" />
+		
+		<result column="ROUTE" property="route" javaType="String"/>
+		<result column="ROUTE_NAME" property="routeName" javaType="String"/>
+		<result column="ROUTE_CODE" property="routeCode" javaType="String"/>
+		
+		<result column="CUSTOMS_CODE" property="customsCode" javaType="String"/>
+		<result column="CUSTOMS_DATE" property="customsDate" javaType="Date"/>
+		<result column="RETURN_CODE" property="returnCode" javaType="String"/>
+		<result column="RETURN_DATE" property="returnDate" javaType="Date"/>
+		<result column="RETURN_DATE2" property="returnDate2" javaType="Date"/>
+		<result column="TAX_CODE" property="taxCode" javaType="String"/>
+		<result column="TAX_DATE1" property="taxDate1" javaType="Date"/>
+		<result column="EXPRESS_CODE" property="expressCode" javaType="String"/>
+		<result column="TAX_DATE2" property="taxDate2" javaType="Date"/>
+		
+		<result column="VEHICLE_TYPE" property="vehicleType" javaType="String"/>
+		<result column="VEHICLE_NUMBER" property="vehicleNumber" javaType="String"/>
+		
+		<result column="STATE" property="state" javaType="int"/>
+	</resultMap>
+
+
+	<resultMap type="com.ksa.model.logistics.BookingNote" id="result-logistics-bookingnote-basic">
+		<id column="ID" property="id" javaType="String" />
+		<result column="CODE" property="code" javaType="String" />
+		<result column="TYPE" property="type" javaType="String" />
+		<result column="TYPE_SUB" property="subType" javaType="String" />
+		<result column="SERIAL_NUMBER" property="serialNumber" javaType="int" />
+		<result column="CREATED_DATE" property="createdDate" javaType="Date" />
+		<result column="CHARGE_DATE" property="chargeDate" javaType="Date" />	<!-- 记账日期 -->
+		<result column="INVOICE_NUMBER" property="invoiceNumber" javaType="String" />
+		
+		<result column="CARGO_NAME" property="cargoName" javaType="String" />	
+		<result column="CARGO_NOTE" property="cargoNote" javaType="String" />
+		<result column="CARGO_DESCRIPTION" property="cargoDescription" javaType="String" />
+		<result column="CARGO_CONTAINER" property="cargoContainer" javaType="String" />
+		<result column="SHIPPING_MARK" property="shippingMark" javaType="String" />
+		<result column="VOLUMN" property="volumn" javaType="float" />
+		<result column="WEIGHT" property="weight" javaType="float" />
+		<result column="QUANTITY" property="quantity" javaType="int" />
+		<result column="UNIT" property="unit" javaType="String" />
+		<result column="QUANTITY_DESCRIPTION" property="quantityDescription" javaType="String" />
+		
+		<result column="TITLE" property="title" javaType="String" />
+		<result column="MAWB" property="mawb" javaType="String" />
+		<result column="HAWB" property="hawb" javaType="String" />
+		
+		<result column="DEPARTURE" property="departure" javaType="String" />
+		<result column="DEPARTURE_PORT" property="departurePort" javaType="String" />
+		<result column="DEPARTURE_DATE" property="departureDate" javaType="Date" />
+		<result column="DESTINATION" property="destination" javaType="String"/>
+		<result column="DESTINATION_PORT" property="destinationPort" javaType="String"/>
+		<result column="DESTINATION_DATE" property="destinationDate" javaType="Date" />
+		<result column="LOADING_PORT" property="loadingPort" javaType="String" />
+		<result column="DISCHARGE_PORT" property="dischargePort" javaType="String" />
+		<result column="DELIVER_DATE" property="deliverDate" javaType="Date" />
+		
+		<result column="ROUTE" property="route" javaType="String"/>
+		<result column="ROUTE_NAME" property="routeName" javaType="String"/>
+		<result column="ROUTE_CODE" property="routeCode" javaType="String"/>
+		
+		<result column="CUSTOMS_CODE" property="customsCode" javaType="String"/>
+		<result column="CUSTOMS_DATE" property="customsDate" javaType="Date"/>
+		<result column="RETURN_CODE" property="returnCode" javaType="String"/>
+		<result column="RETURN_DATE" property="returnDate" javaType="Date"/>
+		<result column="RETURN_DATE2" property="returnDate2" javaType="Date"/>
+		<result column="TAX_CODE" property="taxCode" javaType="String"/>
+		<result column="TAX_DATE1" property="taxDate1" javaType="Date"/>
+		<result column="EXPRESS_CODE" property="expressCode" javaType="String"/>
+		<result column="TAX_DATE2" property="taxDate2" javaType="Date"/>
+		
+		<result column="VEHICLE_TYPE" property="vehicleType" javaType="String"/>
+		<result column="VEHICLE_NUMBER" property="vehicleNumber" javaType="String"/>
+		
+		<result column="STATE" property="state" javaType="int"/>
+
+		<association column="CUSTOMER_ID" property="customer" javaType="com.ksa.model.bd.Partner">
+			<id column="CUSTOMER_ID" property="id" />
+			<id column="CUSTOMER_CODE" property="code" />
+			<result column="CUSTOMER_NAME" property="name" />
+		</association>
+		<association column="SALER_ID" property="saler" javaType="com.ksa.model.security.User">
+			<id column="SALER_ID" property="id" />
+			<result column="SALER_NAME" property="name" />
+		</association>
+		<association column="CREATOR_ID" property="creator" javaType="com.ksa.model.security.User">
+			<id column="CREATOR_ID" property="id" />
+			<result column="CREATOR_NAME" property="name" />
+		</association>
+		<association column="SHIPPER_ID" property="shipper" javaType="com.ksa.model.bd.Partner">
+			<id column="SHIPPER_ID" property="id" />
+			<result column="SHIPPER_NAME" property="name" />
+			<result column="SHIPPER_ALIAS" property="alias" />
+		</association>
+		<association column="CONSIGNEE_ID" property="consignee" javaType="com.ksa.model.bd.Partner">
+			<id column="CONSIGNEE_ID" property="id" />
+			<result column="CONSIGNEE_NAME" property="name" />
+			<result column="CONSIGNEE_ALIAS" property="alias" />
+		</association>
+		<association column="NOTIFY_ID" property="notify" javaType="com.ksa.model.bd.Partner">
+			<id column="NOTIFY_ID" property="id" />
+			<result column="NOTIFY_NAME" property="name" />
+			<result column="NOTIFY_ALIAS" property="alias" />
+		</association>
+		<association column="CARRIER_ID" property="carrier" javaType="com.ksa.model.bd.Partner">
+			<id column="CARRIER_ID" property="id" />
+			<result column="CARRIER_NAME" property="name" />
+		</association>
+		<association column="SHIPPING_AGENT_ID" property="shippingAgent" javaType="com.ksa.model.bd.Partner">
+			<id column="SHIPPING_AGENT_ID" property="id" />
+			<result column="SHIPPING_AGENT_NAME" property="name" />
+		</association>
+		<association column="VEHICLE_TEAM_ID" property="vehicleTeam" javaType="com.ksa.model.bd.Partner">
+			<id column="VEHICLE_TEAM_ID" property="id" />
+			<result column="VEHICLE_TEAM_NAME" property="name" />
+		</association>
+		<association column="CUSTOMS_BROKER_ID" property="customsBroker" javaType="com.ksa.model.bd.Partner">
+			<id column="CUSTOMS_BROKER_ID" property="id" />
+			<result column="CUSTOMS_BROKER_NAME" property="name" />
+		</association>
+		<association column="AGENT_ID" property="agent" javaType="com.ksa.model.bd.Partner">
+			<id column="AGENT_ID" property="id" />
+			<result column="AGENT_NAME" property="name" />
+		</association>
+	</resultMap>
+	
+	<!-- 完整的托单数据 -->
+	<resultMap type="com.ksa.model.logistics.BookingNote" id="result-logistics-bookingnote" extends="result-logistics-bookingnote-basic">
+		<collection column="ID" property="cargos" ofType="com.ksa.model.logistics.BookingNoteCargo" select="select-logistics-bookingnote-cargo-bynoteid" />
+	</resultMap>
+	
+	<insert id="insert-logistics-bookingnote" parameterType="com.ksa.model.logistics.BookingNote">
+		INSERT INTO KSA_LOGISTICS_BOOKINGNOTE
+						(  ID, 	CODE, 	TYPE, TYPE_SUB,		SERIAL_NUMBER, 	CUSTOMER_ID, INVOICE_NUMBER, CREATED_DATE,  	CHARGE_DATE,					
+						SALER_ID, CREATOR_ID, CARRIER_ID, SHIPPING_AGENT_ID, AGENT_ID,
+						CARGO_NAME, CARGO_NOTE, CARGO_CONTAINER, CARGO_DESCRIPTION, SHIPPING_MARK, VOLUMN, WEIGHT, QUANTITY, UNIT,QUANTITY_DESCRIPTION,
+						TITLE, MAWB, HAWB, SHIPPER_ID, CONSIGNEE_ID, NOTIFY_ID,
+						DEPARTURE, DEPARTURE_PORT, DEPARTURE_DATE, DESTINATION, DESTINATION_PORT, DESTINATION_DATE, LOADING_PORT, DISCHARGE_PORT, DELIVER_DATE,
+						ROUTE, ROUTE_NAME, ROUTE_CODE,
+						CUSTOMS_BROKER_ID,
+						CUSTOMS_CODE, CUSTOMS_DATE, RETURN_CODE, RETURN_DATE, RETURN_DATE2,
+						TAX_CODE, TAX_DATE1, EXPRESS_CODE, TAX_DATE2, 
+						VEHICLE_TEAM_ID, VEHICLE_TYPE, VEHICLE_NUMBER, STATE )
+		VALUES ( 	#{id,jdbcType=VARCHAR},  #{code,jdbcType=VARCHAR}, 	#{type,jdbcType=VARCHAR}, 	#{subType,jdbcType=VARCHAR},	#{serialNumber}, #{customer.id,jdbcType=VARCHAR},#{invoiceNumber,jdbcType=VARCHAR},#{createdDate,jdbcType=DATE},#{chargeDate,jdbcType=DATE},
+			 		#{saler.id,jdbcType=VARCHAR}, #{creator.id,jdbcType=VARCHAR}, #{carrier.id,jdbcType=VARCHAR}, #{shippingAgent.id,jdbcType=VARCHAR}, #{agent.id,jdbcType=VARCHAR}, 
+			 		#{cargoName,jdbcType=VARCHAR},#{cargoNote,jdbcType=VARCHAR},#{cargoContainer,jdbcType=VARCHAR},#{cargoDescription,jdbcType=VARCHAR},#{shippingMark,jdbcType=VARCHAR}, #{volumn,jdbcType=NUMERIC}, #{weight,jdbcType=NUMERIC}, #{quantity,jdbcType=NUMERIC},#{unit,jdbcType=VARCHAR},#{quantityDescription,jdbcType=VARCHAR},
+			 		#{title,jdbcType=VARCHAR}, #{mawb,jdbcType=VARCHAR}, #{hawb,jdbcType=VARCHAR}, #{shipper.id,jdbcType=VARCHAR},#{consignee.id,jdbcType=VARCHAR},#{notify.id,jdbcType=VARCHAR},
+			 		#{departure,jdbcType=VARCHAR},#{departurePort,jdbcType=VARCHAR}, #{departureDate,jdbcType=DATE},#{destination,jdbcType=VARCHAR},#{destinationPort,jdbcType=VARCHAR},#{destinationDate,jdbcType=DATE},#{loadingPort,jdbcType=VARCHAR}, #{dischargePort,jdbcType=VARCHAR}, #{deliverDate,jdbcType=DATE}, 
+			 		#{route,jdbcType=VARCHAR},#{routeName,jdbcType=VARCHAR},#{routeCode,jdbcType=VARCHAR},
+			 		#{customsBroker.id,jdbcType=VARCHAR},
+			 		#{customsCode,jdbcType=VARCHAR},#{customsDate,jdbcType=DATE},#{returnCode,jdbcType=VARCHAR},#{returnDate,jdbcType=DATE},#{returnDate2,jdbcType=DATE},
+			 		#{taxCode,jdbcType=VARCHAR},#{taxDate1,jdbcType=DATE},#{expressCode,jdbcType=VARCHAR},#{taxDate2,jdbcType=DATE},
+			 		#{vehicleTeam.id,jdbcType=VARCHAR},#{vehicleType,jdbcType=VARCHAR},#{vehicleNumber,jdbcType=VARCHAR},#{state,jdbcType=NUMERIC} )	
+	</insert>
+	
+	<!-- TYPE, CODE, SERIAL_NUMBER 不允许修改 -->
+	<update id="update-logistics-bookingnote" parameterType="com.ksa.model.logistics.BookingNote">
+		UPDATE KSA_LOGISTICS_BOOKINGNOTE SET
+			TYPE_SUB 						= #{subType,jdbcType=VARCHAR},
+		  	CUSTOMER_ID					= #{customer.id,jdbcType=VARCHAR},
+		  	INVOICE_NUMBER 			= #{invoiceNumber,jdbcType=VARCHAR},
+		  	CREATED_DATE				= #{createdDate,jdbcType=DATE},
+		  	
+		  	
+		  	SALER_ID							= #{saler.id,jdbcType=VARCHAR},
+		  	CARRIER_ID 						= #{carrier.id,jdbcType=VARCHAR},
+		  	SHIPPING_AGENT_ID 		= #{shippingAgent.id,jdbcType=VARCHAR},
+		  	AGENT_ID						= #{agent.id,jdbcType=VARCHAR},
+		  	
+		  	CARGO_NAME					= #{cargoName,jdbcType=VARCHAR},
+		  	CARGO_NOTE					= #{cargoNote,jdbcType=VARCHAR},
+		  	CARGO_DESCRIPTION  	= #{cargoDescription,jdbcType=VARCHAR},
+		  	CARGO_CONTAINER  		= #{cargoContainer,jdbcType=VARCHAR},
+		  	SHIPPING_MARK  			= #{shippingMark,jdbcType=VARCHAR},
+		  	VOLUMN 						= #{volumn,jdbcType=NUMERIC},
+		  	WEIGHT							= #{weight,jdbcType=NUMERIC},
+		  	QUANTITY						= #{quantity,jdbcType=NUMERIC},
+		  	UNIT  								= #{unit,jdbcType=VARCHAR},
+		  	QUANTITY_DESCRIPTION= #{quantityDescription,jdbcType=VARCHAR},
+		  	
+		  	TITLE								= #{title,jdbcType=VARCHAR},
+		  	MAWB								= #{mawb,jdbcType=VARCHAR},
+		  	HAWB								= #{hawb,jdbcType=VARCHAR},
+		  	SHIPPER_ID						= #{shipper.id,jdbcType=VARCHAR},
+		  	CONSIGNEE_ID				= #{consignee.id,jdbcType=VARCHAR},
+		  	NOTIFY_ID  						= #{notify.id,jdbcType=VARCHAR},		
+		  	
+		  	DEPARTURE						= #{departure,jdbcType=VARCHAR},
+		  	DEPARTURE_PORT			= #{departurePort,jdbcType=VARCHAR},
+		  	DEPARTURE_DATE			= #{departureDate,jdbcType=DATE},
+		  	DESTINATION					= #{destination,jdbcType=VARCHAR},
+		  	DESTINATION_PORT 		= #{destinationPort,jdbcType=VARCHAR},
+		  	DESTINATION_DATE		= #{destinationDate,jdbcType=DATE},
+		  	LOADING_PORT				= #{loadingPort,jdbcType=VARCHAR},
+		  	DISCHARGE_PORT			= #{dischargePort,jdbcType=VARCHAR},
+		  	DELIVER_DATE  				= #{deliverDate,jdbcType=DATE},
+		  	
+		  	ROUTE 								= #{route,jdbcType=VARCHAR},
+		  	ROUTE_NAME					= #{routeName,jdbcType=VARCHAR},
+		  	ROUTE_CODE					= #{routeCode,jdbcType=VARCHAR},
+		  	
+		  	CUSTOMS_BROKER_ID		= #{customsBroker.id,jdbcType=VARCHAR},
+		  	CUSTOMS_CODE 			= #{customsCode,jdbcType=VARCHAR},
+		  	CUSTOMS_DATE				= #{customsDate,jdbcType=DATE},
+		  	RETURN_CODE 				= #{returnCode,jdbcType=VARCHAR},
+		  	RETURN_DATE					= #{returnDate,jdbcType=DATE},
+		  	RETURN_DATE2				= #{returnDate2,jdbcType=DATE},
+		  	TAX_CODE 						= #{taxCode,jdbcType=VARCHAR},
+		  	TAX_DATE1						= #{taxDate1,jdbcType=DATE},
+		  	EXPRESS_CODE 				= #{expressCode,jdbcType=VARCHAR},
+		  	TAX_DATE2						= #{taxDate2,jdbcType=DATE},
+		  	
+		  	VEHICLE_TEAM_ID			= #{vehicleTeam.id,jdbcType=VARCHAR},
+		  	VEHICLE_TYPE 					= #{vehicleType,jdbcType=VARCHAR},
+		  	VEHICLE_NUMBER			= #{vehicleNumber,jdbcType=VARCHAR}
+		WHERE ID = #{id,jdbcType=VARCHAR}
+	</update>
+	
+	<update id="update-logistics-bookingnote-state" parameterType="com.ksa.model.logistics.BookingNote">
+		UPDATE KSA_LOGISTICS_BOOKINGNOTE SET
+		  	STATE = #{state,jdbcType=NUMERIC}
+		WHERE ID = #{id,jdbcType=VARCHAR}
+	</update>
+	
+	<!-- 更新记账日期 -->
+	<update id="update-logistics-bookingnote-chargedate" parameterType="com.ksa.model.logistics.BookingNote">
+		UPDATE KSA_LOGISTICS_BOOKINGNOTE SET
+		  	CHARGE_DATE = #{chargeDate,jdbcType=DATE}
+		WHERE ID = #{id,jdbcType=VARCHAR}
+	</update>
+	
+	<sql id="select-logistics-bookingnote">
+		SELECT bn.*,
+			 c1.NAME AS CUSTOMER_NAME, c1.CODE AS CUSTOMER_CODE,
+			 u1.NAME AS CREATOR_NAME, 
+			 u2.NAME AS SALER_NAME,
+			 p1.NAME AS CARRIER_NAME, 
+		 	p2.NAME AS SHIPPING_AGENT_NAME, 
+		 	p3.NAME AS SHIPPER_NAME, p3.ALIAS AS SHIPPER_ALIAS,
+			p4.NAME AS CONSIGNEE_NAME, p4.ALIAS AS CONSIGNEE_ALIAS, 
+			p5.NAME AS NOTIFY_NAME, p5.ALIAS AS NOTIFY_ALIAS,
+			s1.NAME AS AGENT_NAME, 
+			s2.NAME AS CUSTOMS_BROKER_NAME, 
+			s3.NAME AS VEHICLE_TEAM_NAME
+		FROM KSA_LOGISTICS_BOOKINGNOTE bn 
+			LEFT JOIN KSA_BD_PARTNER c1 ON bn.CUSTOMER_ID				= c1.ID
+			LEFT JOIN KSA_SECURITY_USER u1 ON bn.CREATOR_ID 			= u1.ID
+			LEFT JOIN KSA_SECURITY_USER u2 ON bn.SALER_ID 				= u2.ID
+			LEFT JOIN KSA_BD_PARTNER p1 ON bn.CARRIER_ID 					= p1.ID
+			LEFT JOIN KSA_BD_PARTNER p2 ON bn.SHIPPING_AGENT_ID 	= p2.ID
+			LEFT JOIN KSA_BD_PARTNER p3 ON bn.SHIPPER_ID 					= p3.ID
+			LEFT JOIN KSA_BD_PARTNER p4 ON bn.CONSIGNEE_ID 			= p4.ID
+			LEFT JOIN KSA_BD_PARTNER p5 ON bn.NOTIFY_ID 					= p5.ID
+			LEFT JOIN KSA_BD_PARTNER s1 ON bn.AGENT_ID 					= s1.ID
+			LEFT JOIN KSA_BD_PARTNER s2 ON bn.CUSTOMS_BROKER_ID	= s2.ID
+			LEFT JOIN KSA_BD_PARTNER s3 ON bn.VEHICLE_TEAM_ID 		= s3.ID
+	</sql>
+	
+	<select id="select-logistics-bookingnote-basic-byid" resultMap="result-logistics-bookingnote-basic">
+		<include refid="select-logistics-bookingnote"/>
+		WHERE bn.ID = #{id,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="select-logistics-bookingnote-byid" resultMap="result-logistics-bookingnote">
+		<include refid="select-logistics-bookingnote"/>
+		WHERE bn.ID = #{id,jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 保证 MAWB HAWB 至少一个存在 -->
+	<select id="select-logistics-bookingnote-bylading"  resultMap="result-logistics-bookingnote-singletable">
+		SELECT * FROM KSA_LOGISTICS_BOOKINGNOTE
+		WHERE
+		<if test="id != null">
+			ID <![CDATA[<>]]> #{id,jdbcType=VARCHAR} AND 
+		</if>
+			(
+				1 = 2
+				<if test="hawb != null">
+					OR HAWB <![CDATA[=]]> #{hawb,jdbcType=VARCHAR}
+				</if>
+				<if test="mawb != null">
+					OR MAWB <![CDATA[=]]> #{mawb,jdbcType=VARCHAR}
+				</if>
+			)
+		LIMIT 1
+	</select>
+	
+	<select id="grid-logistics-bookingnote" resultMap="result-logistics-bookingnote-basic">
+		<include refid="select-logistics-bookingnote" />
+		<if test="_sort != null">
+			ORDER BY ${_sort} ${_order}
+		</if>
+		<if test="_sort == null">
+			ORDER BY CREATED_DATE DESC, SERIAL_NUMBER DESC
+		</if>
+	</select>
+	
+	<select id="count-logistics-bookingnote" resultType="int">
+		SELECT COUNT( ID )
+		FROM KSA_LOGISTICS_BOOKINGNOTE
+	</select>
+	
+	<select id="grid-logistics-bookingnote-query" resultMap="result-logistics-bookingnote-basic">
+		<include refid="select-logistics-bookingnote"/>
+		<if test="queryClauses != null">
+			WHERE 
+				<foreach item="clause" collection="queryClauses" separator=" AND ">
+					${clause}
+				</foreach>
+		</if>
+		<if test="_sort != null">
+			ORDER BY ${_sort} ${_order}
+		</if>
+		<if test="_sort == null">
+			ORDER BY CREATED_DATE DESC, SERIAL_NUMBER DESC
+		</if>
+	</select>
+	
+	<select id="count-logistics-bookingnote-query" resultType="int" parameterType="map">
+		SELECT COUNT( * )
+		FROM KSA_LOGISTICS_BOOKINGNOTE bn
+		<if test="queryClauses != null">
+			WHERE 
+				<foreach item="clause" collection="queryClauses" separator=" AND ">
+					${clause}
+				</foreach>
+		</if>
+	</select>
+	
+	<!-- 查询需退单提醒的业务 -->
+	<select id="grid-logistics-bookingnote-unreturned" resultMap="result-logistics-bookingnote-basic">
+		<include refid="select-logistics-bookingnote"/>
+		WHERE
+		<if test="queryClauses == null">
+			<!-- 268435456 = 0x10000000 表示退单状态位 -->
+			( ( bn.STATE <![CDATA[&]]> 268435456 ) = 0 ) 
+		</if>
+		<if test="queryClauses != null">
+			<foreach item="clause" collection="queryClauses" separator=" AND ">
+				${clause}
+			</foreach>
+		</if>
+		<if test="checkDate != null">
+			AND (
+			 	<!-- 出口业务在出港15天后提示退单 -->
+				( ( bn.TYPE = 'SE'  OR  bn.TYPE = 'AE' ) AND bn.DEPARTURE_DATE  <![CDATA[<=]]> #{checkDate,jdbcType=DATE} )
+				OR
+				<!-- 进口业务在进港15天后提示退单 -->
+				( ( bn.TYPE = 'SI'  OR  bn.TYPE = 'AI' ) AND bn.DESTINATION_DATE  <![CDATA[<=]]> #{checkDate,jdbcType=DATE} )
+			)
+		</if>
+			
+		<if test="_sort != null">
+			ORDER BY ${_sort} ${_order}
+		</if>
+		<if test="_sort == null">
+			ORDER BY CREATED_DATE DESC, SERIAL_NUMBER DESC
+		</if>
+	</select>
+	<select id="count-logistics-bookingnote-unreturned" resultType="int">
+		SELECT COUNT( ID )
+		FROM KSA_LOGISTICS_BOOKINGNOTE bn
+		WHERE
+		<if test="queryClauses == null">
+			<!-- 268435456 = 0x10000000 表示退单状态位 -->
+			( ( bn.STATE <![CDATA[&]]> 268435456 ) = 0 ) 
+		</if>
+		<if test="queryClauses != null">
+			<foreach item="clause" collection="queryClauses" separator=" AND ">
+				${clause}
+			</foreach>
+		</if>
+		<if test="checkDate != null">
+			AND (
+			 	<!-- 出口业务在出港15天后提示退单 -->
+				( ( bn.TYPE = 'SE'  OR  bn.TYPE = 'AE' ) AND bn.DEPARTURE_DATE  <![CDATA[<=]]> #{checkDate,jdbcType=DATE} )
+				OR
+				<!-- 进口业务在进港15天后提示退单 -->
+				( ( bn.TYPE = 'SI'  OR  bn.TYPE = 'AI' ) AND bn.DESTINATION_DATE  <![CDATA[<=]]> #{checkDate,jdbcType=DATE} )
+			)
+		</if>
+	</select>
+</mapper>

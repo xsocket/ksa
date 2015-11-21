@@ -1,0 +1,65 @@
+ <!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 托单数据查询 -->
+	<package name="logistics-bookingnote-data" extends="ksa-default" namespace="/data/logistics/bookingnote">
+		<action name="query" class="com.ksa.web.struts2.action.logistics.bookingnote.BookingNoteQueryAction">
+			<result name="success" type="json" >
+				<param name="contentType">application/json</param>
+            	<param name="excludeNullProperties">true</param>
+            	<param name="ignoreHierarchy">false</param>
+            	<param name="enableGZIP">true</param>
+            	<param name="root">gridData</param>
+			</result>
+		</action>
+		<!-- 退单相关查询 -->
+		<action name="query-return" class="com.ksa.web.struts2.action.logistics.bookingnote.BookingNoteReturnQueryAction">
+			<result name="success" type="json" >
+				<param name="contentType">application/json</param>
+            	<param name="excludeNullProperties">true</param>
+            	<param name="ignoreHierarchy">false</param>
+            	<param name="enableGZIP">true</param>
+            	<param name="root">gridData</param>
+			</result>
+		</action>
+	</package>
+	
+	<!-- 托单增删改 -->
+	<package name="logistics-bookingnote-dialog" extends="ksa-default" namespace="/dialog/logistics/bookingnote">
+		<result-types>
+			<!-- 导出excel文件 -->
+			<result-type name="freemarker-stream" class="com.ksa.web.struts2.views.freemarker.FreemarkerStreamResult">
+				<param name="contentType">application/xhtml+xml</param>
+				<param name="contentDisposition">attachment;filename="${filename}"</param>
+			</result-type>
+		</result-types>
+		<action name="download" class="com.ksa.web.struts2.action.logistics.bookingnote.BookingNoteDownloadAction">
+			<result name="success" type="freemarker-stream">/ui/logistics/excel/bookingnote-download.ftl</result>
+		</action>
+	
+		<action name="edit-*" class="com.ksa.web.struts2.action.logistics.bookingnote.BookingNoteAction">
+			<param name="type">{1}</param>
+			<result name="success">/ui/logistics/{1}/bookingnote.ftl</result>
+			<result name="error">/ui/logistics/{1}/bookingnote.ftl</result>
+		</action>
+		
+		<action name="insert-*" class="com.ksa.web.struts2.action.logistics.bookingnote.BookingNoteSaveAction">
+			<param name="type">{1}</param>
+			<result name="success">/ui/logistics/{1}/edit.ftl</result>
+			<result name="input">/ui/logistics/{1}/create.ftl</result>
+			<result name="error">/ui/logistics/{1}/create.ftl</result>
+		</action>
+		<action name="update-*" class="com.ksa.web.struts2.action.logistics.bookingnote.BookingNoteSaveAction">
+			<param name="type">{1}</param>
+			<result name="success">/ui/logistics/{1}/bookingnote.ftl</result>
+			<result name="input">/ui/logistics/{1}/bookingnote.ftl</result>
+			<result name="error">/ui/logistics/{1}/bookingnote.ftl</result>
+		</action>
+		<action name="delete" class="com.ksa.web.struts2.action.logistics.bookingnote.BookingNoteDeleteAction">
+			<result name="success" type="json" />
+			<result name="input" type="json" />
+			<result name="error" type="json" />
+		</action>
+	</package>
+</struts>

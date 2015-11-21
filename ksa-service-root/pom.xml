@@ -1,0 +1,35 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+		<groupId>com.ksa</groupId>
+		<artifactId>ksa-root</artifactId>
+		<version>3.8.4-SANPSHOT</version>
+	</parent>
+
+	<artifactId>ksa-service-root</artifactId>
+	<packaging>pom</packaging>
+
+	<name>ksa-service-root</name>
+	<description>杭州凯思爱物流管理系统 - Service 模块根模型</description>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	
+	<dependencies>
+		<dependency>
+			<groupId>com.ksa</groupId>
+			<artifactId>ksa-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+	
+	<modules>
+		<module>ksa-security-service</module>
+		<module>ksa-bd-service</module>
+		<module>ksa-logistics-service</module>
+		<module>ksa-finance-service</module>
+	</modules>
+</project>

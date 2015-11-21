@@ -1,0 +1,20 @@
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 费用利润查询 -->
+	<package name="finance-profit-data" extends="ksa-default" namespace="/data/finance/profit">
+		<global-results>
+			<result name="success" type="json">
+				<param name="contentType">application/json</param>
+	           	<param name="excludeNullProperties">true</param>
+	           	<param name="ignoreHierarchy">false</param>
+	           	<param name="enableGZIP">true</param>
+	           	<param name="root">gridData</param>
+			</result>
+		</global-results>
+		<action name="query" class="com.ksa.web.struts2.action.finance.profit.ProfitQueryAction" />
+		<action name="query-foreign" class="com.ksa.web.struts2.action.finance.charge.ForeignChargeQueryAction"/>
+		<action name="query-native" class="com.ksa.web.struts2.action.finance.charge.NativeChargeQueryAction"/>
+	</package>
+</struts>

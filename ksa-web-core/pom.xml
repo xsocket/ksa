@@ -1,0 +1,84 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+ <parent>
+		<groupId>com.ksa</groupId>
+		<artifactId>ksa-root</artifactId>
+		<version>3.8.4-SANPSHOT</version>
+	</parent>
+
+	<artifactId>ksa-web-core</artifactId>
+	<packaging>jar</packaging>
+
+	<name>ksa-web-core</name>
+	<description>杭州凯思爱物流管理系统 - WEB 核心模块</description>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<shiro.version>1.2.0</shiro.version>
+		<struts.version>2.3.1</struts.version>
+	</properties>
+	
+	<dependencies>
+		<!-- provided -->
+		<dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-servlet_2.5_spec</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-jsp_2.1_spec</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
+		<!-- spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+		
+		<!-- struts2 -->
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-core</artifactId>
+			<version>${struts.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-json-plugin</artifactId>
+			<version>${struts.version}</version>
+		</dependency>
+		
+		<!-- wro4j -->
+		<dependency>
+			<groupId>ro.isdc.wro4j</groupId>
+			<artifactId>wro4j-core</artifactId>
+			<version>1.4.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-web</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+		
+		<!-- KSA -->
+		<dependency>
+			<groupId>com.ksa</groupId>
+			<artifactId>ksa-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ksa</groupId>
+			<artifactId>ksa-dao-context</artifactId>
+			<version>3.8.4-SANPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+			<version>1.9</version>
+		</dependency>
+	</dependencies>
+</project>

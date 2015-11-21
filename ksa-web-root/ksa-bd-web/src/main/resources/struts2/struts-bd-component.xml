@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="ksa-component-bd" extends="ksa-default" namespace="/component/bd">
+	
+		<!-- 单位类型多选组件 -->
+		<action name="department-selection">
+			<result>/ui/bd/component/department-selection.ftl</result>
+		</action>
+		
+		<!-- 合作伙伴抬头选择 -->
+		<action name="partner-alias-selection" class="com.ksa.web.struts2.action.bd.partner.PartnerExtraAction">
+			<result>/ui/bd/component/partner-alias-selection.ftl</result>
+		</action>
+		<!-- 合作伙伴抬头选择 -->
+		<action name="partner-alias-insert" class="com.ksa.web.struts2.action.bd.partner.PartnerExtraAction">
+			<param name="action">insert</param>
+			<result type="json"></result>
+		</action>
+		<action name="partner-alias-delete" class="com.ksa.web.struts2.action.bd.partner.PartnerExtraAction">
+			<param name="action">delete</param>
+			<result type="json"></result>
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ksa-finance">
+	<!-- 获取精简的托单信息:不包含货物及附加表中的信息, 供其他关联对象连接时使用 -->
+	<select id="select-finance-bookingnote-basic-byid" resultMap="result-finance-bookingnote-basic">
+		<!-- 依赖 finance-bookingnote.xml 中的配置信息 -->
+		<include refid="select-finance-bookingnote-basic" />
+		WHERE bn.ID = #{id,jdbcType=VARCHAR}
+	</select>
+</mapper>

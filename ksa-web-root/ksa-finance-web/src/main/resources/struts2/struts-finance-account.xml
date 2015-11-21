@@ -1,0 +1,92 @@
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 结算单管理 -->
+	<package name="finance-account-default" extends="ksa-default" namespace="/ui/finance/account">
+		<action name="default" class="com.ksa.web.struts2.action.finance.account.AccountAction">
+			<result>/ui/finance/account/default.ftl</result>
+		</action>
+		<action name="default-doinvoice" class="com.ksa.web.struts2.action.finance.account.AccountAction">
+			<result>/ui/finance/account/default-doinvoice.ftl</result>
+		</action>
+	</package>
+	
+	<!-- 账单 portal -->
+	<package name="finance-account-portal" extends="ksa-default" namespace="/portal/finance/account">
+		<action name="default">
+			<result>/portal/finance/account/default.ftl</result>
+		</action>
+	</package>
+	
+	<!-- 结算单增删改 -->
+	<package name="finance-account-dialog" extends="ksa-default" namespace="/dialog/finance/account">
+		<result-types>
+			<!-- 导出excel文件 -->
+			<result-type name="freemarker-stream" class="com.ksa.web.struts2.views.freemarker.FreemarkerStreamResult">
+				<param name="contentType">application/xhtml+xml</param>
+				<param name="contentDisposition">attachment;filename="${filename}"</param>
+			</result-type>
+		</result-types>
+		
+		<action name="edit" class="com.ksa.web.struts2.action.finance.account.AccountEditAction">
+			<result name="success">/ui/finance/account/edit.ftl</result>
+		</action>
+		
+		<action name="create" class="com.ksa.web.struts2.action.finance.account.AccountEditAction">
+			<result name="success">/ui/finance/account/create.ftl</result>
+		</action>
+		<action name="account" class="com.ksa.web.struts2.action.finance.account.AccountEditAction">
+			<result name="success">/ui/finance/account/account.ftl</result>
+		</action>
+		<action name="account-excel" class="com.ksa.web.struts2.action.finance.account.AccountExcelAction">
+			<result name="success">/ui/finance/account/account-excel.ftl</result>
+		</action>
+		<action name="invoice" class="com.ksa.web.struts2.action.finance.account.AccountEditAction">
+			<result name="success">/ui/finance/account/invoice.ftl</result>
+		</action>
+		
+		<action name="account-download" class="com.ksa.web.struts2.action.finance.account.AccountDownloadAction">
+			<result name="success" type="freemarker-stream">/ui/finance/account/excel/account${direction}.ftl</result>
+		</action>
+		
+		<action name="save" class="com.ksa.web.struts2.action.finance.account.AccountSaveAction">
+			<result name="input">/ui/finance/account/edit.ftl</result>
+			<result name="success">/ui/finance/account/account.ftl</result>
+		</action>
+		
+		<action name="delete" class="com.ksa.web.struts2.action.finance.account.AccountDeleteAction">
+			<result name="success" type="json" />
+			<result name="error" type="json" />
+		</action>
+		
+		<action name="compute-code" class="com.ksa.web.struts2.action.finance.account.AccountCodeComputeAction">
+			<result name="success" type="json" />
+			<result name="error" type="json" />
+		</action>
+		
+		<action name="state" class="com.ksa.web.struts2.action.finance.account.AccountStateAction">
+			<result name="success" type="json" />
+			<result name="error" type="json" />
+		</action>
+	</package>
+	
+	<!-- 获取汇率数据表格 -->
+	<package name="finance-griddata-account" extends="ksa-griddata-default" namespace="/data/grid/currency">
+		<action name="account" class="com.ksa.web.struts2.action.finance.account.AccountRateGridDataAction">
+			<result name="success" type="json" />
+		</action>
+	</package>
+	<!-- 结算单数据查询 -->
+	<package name="finance-account-data" extends="ksa-default" namespace="/data/finance/account">
+		<action name="query" class="com.ksa.web.struts2.action.finance.account.AccountQueryAction">
+			<result name="success" type="json" >
+				<param name="contentType">application/json</param>
+            	<param name="excludeNullProperties">true</param>
+            	<param name="ignoreHierarchy">false</param>
+            	<param name="enableGZIP">true</param>
+            	<param name="root">gridData</param>
+			</result>
+		</action>
+	</package>
+</struts>

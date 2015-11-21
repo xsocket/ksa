@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ksa-finance">
+	
+	<!-- 通过结算单中的费用信息，反查托单的内容 -->
+	<!-- 依赖 finance-bookingnote.xml 中的配置 -->
+	<select id="select-finance-bookingnote-byaccount" resultMap="result-finance-bookingnote-basic">
+		<include refid="select-finance-bookingnote-basic" />
+		WHERE bn.ID IN (
+			SELECT c.BOOKINGNOTE_ID 
+			FROM KSA_FINANCE_CHARGE c
+			WHERE c.ACCOUNT_ID = #{accountId,jdbcType=VARCHAR}
+		)
+		ORDER BY bn.SERIAL_NUMBER
+	</select>
+	
+</mapper>

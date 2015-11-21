@@ -1,0 +1,48 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.ksa</groupId>
+    <artifactId>ksa-web-root</artifactId>
+    <version>3.8.4-SANPSHOT</version>
+  </parent>
+
+  <artifactId>ksa-system-web</artifactId>
+  <packaging>jar</packaging>
+
+  <name>ksa-system-web</name>
+  <description>杭州凯思爱物流管理系统 - 系统配置 WEB 模块</description>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.ksa</groupId>
+      <artifactId>ksa-security-service</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.ksa</groupId>
+      <artifactId>ksa-bd-service</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.ksa</groupId>
+      <artifactId>ksa-logistics-service</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.ksa</groupId>
+      <artifactId>ksa-finance-service</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.microsoft.sqlserver</groupId>
+      <artifactId>sqljdbc</artifactId>
+      <version>1.0.809.102</version>
+    </dependency>
+  </dependencies>
+</project>

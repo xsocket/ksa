@@ -1,0 +1,48 @@
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 系统备份/还原操作 -->
+	<package name="system-backup-default" extends="ksa-default" namespace="/ui/system/backup">
+		<action name="default" class="com.ksa.web.struts2.action.system.backup.ManagerAction">
+			<result>/ui/system/backup/default.ftl</result>
+		</action>
+		<action name="backup" class="com.ksa.web.struts2.action.system.backup.BackupAction">
+			<result type="json" />
+		</action>
+		<action name="download" class="com.ksa.web.struts2.action.system.backup.DownloadAction">
+			<result name="success" type="stream">
+				<param name="contentLength">${filesize}</param>
+				<param name="inputName">inputStream</param>
+				<param name="contentType">application/octet-stream</param>
+				<param name="contentDisposition">attachment;filename="${filename}"</param>
+			</result>
+			<result name="error">/ui/system/backup/download-error.ftl</result>
+		</action>
+		<action name="restore" class="com.ksa.web.struts2.action.system.backup.RestoreAction">
+			<result type="json" />
+		</action>
+		<action name="delete" class="com.ksa.web.struts2.action.system.backup.DeleteAction">
+			<result type="json" />
+		</action>
+	</package>
+	
+	<package name="system-backup-data" extends="ksa-griddata-default" namespace="/data/system/backup">
+		<action name="query" class="com.ksa.web.struts2.action.system.backup.QueryBackupFileListAction">
+			<result name="success" type="json" />
+		</action>
+	</package>
+	
+	<package name="system-backup-dialog" extends="ksa-default" namespace="/dialog/system/backup/strategy">
+		<action name="save" class="com.ksa.web.struts2.action.system.backup.StrategySave">
+			<result name="success">/ui/system/backup/strategy.ftl</result>
+			<result name="error">/ui/system/backup/strategy.ftl</result>
+			<result name="input">/ui/system/backup/strategy.ftl</result>
+		</action>
+		<action name="view" class="com.ksa.web.struts2.action.system.backup.StrategyView">
+			<result name="success">/ui/system/backup/strategy.ftl</result>
+			<result name="error">/ui/system/backup/strategy.ftl</result>
+			<result name="input">/ui/system/backup/strategy.ftl</result>
+		</action>
+	</package>
+</struts>

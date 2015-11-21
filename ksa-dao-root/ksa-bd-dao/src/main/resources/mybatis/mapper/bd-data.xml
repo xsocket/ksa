@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ksa-bd">
+
+	<resultMap type="com.ksa.model.bd.BasicData" id="result-bd-data-combo">
+		<id column="ID" property="id" javaType="String" />
+		<result column="CODE" property="code" javaType="String" />
+		<result column="NAME" property="name" javaType="String" />
+	</resultMap>
+	<resultMap type="com.ksa.model.bd.BasicData" id="result-bd-data">
+		<id column="ID" property="id" javaType="String" />
+		<result column="CODE" property="code" javaType="String" />
+		<result column="NAME" property="name" javaType="String" />
+		<result column="ALIAS" property="alias" javaType="String"/>
+		<result column="NOTE" property="note" javaType="String"/>
+		<result column="EXTRA" property="extra" javaType="String"/>
+		<result column="RANK" property="rank" javaType="int"/>
+		<association column="TYPE_ID" property="type"   javaType="com.ksa.model.bd.BasicDataType">
+			<id column="TYPE_ID" property="id" />
+			<result column="TYPE_NAME" property="name" />
+		</association>
+	</resultMap>
+	
+	<!-- 插入基础数据 -->
+	<insert id="insert-bd-data" parameterType="com.ksa.model.bd.BasicData">
+		INSERT INTO KSA_BD_DATA 
+						( ID, 	 CODE,		NAME, 		ALIAS, 		NOTE, 		EXTRA, 		TYPE_ID,	RANK )
+		VALUES ( 	#{id},  #{code}, 	#{name}, 	#{alias,jdbcType=VARCHAR}, 	#{note,jdbcType=VARCHAR}, 	#{extra,jdbcType=VARCHAR}, 	#{type.id},	#{rank} )	
+	</insert>
+	
+	<!-- 修改基础数据 -->
+	<update id="update-bd-data" parameterType="com.ksa.model.bd.BasicData">
+		UPDATE KSA_BD_DATA SET
+			CODE 		= #{code},
+			NAME 		= #{name},
+			ALIAS 		= #{alias,jdbcType=VARCHAR},
+			NOTE 		= #{note,jdbcType=VARCHAR},
+			EXTRA 		= #{extra,jdbcType=VARCHAR},
+			RANK		= #{rank}
+		WHERE ID 	= #{id}
+	</update>
+	
+	<!-- 删除基础数据 -->
+	<delete id="delete-bd-data" >
+		DELETE FROM KSA_BD_DATA WHERE ID = #{id}
+	</delete>
+
+	<!-- 查询所有基础数据 -->
+	<select id="select-bd-data-bytype" resultMap="result-bd-data">
+		SELECT d.ID, d.CODE, d.NAME, d.ALIAS, d.NOTE, d.EXTRA, d.TYPE_ID, d.RANK, t.NAME AS TYPE_NAME
+		FROM KSA_BD_DATA d JOIN KSA_BD_TYPE t ON d.TYPE_ID = t.ID 
+		WHERE d.TYPE_ID = #{typeId}
+	</select>
+	
+	<select id="select-bd-data-byid" resultMap="result-bd-data">
+		SELECT d.ID, d.CODE, d.NAME, d.ALIAS, d.NOTE, d.EXTRA, d.TYPE_ID, d.RANK, t.NAME AS TYPE_NAME
+		FROM KSA_BD_DATA d JOIN KSA_BD_TYPE t ON d.TYPE_ID = t.ID 
+		WHERE d.ID = #{id}
+	</select>
+	
+	<select id="select-bd-data-all" resultMap="result-bd-data">
+		SELECT d.ID, d.CODE, d.NAME, d.ALIAS, d.NOTE, d.EXTRA, d.TYPE_ID, d.RANK, t.NAME AS TYPE_NAME
+		FROM KSA_BD_DATA d JOIN KSA_BD_TYPE t ON d.TYPE_ID = t.ID 
+	</select>
+	
+	<!-- 数据获取操作-->
+	<select id="grid-bd-data-bytype" resultMap="result-bd-data">
+		SELECT d.ID, d.CODE, d.NAME, d.ALIAS, d.NOTE, d.EXTRA, d.TYPE_ID, d.RANK, t.NAME AS TYPE_NAME
+		FROM KSA_BD_DATA d JOIN KSA_BD_TYPE t ON d.TYPE_ID = t.ID 
+		WHERE d.TYPE_ID = #{typeId}
+		<if test="search != null">
+			AND
+				( d.CODE like '%${search}%' 
+				  OR d.NAME like '%${search}%' 
+				  OR d.ALIAS like '%${search}%' )
+		</if>
+		<if test="_sort != null">
+			ORDER BY ${_sort} ${_order}
+		</if>
+		<if test="_sort == null">
+			ORDER BY RANK ASC
+		</if>
+	</select>
+	<select id="count-bd-data-bytype" resultType="int">
+		SELECT COUNT(*)
+		FROM KSA_BD_DATA d
+		WHERE TYPE_ID = #{typeId}
+		<if test="search != null">
+			AND
+				( d.CODE like '%${search}%' 
+				  OR d.NAME like '%${search}%' 
+				  OR d.ALIAS like '%${search}%' )
+		</if>
+	</select>
+	
+	<select id="combo-bd-data-bytype" resultMap="result-bd-data-combo">
+		SELECT ID, CODE, NAME
+		FROM KSA_BD_DATA
+		WHERE TYPE_ID = #{typeId}
+	</select>
+	
+</mapper>

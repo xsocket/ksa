@@ -1,0 +1,51 @@
+textarea, input, input[type="text"] {
+	line-height: 1.5;
+	font-family: "宋体", "Helvetica Neue", Arial, Helvetica, sans-serif;
+	color:#000;
+	background: none;
+	font-size: 10.5pt;
+	margin:0;
+	padding:0;
+}
+textarea, input, input[type="text"] { width:95%; }
+textarea {overflow: hidden;  resize:none;}
+
+/*  Tables 
+-------------------------------------------------------------- */
+table {
+	width:99.5%;	 /* 解决100%打印时后边框不显示的问题 */
+	background-color: transparent;
+	border-collapse: collapse;
+	border-spacing: 0;
+	word-break: break-all;
+	word-wrap: break-word;
+}
+
+tr { height: 25pt; }
+
+th,td {
+	text-align: left;
+	margin: 0;
+	padding: 0;
+	border: 1pt solid black;
+}
+
+/* utility components
+-------------------------------------------------------------- */
+.border { border: 1pt solid black; } 
+.no-border { border: none; }
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.text-top { vertical-align: top; }
+.text-middle { vertical-align: middle; }
+.text-bottom { vertical-align: bottom; }
+
+/* 修正样式冲突 */
+.calendar-body tr { height:auto; }
+.calendar-body th, .calendar-body td { width: auto; }
+.calendar-body th { border:none; }
+
+span.combo {position:relative;}
+span.combo span {position:absolute;}

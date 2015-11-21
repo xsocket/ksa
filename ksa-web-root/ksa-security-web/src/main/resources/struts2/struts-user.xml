@@ -1,0 +1,61 @@
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 用户管理 -->
+	<package name="security-user-default" extends="ksa-default" namespace="/ui/security/user">
+		<action name="default" class="com.ksa.web.struts2.action.security.user.UserAction">
+			<result>/ui/security/user/default.ftl</result>
+		</action>
+	</package>
+	
+	<!-- 用户信息 -->
+	<package name="security-user-dialog" extends="ksa-default" namespace="/dialog/security/user">
+		<action name="create" class="com.ksa.web.struts2.action.security.user.UserAction">
+			<result>/ui/security/user/create-user.ftl</result>
+		</action>
+		<action name="insert" class="com.ksa.web.struts2.action.security.user.UserInsertAction">
+			<result name="success">/ui/security/user/edit-user.ftl</result>
+			<result name="input">/ui/security/user/create-user.ftl</result>
+			<result name="error">/ui/security/user/create-user.ftl</result>
+		</action>
+		
+		<action name="edit" class="com.ksa.web.struts2.action.security.user.UserEditAction">
+			<result name="success">/ui/security/user/edit-user.ftl</result>
+			<result name="input">/ui/security/user/edit-user.ftl</result>
+			<result name="error">/ui/security/user/edit-user.ftl</result>
+		</action>
+		<action name="update" class="com.ksa.web.struts2.action.security.user.UserUpdateAction">
+			<result name="success">/ui/security/user/edit-user.ftl</result>
+			<result name="input">/ui/security/user/edit-user.ftl</result>
+			<result name="error">/ui/security/user/edit-user.ftl</result>
+		</action>
+		
+		<action name="edit-password">
+			<result>/ui/security/user/edit-password.ftl</result>
+		</action>
+		<action name="update-password" class="com.ksa.web.struts2.action.security.user.UserPasswordUpdateAction">
+			<result name="success">/ui/security/user/edit-password.ftl</result>
+			<result name="input">/ui/security/user/edit-password.ftl</result>
+			<result name="error">/ui/security/user/edit-password.ftl</result>
+		</action>
+		
+		<action name="lock" class="com.ksa.web.struts2.action.security.user.UserLockAction">
+			<result name="success" type="json" />
+			<result name="input" type="json" />
+			<result name="error" type="json" />
+		</action>
+		
+		<!-- 用户所含角色的异步增删操作 -->
+		<action name="insert-role" class="com.ksa.web.struts2.action.security.user.UserRoleInsertAction">
+			<result name="success" type="json" />
+			<result name="input" type="json" />
+			<result name="error" type="json" />
+		</action>
+		<action name="delete-role" class="com.ksa.web.struts2.action.security.user.UserRoleDeleteAction">
+			<result name="success" type="json" />
+			<result name="input" type="json" />
+			<result name="error" type="json" />
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 数据迁移需要用到的 sql -->
+<mapper namespace="ksa-initialize">
+
+	<!-- 清空表：系统数据迁移时使用 -->
+	<delete id="clear-logistics-bookingnote">
+		DELETE FROM KSA_LOGISTICS_BOOKINGNOTE
+	</delete>
+	<delete id="clear-finance-charge">
+		DELETE FROM KSA_FINANCE_CHARGE
+	</delete>
+	<delete id="clear-finance-invoice">
+		DELETE FROM KSA_FINANCE_INVOICE
+	</delete>
+	<delete id="clear-finance-account">
+		DELETE FROM KSA_FINANCE_ACCOUNT
+	</delete>
+	
+	<!-- 改变 SHIPPING_MARK 字段的长度( 200 到 2000 ) -->
+	<update id="alter-logistics-bookingnote-shippingmark">
+		alter table KSA_LOGISTICS_BOOKINGNOTE change SHIPPING_MARK SHIPPING_MARK varchar(2000)	
+	</update>
+	<update id="alter-logistics-bookingnote-cargoname">
+		alter table KSA_LOGISTICS_BOOKINGNOTE change CARGO_NAME CARGO_NAME varchar(2000)	
+	</update>
+	
+</mapper>

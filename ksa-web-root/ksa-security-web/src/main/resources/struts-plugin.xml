@@ -1,0 +1,8 @@
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<include file="struts2/struts-user.xml"/>
+	<include file="struts2/struts-role.xml"/>
+	<include file="struts2/struts-component.xml"/>
+</struts>

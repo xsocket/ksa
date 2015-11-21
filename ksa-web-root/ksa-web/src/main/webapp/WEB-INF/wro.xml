@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<groups xmlns="http://www.isdc.ro/wro" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.isdc.ro/wro wro.xsd">
+	
+	<group name="jquery">
+		<js>/rs/jquery/jquery-1.7.2.min.js</js>
+	</group>
+	
+	<group name="hotkeys">
+		<js>/rs/jquery/jquery.hotkeys.js</js>
+	</group>
+	
+	<group name="bootstrap">
+		<!-- <js>/rs/bootstrap/js/bootstrap.js</js> -->
+		<js>/rs/bootstrap/js/bootstrap-dropdown.js</js>
+		<js>/rs/bootstrap/js/bootstrap-typeahead.js</js>
+		<js>/rs/bootstrap/js/bootstrap-alert.js</js>
+		<css>/rs/bootstrap/css/bootstrap.css</css>
+		<!-- <css>/rs/bootstrap/css/bootstrap-responsive.css</css> -->
+	</group>
+	
+	<group name="html5">
+		<js>/rs/html5.js</js>
+	</group>
+	
+	<group name="ksa-easyui-gray">
+		<js>/rs/custom/easyui/plugins/jquery.parser.js</js>
+		
+		<js>/rs/custom/easyui/plugins/jquery.draggable.js</js>
+		<js>/rs/custom/easyui/plugins/jquery.droppable.js</js>
+		<js>/rs/custom/easyui/plugins/jquery.resizable.js</js>
+		
+		<js>/rs/custom/easyui/plugins/jquery.linkbutton.js</js>
+		<js>/rs/custom/easyui/plugins/jquery.pagination.js</js>
+		<js>/rs/custom/easyui/plugins/jquery.tree.js</js>
+		<!-- <js>/rs/custom/easyui/plugins/jquery.progressbar.js</js> -->
+		
+		<js>/rs/custom/easyui/plugins/jquery.panel.js</js>
+		<js>/rs/custom/easyui/plugins/jquery.window.js</js>
+		<!-- <js>/rs/custom/easyui/plugins/jquery.dialog.js</js> -->
+		<js>/rs/custom/easyui/plugins/jquery.messager.js</js>
+		<js>/rs/custom/easyui/plugins/jquery.accordion.js</js>
+		<js>/rs/custom/easyui/plugins/jquery.tabs.js</js>
+		<js>/rs/custom/easyui/plugins/jquery.layout.js</js>
+		
+		<js>/rs/custom/easyui/plugins/jquery.menu.js</js>
+		<!-- <js>/rs/custom/easyui/plugins/jquery.menubutton.js</js> -->
+		<!-- <js>/rs/custom/easyui/plugins/jquery.splitbutton.js</js> -->
+		
+		<!-- <js>/rs/custom/easyui/plugins/jquery.searchbox.js</js> -->
+		<js>/rs/custom/easyui/plugins/jquery.validatebox.js</js>
+		<js>/rs/custom/easyui/plugins/jquery.form.js</js>
+		<js>/rs/custom/easyui/plugins/jquery.numberbox.js</js>
+		
+		<js>/rs/custom/easyui/plugins/jquery.calendar.js</js>
+		
+		<js>/rs/custom/easyui/plugins/jquery.spinner.js</js>
+		<js>/rs/custom/easyui/plugins/jquery.numberspinner.js</js>
+		<js>/rs/custom/easyui/plugins/jquery.timespinner.js</js>
+		
+		<js>/rs/custom/easyui/plugins/jquery.datagrid.js</js>
+		<js>/rs/custom/easyui/plugins/jquery.treegrid.js</js>
+		<js>/rs/custom/easyui/plugins/jquery.propertygrid.js</js>
+		
+		<js>/rs/custom/easyui/plugins/jquery.combo.js</js>
+		<js>/rs/custom/easyui/plugins/jquery.combobox.js</js>
+		<js>/rs/custom/easyui/plugins/jquery.combotree.js</js>
+		<js>/rs/custom/easyui/plugins/jquery.combogrid.js</js>
+		
+		<js>/rs/custom/easyui/plugins/jquery.datebox.js</js>		
+		<js>/rs/custom/easyui/plugins/jquery.datetimebox.js</js>
+		
+		<!-- <js>/rs/custom/easyui/plugins/jquery.slider.js</js> -->
+		<js>/rs/custom/easyui/plugins/jquery.portal.js</js>
+		
+		
+		<css>/rs/custom/easyui/themes/gray/linkbutton.css</css>
+		<css>/rs/custom/easyui/themes/gray/pagination.css</css>
+		<css>/rs/custom/easyui/themes/gray/tree.css</css>
+		<!-- <css>/rs/custom/easyui/themes/gray/progressbar.css</css> -->
+		
+		<css>/rs/custom/easyui/themes/gray/panel.css</css>
+		<css>/rs/custom/easyui/themes/gray/window.css</css>
+		<!-- <css>/rs/custom/easyui/themes/gray/dialog.css</css> -->
+		<css>/rs/custom/easyui/themes/gray/messager.css</css>
+		<css>/rs/custom/easyui/themes/gray/accordion.css</css>
+		<css>/rs/custom/easyui/themes/gray/tabs.css</css>
+		<css>/rs/custom/easyui/themes/gray/layout.css</css>
+		
+		<css>/rs/custom/easyui/themes/gray/menu.css</css>
+		<!-- <css>/rs/custom/easyui/themes/gray/menubutton.css</css> -->
+		<!-- <css>/rs/custom/easyui/themes/gray/splitbutton.css</css> -->
+		
+		<!-- <css>/rs/custom/easyui/themes/gray/searchbox.css</css> -->
+		<css>/rs/custom/easyui/themes/gray/validatebox.css</css>
+		
+		<css>/rs/custom/easyui/themes/gray/calendar.css</css>
+		
+		<css>/rs/custom/easyui/themes/gray/spinner.css</css>
+		
+		<css>/rs/custom/easyui/themes/gray/datagrid.css</css>
+		<css>/rs/custom/easyui/themes/gray/propertygrid.css</css>
+		
+		<css>/rs/custom/easyui/themes/gray/combo.css</css>
+		<css>/rs/custom/easyui/themes/gray/combobox.css</css>
+		
+		<css>/rs/custom/easyui/themes/gray/datebox.css</css>		
+		
+		<!-- <css>/rs/custom/easyui/themes/gray/slider.css</css> -->
+		<css>/rs/custom/easyui/themes/gray/portal.css</css>	
+	</group>
+	
+	<group name="ksa-print">
+		<css>/rs/custom/print/blueprint.css</css>
+		<css>/rs/custom/print/custom.css</css>
+	</group>
+	
+	<group name="ksa-custom">
+		<js>/rs/custom/easyui/locale/easyui-lang-zh_CN.js</js>
+		<js>/rs/custom/ksa.js</js>
+		<css>/rs/custom/ksa.css</css>
+		<css>/rs/custom/icon.css</css>
+	</group>
+	
+	<group name="ksa-global-default">
+		<group-ref>jquery</group-ref>
+		<group-ref>hotkeys</group-ref>
+		<group-ref>bootstrap</group-ref>
+		<group-ref>ksa-easyui-gray</group-ref>
+		<group-ref>ksa-custom</group-ref>
+	</group>
+	
+	<group name="ksa-component">
+		<js>/rs/custom/component/jquery.multipleselection.js</js>
+	</group>
+	
+	<group name="ksa-component-compositequery">
+		<js>/rs/custom/component/jquery.compositequery.js</js>
+		<css>/rs/custom/component/css/compositequery.css</css>
+	</group>
+	
+	<group name="ksa-chart">
+		<js>/rs/fusion-charts.js</js>
+	</group>
+
+</groups>	

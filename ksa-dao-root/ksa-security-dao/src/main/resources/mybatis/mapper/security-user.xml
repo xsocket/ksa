@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ksa-security">
+
+	<resultMap type="com.ksa.model.security.User" id="result-security-user">
+		<id column="ID" property="id" javaType="String" />
+		<result column="NAME" property="name" javaType="String" />
+		<result column="PASSWORD" property="password" javaType="String" />
+		<result column="EMAIL" property="email" javaType="String"/>
+		<result column="TELEPHONE" property="telephone" javaType="String"/>		
+		<result column="IS_LOCKED" property="locked" javaType="boolean"/>
+		<collection property="roles" ofType="com.ksa.model.security.Role" 
+			column="ID" select="select-security-role-byuserid">
+		</collection>
+	</resultMap>
+	
+	<!-- 插入用户 -->
+	<insert id="insert-security-user" parameterType="com.ksa.model.security.User">
+		INSERT INTO KSA_SECURITY_USER 
+						( ID, 		NAME, 		PASSWORD, 	EMAIL, 		TELEPHONE, 	IS_LOCKED )
+		VALUES ( 	#{id}, 	#{name,jdbcType=VARCHAR}, 	#{password,jdbcType=VARCHAR}, 	#{email,jdbcType=VARCHAR}, 	#{telephone,jdbcType=VARCHAR}, 	#{locked, jdbcType=NUMERIC} )	
+	</insert>
+	
+	<!-- 修改用户 -->
+	<update id="update-security-user" parameterType="com.ksa.model.security.User">
+		UPDATE KSA_SECURITY_USER SET
+			NAME 			= #{name,jdbcType=VARCHAR},
+			PASSWORD = #{password,jdbcType=VARCHAR},
+			EMAIL 			= #{email,jdbcType=VARCHAR},
+			TELEPHONE 	= #{telephone,jdbcType=VARCHAR},
+			IS_LOCKED 	= #{locked, jdbcType=NUMERIC}
+		WHERE 	ID 	= #{id}
+	</update>
+	
+	<!-- 删除用户 -->
+	<delete id="delete-security-user" >
+		DELETE FROM KSA_SECURITY_USER WHERE ID = #{id}
+	</delete>
+
+	<!-- 查询所有用户 -->
+	<select id="select-security-user-all" resultMap="result-security-user">
+		SELECT ID, NAME, PASSWORD, EMAIL, TELEPHONE, IS_LOCKED
+		FROM KSA_SECURITY_USER
+		ORDER BY IS_LOCKED
+	</select>
+	
+	<!-- 查询具体用户 -->
+	<select id="select-security-user-byid" resultMap="result-security-user">
+		SELECT ID, NAME, PASSWORD, EMAIL, TELEPHONE, IS_LOCKED
+		FROM KSA_SECURITY_USER
+		WHERE ID = #{id}
+	</select>
+
+	<!-- 插入用户角色 -->
+	<insert id="insert-security-userrole" parameterType="map">
+		INSERT INTO KSA_SECURITY_USERROLE ( USER_ID, ROLE_ID )
+		VALUES ( 	#{userId}, 	#{roleId} )	
+	</insert>
+	<!-- 删除用户角色 -->
+	<delete id="delete-security-userrole" parameterType="map">
+		DELETE FROM KSA_SECURITY_USERROLE 
+		WHERE USER_ID = #{userId} AND ROLE_ID = #{roleId}
+	</delete>
+
+
+
+	
+	<!-- 数据获取操作-->
+	<select id="combo-security-user-all" resultMap="result-security-user">
+		SELECT ID, NAME, '' AS PASSWORD, '' AS EMAIL, '' AS TELEPHONE, IS_LOCKED
+		FROM KSA_SECURITY_USER
+		WHERE IS_LOCKED = 0
+	</select>
+	
+	<select id="grid-security-user-all" resultMap="result-security-user">
+		SELECT ID, NAME, '' AS PASSWORD, EMAIL, TELEPHONE, IS_LOCKED
+		FROM KSA_SECURITY_USER
+		<if test="_sort != null">
+			ORDER BY ${_sort} ${_order}
+		</if>
+		<if test="_sort == null">
+			ORDER BY IS_LOCKED
+		</if>
+	</select>
+	
+	<select id="count-security-user-all" resultType="int">
+		SELECT COUNT(*)
+		FROM KSA_SECURITY_USER
+	</select>
+	
+	<select id="grid-security-user-byrole" resultMap="result-security-user">
+		SELECT ID, NAME, '' AS PASSWORD, EMAIL, TELEPHONE, IS_LOCKED
+		FROM KSA_SECURITY_USER 
+			JOIN KSA_SECURITY_USERROLE ON ID = USER_ID
+		WHERE ROLE_ID = #{roleId,jdbcType=VARCHAR}
+		<if test="_sort != null">
+			ORDER BY ${_sort} ${_order}
+		</if>
+		<if test="_sort == null">
+			ORDER BY IS_LOCKED
+		</if>
+	</select>
+	
+	<select id="count-security-user-byrole" resultType="int">
+		SELECT COUNT(*)
+		FROM KSA_SECURITY_USER 
+			JOIN KSA_SECURITY_USERROLE ON ID = USER_ID
+		WHERE ROLE_ID = #{roleId,jdbcType=VARCHAR}
+	</select>
+	
+</mapper>

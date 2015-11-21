@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- 依赖 ksa-dao-context 项目中，/spring/dao-config.xml 的定义。  -->
+	
+	<!-- BookingNote DAO -->
+	<bean id="bookingNoteDao" class="com.ksa.dao.logistics.mybatis.MybatisBookingNoteDao" parent="mybatisDao" />
+	
+	<!-- BookingNoteCargo DAO -->
+	<bean id="bookingNoteCargoDao" class="com.ksa.dao.logistics.mybatis.MybatisBookingNoteCargoDao" parent="mybatisDao" />
+	
+	<!-- BillOfLading DAO -->
+	<bean id="billOfLadingDao" class="com.ksa.dao.logistics.mybatis.MybatisBillOfLadingDao" parent="mybatisDao" />
+	
+	<!-- WarehouseNoting DAO -->
+	<bean id="warehouseNotingDao" class="com.ksa.dao.logistics.mybatis.MybatisWarehouseNotingDao" parent="mybatisDao" />
+	
+	<!-- WarehouseBooking DAO -->
+	<bean id="warehouseBookingDao" class="com.ksa.dao.logistics.mybatis.MybatisWarehouseBookingDao" parent="mybatisDao" />
+	
+	<!-- Manifest DAO -->
+	<bean id="manifestDao" class="com.ksa.dao.logistics.mybatis.MybatisManifestDao" parent="mybatisDao" />
+	
+	<!-- ArrivalNote DAO -->
+	<bean id="arrivalNoteDao" class="com.ksa.dao.logistics.mybatis.MybatisArrivalNoteDao" parent="mybatisDao" />
+	
+</beans>

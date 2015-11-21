@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.devMode" value="false" />
+	<constant name="webwork.devMode" value="false" />
+	<constant name="struts.freemarker.templatesCache " value="true" />
+	<constant name="struts.configuration.xml.reload" value="false" />
+	<constant name="struts.i18n.reload" value="false" />
+
+	<constant name="struts.locale" value="zh" />
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.ui.theme" value="simple" />
+	
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<constant name="struts.url.includeParams" value="none" />
+	
+	<constant name="struts.multipart.parser" value="jakarta" />
+	<constant name="struts.multipart.maxSize" value="104857600" /><!-- 文件可上传的大小为100M -->
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true" /><!-- 允许调用静态常量和方法 -->
+	<!-- 调用常量： ${stack.findValue("@com.wish.maml.freemarkerexample.model.User1@MAN")}
+			调用方法：${stack.findValue("@com.wish.maml.freemarkerexample.model.User1@m()")}  -->
+			
+	<!-- 将 shiro tags 集成入 freemarker  -->			
+	<constant name="struts.freemarker.manager.classname" value="com.ksa.web.struts2.views.freemarker.ShiroFreemarkerManager" />			
+
+	<package name="ksa-default" extends="struts-default" abstract="true">
+		<result-types>
+			<result-type name="freemarker" class="org.apache.struts2.views.freemarker.FreemarkerResult" default="true" />
+			<result-type name="freemarker-stream" class="com.ksa.web.struts2.views.freemarker.FreemarkerStreamResult" />
+			<result-type name="json" class="org.apache.struts2.json.JSONResult">
+				<param name="contentType">application/json</param>
+            	<param name="excludeNullProperties">true</param>
+            	<param name="ignoreHierarchy">false</param>
+            	<param name="enableGZIP">true</param>
+            	<param name="root">jsonResult</param>
+			</result-type>
+		</result-types>
+		
+		<interceptors>
+			<interceptor name="dataInitialized" class="com.ksa.web.struts2.interceptor.DataInitializedInterceptor"></interceptor>
+			
+			<interceptor-stack name="ksaStack">
+				<interceptor-ref name="dataInitialized"/>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+		</interceptors>
+		
+		<default-interceptor-ref name="ksaStack"/>
+		
+		<!-- 接下来自定义一些默认的设置，如默认action，global result 等 -->
+		<global-results>
+			<result name="no-permission">/template/no-permission.ftl</result>
+			<result name="to-initialize" type="redirect">
+			  <param name="location">data-initialize.action</param>
+			</result>
+		</global-results>
+	</package>
+
+	<!-- griddata 默认定义 -->
+	<include file="struts2/struts-griddata.xml"></include>
+	<include file="struts2/struts-combodata.xml"></include>
+</struts>
