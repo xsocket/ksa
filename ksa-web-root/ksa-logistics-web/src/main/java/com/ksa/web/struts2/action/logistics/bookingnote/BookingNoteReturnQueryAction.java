@@ -54,6 +54,10 @@ public class BookingNoteReturnQueryAction extends BookingNoteQueryAction {
                 }
             }
         }
+        
+        //按权限过滤
+        permissionFilter(clauseList);
+        
         if( StringUtils.hasText( checkDate ) ) {
             paras.put( "checkDate", checkDate );
         } else {

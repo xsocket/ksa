@@ -251,7 +251,7 @@ public class BookingNoteQueryAction extends GridDataActionSupport {
      * @param paras
      * @return
      */
-    private void permissionFilter(Collection<String> clauseList) {
+    protected void permissionFilter(Collection<String> clauseList) {
       
       if(SecurityUtils.isPermitted( "bookingnote:viewall" )) {
         // 如果具有查看所有数据的权限，则不进行参数过滤
