@@ -19,27 +19,17 @@
 		        href:'portal/logistics/default.action'
 		    })  
 	    });
-//</shiro:hasPermission>	  
+//</shiro:hasPermission>
 //<shiro:hasPermission name="bookingnote:edit:view">
 	    /* 自定义 Portal2 : 退单提醒 */
 	    $portal.portal('add', {  
-	        columnIndex: 0,
+	        columnIndex: 1,
 	        panel: $('<div></div>').appendTo('body').panel({  
 		        title: '退单提醒',  height:portalHeight,
 		        href:'portal/logistics/return-notify.action'
 		    })  
 	    });
-//</shiro:hasPermission>
-//<shiro:hasPermission name="statistics:profit">
-	    /* 自定义 Portal3 : 账单管理 */
-	    $portal.portal('add', {  
-	        columnIndex: 1,
-	        panel: $('<div></div>').appendTo('body').panel({  
-		        title: '近期账单',  height:portalHeight,
-		        href:'portal/finance/account/default.action'
-		    })  
-	    });
-//</shiro:hasPermission>
+//</shiro:hasPermission>	
 //<shiro:hasPermission name="statistics:profit">
 	    /* 自定义 Portal4 : 当月业务利润表 */
 	    var now = new Date();
@@ -49,13 +39,23 @@
 	    var lastDay = year + "-" + month + "-" + getLastDay( year, month );
 	    var src = 'dialog/chart/profit/default.action?CREATED_DATE='+firstDay+'&CREATED_DATE='+lastDay+'&title=' + year + '年' + month + '月业务利润图&chart=MSColumn2D&group=type';
 	    $portal.portal('add', {  
-	        columnIndex: 1,
+	        columnIndex: 0,
 	        panel: $('<div></div>').appendTo('body').panel({  
 		        title: year + '年' + month + '月业务利润图',  height:portalHeight,
 		        href:encodeURI( src )
 		    })  
 	    });
 //</shiro:hasPermission>
+//<shiro:hasPermission name="finance:account1">
+	    /* 自定义 Portal3 : 账单管理 */
+	    $portal.portal('add', {  
+	        columnIndex: 1,
+	        panel: $('<div></div>').appendTo('body').panel({  
+		        title: '近期账单',  height:portalHeight,
+		        href:'portal/finance/account/default.action'
+		    })  
+	    });
+//</shiro:hasPermission>  
 
 		function getLastDay(year,month)  {  
 		 var new_year = year;  
