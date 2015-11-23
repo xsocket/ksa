@@ -27,6 +27,11 @@
 				<li><a name="ai" href="javascript:void(0)">空运进口</a></li>
 				<li class="divider"></li>
 				<li><a name="ly" href="javascript:void(0)">国内运输</a></li>
+				<li><a name="kb" href="javascript:void(0)">捆包业务</a></li>
+				<li><a name="rh" href="javascript:void(0)">内航线</a></li>
+				<li><a name="cc" href="javascript:void(0)">仓储业务</a></li>
+				<li><a name="bc" href="javascript:void(0)">搬场业务</a></li>
+				<li><a name="tl" href="javascript:void(0)">公铁联运</a></li>
 		  </ul>
 	</div>
 	<button id="btn_edit" class="btn btn-warning"><i class="icon-white icon-edit"></i> 编辑... (E)</button>

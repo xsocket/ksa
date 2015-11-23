@@ -8,6 +8,11 @@ var PROFIT_QUERY_CONDITION = [
         input.append("<option value='AE'>空运出口</option>");
         input.append("<option value='AI'>空运进口</option>");
         input.append("<option value='LY'>国内运输</option>");
+        input.append("<option value='KB'>捆包业务</option>");
+        input.append("<option value='RH'>内航线</option>");
+        input.append("<option value='CC'>仓储业务</option>");
+        input.append("<option value='BC'>搬场业务</option>");
+        input.append("<option value='TL'>公铁联运</option>");
         $(target).append(input);
         input.combobox( {multiple:true,editable:false} );
     } },

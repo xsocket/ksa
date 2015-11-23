@@ -158,7 +158,9 @@ function GET_CHARGE_SINGLE_COLUMN( showColumn ) {
                     switch( value.toUpperCase() ) {
                         case "SE" : type = "海运出口"; break; case "AI" : type = "空运进口"; break; 
                         case "SI" : type = "海运进口"; break; case "AE" : type = "空运出口"; break;
-                        case "LY" : type = "国内运输"; break;
+                        case "LY" : type = "国内运输"; break; case "KB" : type = "捆包业务"; break;
+                        case "RH" : type = "内航线"; break; case "CC" : type = "仓储业务"; break;
+                        case "BC" : type = "搬场业务"; break; case "TL" : type = "公铁联运"; break;
                     }
                     if( data.subType && data.subType != "" ) {
                         type = type + "( " + data.subType + " )";

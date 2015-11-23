@@ -53,11 +53,19 @@ function GET_CARGO_TABLE_COLUMN( showColumn ) {
     return [
         { field:'serial_number', title:'业务编号', width:70, sortable:true, align:"center", hidden:!showColumn["serial_number"], formatter: function(v, data){ return data.code; } },
         { field:'type', title:'类型', width:60, sortable:true, align:"center", hidden:!showColumn["type"],
-               formatter : function( value ) {
+               formatter : function( value, data ) {
+            	   var type = "";
                    switch( value.toUpperCase() ) {
-                       case "SE" : return "海运出口"; case "AI" : return "空运进口"; 
-                       case "SI" : return "海运进口"; case "AE" : return "空运出口"; 
+                       case "SE" : type = "海运出口"; break; case "AI" : type = "空运进口"; break; 
+                       case "SI" : type = "海运进口"; break; case "AE" : type = "空运出口"; break;
+                       case "LY" : type = "国内运输"; break; case "KB" : type = "捆包业务"; break;
+                       case "RH" : type = "内航线"; break; case "CC" : type = "仓储业务"; break;
+                       case "BC" : type = "搬场业务"; break; case "TL" : type = "公铁联运"; break;
                    }
+                   if( data.subType && data.subType != "" ) {
+                       type = type + "( " + data.subType + " )";
+                   }
+                   return type;
                } 
         },
         { field:'created_date', title:'接单日期', width:70, sortable:true, align:"center", hidden:!showColumn["created_date"], formatter : function(v, data) { return ksa.utils.dateFormatter( data.createdDate ); } },

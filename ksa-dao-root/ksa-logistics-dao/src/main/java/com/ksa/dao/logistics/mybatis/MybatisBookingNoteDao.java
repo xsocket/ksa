@@ -58,6 +58,7 @@ public class MybatisBookingNoteDao extends AbstractMybatisDao implements Booking
     @Override
     public int selectBookingNoteCount( String queryString ) throws RuntimeException {
         Map<String, Object> para = new HashMap<String, Object>();
+        // FIXME 对应sql中参数名是 queryClauses，这个参数设置无用！只能查到全部数据！
         para.put( "queryClause", new String[]{ queryString } );
         return ( (Integer) this.session.selectOne( "count-logistics-bookingnote-query", para ) ).intValue(); 
     }

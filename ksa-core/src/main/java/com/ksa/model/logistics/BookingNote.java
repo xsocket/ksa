@@ -39,6 +39,21 @@ public class BookingNote extends BaseModel implements Comparable<BookingNote> {
     /** 国内运输类型 托单*/
     public static final String TYPE_NATIVE = "LY";
     
+    /** 捆包业务类型 托单*/
+    public static final String TYPE_KB = "KB";
+    
+    /** 内航线类型 托单*/
+    public static final String TYPE_RH = "RH";
+    
+    /** 搬场业务类型 托单*/
+    public static final String TYPE_BC = "BC";
+    
+    /** 仓储业务类型 托单*/
+    public static final String TYPE_CC = "CC";
+    
+    /** 公铁联运类型 托单*/
+    public static final String TYPE_TL = "TL";
+    
     /** 子类型 FCL */
     public static final String TYPE_SUB_FCL = "FCL";
     
