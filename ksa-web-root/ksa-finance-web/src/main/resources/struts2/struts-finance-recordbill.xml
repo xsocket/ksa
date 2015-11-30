@@ -19,6 +19,11 @@
 			<result name="successAE" type="freemarker-stream">/ui/finance/business/recordbill-ex.ftl</result>
 			<result name="successAI" type="freemarker-stream">/ui/finance/business/recordbill-im.ftl</result>
 			<result name="successLY" type="freemarker-stream">/ui/finance/business/recordbill-ex.ftl</result>
+            <result name="successKB" type="freemarker-stream">/ui/finance/business/recordbill-ex.ftl</result>
+            <result name="successBC" type="freemarker-stream">/ui/finance/business/recordbill-ex.ftl</result>
+            <result name="successCC" type="freemarker-stream">/ui/finance/business/recordbill-ex.ftl</result>
+            <result name="successRH" type="freemarker-stream">/ui/finance/business/recordbill-ex.ftl</result>
+            <result name="successTL" type="freemarker-stream">/ui/finance/business/recordbill-ex.ftl</result>
 		</action>
 	</package>
 	
