@@ -36,6 +36,11 @@ public class AccountExcelAction extends AccountAction {
         TYPE_SORTED_MAP.put( BookingNote.TYPE_AIR_EXPORT, 2 );
         TYPE_SORTED_MAP.put( BookingNote.TYPE_AIR_IMPORT, 3 );
         TYPE_SORTED_MAP.put( BookingNote.TYPE_NATIVE, 4 );
+        TYPE_SORTED_MAP.put( BookingNote.TYPE_KB, 5 );
+        TYPE_SORTED_MAP.put( BookingNote.TYPE_CC, 6 );
+        TYPE_SORTED_MAP.put( BookingNote.TYPE_BC, 7 );
+        TYPE_SORTED_MAP.put( BookingNote.TYPE_RH, 8 );
+        TYPE_SORTED_MAP.put( BookingNote.TYPE_TL, 9 );
     }
     
     protected List<BookingNote> bookingNotes;

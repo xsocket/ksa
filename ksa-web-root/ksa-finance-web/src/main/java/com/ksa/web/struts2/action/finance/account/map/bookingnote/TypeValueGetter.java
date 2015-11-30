@@ -19,6 +19,16 @@ public class TypeValueGetter extends AbstractBookingNoteValueGetter {
                 return "空运进口";
             } else if( BookingNote.TYPE_NATIVE.equalsIgnoreCase( type ) ) {
                 return "国内运输";
+            } else if( BookingNote.TYPE_KB.equalsIgnoreCase( type ) ) {
+                return "捆包业务";
+            } else if( BookingNote.TYPE_BC.equalsIgnoreCase( type ) ) {
+                return "搬场业务";
+            } else if( BookingNote.TYPE_CC.equalsIgnoreCase( type ) ) {
+                return "仓储业务";
+            } else if( BookingNote.TYPE_RH.equalsIgnoreCase( type ) ) {
+                return "内航线";
+            } else if( BookingNote.TYPE_TL.equalsIgnoreCase( type ) ) {
+                return "公铁联运";
             } 
         }
         return "其他";
