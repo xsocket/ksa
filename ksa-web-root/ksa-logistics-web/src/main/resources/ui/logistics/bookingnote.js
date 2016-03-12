@@ -66,11 +66,12 @@ $(function(){
                 formatter: function(v, data){ return v + "<input type='hidden' name='name' value='" + v + "' />" ; } },
             { field:'category', title:'箱类', width:100,   sortable:true, align:"center", hidden: ! IS_SEA, // 海运显示
                     formatter: function(v, data){ return v + "<input type='hidden' name='category' value='" + v + "' />" ; },
-                    editor:{type:"combobox",options:{ data:CATEGORIES,valueField:'v',textField:'v' } } },
+                    editor:{type:"combobox",options:{ data:CATEGORIES,valueField:'v',textField:'v',onChange:function(){ refreshCargo(); } } } },
             { field:'type', title:'箱型', width:100,   sortable:true, align:"center", hidden: ! IS_SEA,        // 海运显示
                     formatter: function(v, data){ return v + "<input type='hidden' name='type' value='" + v + "' />" ; },
-                    editor:{type:"combobox",options:{ data:TYPIES,valueField:'v',textField:'v' } } },
-            { field:'amount', title:(IS_SEA?'箱量':'数量'), width:100,   sortable:true, align:"right", editor:"numberbox",
+                    editor:{type:"combobox",options:{ data:TYPIES,valueField:'v',textField:'v',onChange:function(){ refreshCargo(); } } } },
+            { field:'amount', title:(IS_SEA?'箱量':'数量'), width:100,   sortable:true, align:"right",
+                    editor:{type:"numberbox",options:{ onChange:function(){ refreshCargo(); } } },
                     formatter: function(v, data){ return v + "<input type='hidden' name='amount' value='" + v + "' />" ; }    }
        ] ],
        toolbar : [{
@@ -93,6 +94,7 @@ $(function(){
                if (row){
                    var index = $grid.datagrid('getRowIndex', row);
                    $grid.datagrid('deleteRow', index);
+                   refreshCargo();
                }
            }
        }, {
@@ -103,6 +105,7 @@ $(function(){
            handler:function(){
                $grid.datagrid('rejectChanges');
                $lastIndex = -1;
+               refreshCargo();
            }
        }],
        onClickRow:function(rowIndex){
@@ -126,20 +129,34 @@ $(function(){
     
     $("#cargo_refresh").click(function(){
         if( $lastIndex >= 0 ) { $grid.datagrid('endEdit', $lastIndex); }
-        var rows = $grid.datagrid("getRows");
-        var v = "";
-        if( rows && rows.length > 0 ) {
-            $.each( rows, function(i, row) {
-                v += ( " + " + row.category + row.type + "*" + row.amount);
-            } );
-        }
-        var v = v.substring(3);
+        refreshCargo();
+        return false;
+    });
+    
+    window.refreshCargo = function() {
+    	var rows = $grid.datagrid("getRows");
+    	var length = rows.length;
+    	var v = "";
+    	if(rows && length > 0) {
+    		for(var i = 0; i < length; i++) {
+        		var editors = $grid.datagrid('getEditors', i);
+        		if(editors.length == 0) {
+        			var row = rows[i];
+        			v += ( " + " + row.category + row.type + "*" + row.amount);
+        		} else {
+        			var category = $(editors[1].target).combobox("getValue");
+        			var type = $(editors[2].target).combobox("getValue");
+        			var amount = $(editors[3].target).numberbox("getValue");
+        			v += ( " + " + category + type + "*" + amount);
+        		}
+        	}
+    		v = v.substring(3);
+    	}
         if( v != $("#cargo_container").val() ) {
             $("#cargo_container").val( v );
             markDirty();
         }
-        return false;
-    });
+    }
     
     function saveBookingNote( validate ) {
      // 格式化数据表格
