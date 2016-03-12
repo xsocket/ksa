@@ -306,67 +306,6 @@
 <#-- 航线信息 -->
 <fieldset class="form-inline">
 	<legend>航线港口信息</legend>
-	<div class="control-group">
-		<label class="control-label">航线：</label>
-		<div class="controls">
-	    	<input id="route_sea" type="text" name="route" value="${model.route!}" />
-		</div>
-	</div>
-	<div class="control-group">
-		<label class="control-label">船名：</label>
-		<div class="controls">
-			<input type="text" name="routeName" value="${model.routeName!}" />
-		</div>
-	</div>
-	<div class="control-group">
-		<label class="control-label">航次：</label>
-		<div class="controls">
-	    	<input type="text" name="routeCode" value="${model.routeCode!}" />
-		</div>
-	</div>
-	<br/><#-- 换行 -->
-	
-	<div class="control-group">
-		<label class="control-label">起运港：</label>
-		<div class="controls">
-	    	<input id="departure_port" type="text" name="departurePort" value="${model.departurePort!}" 
-    			data-options="validType:'length[0,200]'" />
-		</div>
-	</div>
-	<div class="control-group">
-		<label class="control-label">装货港：</label>
-		<div class="controls">
-	    	<input id="loading_port" type="text" name="loadingPort" value="${model.loadingPort!}" data-options="validType:'length[0,200]'" />
-		</div>
-	</div>
-	<div class="control-group">
-		<label class="control-label">离港日：</label>
-		<div class="controls">
-	    	<input type="text" name="departureDate" <#if model.departureDate??>value="${model.departureDate?date}"</#if> class="easyui-datebox" />
-		</div>
-	</div>
-	<br/><#-- 换行 -->
-	
-	<div class="control-group">
-		<label class="control-label">目的港：</label>
-		<div class="controls">
-	    	<input id="destination_port" type="text" name="destinationPort" value="${model.destinationPort!}" 
-    			data-options="validType:'length[0,200]'" />
-		</div>
-	</div>
-	<div class="control-group">
-		<label class="control-label">卸货港：</label>
-		<div class="controls">
-	    	<input id="discharge_port" type="text" name="dischargePort" value="${model.dischargePort!}" data-options="validType:'length[0,200]'" />
-		</div>
-	</div>
-	<div class="control-group">
-		<label class="control-label">到港日：</label>
-		<div class="controls">
-	    	<input type="text" name="destinationDate" <#if model.destinationDate??>value="${model.destinationDate?date}"</#if> class="easyui-datebox" />
-		</div>
-	</div>
-	<br/><#-- 换行 -->
 	
 	<div class="control-group">
 		<label class="control-label">出发地：</label>
@@ -375,24 +314,30 @@
 		</div>
 	</div>
 	<div class="control-group">
-		<label class="control-label">目的地：</label>
-		<div class="controls">
-	    	<input id="destination" type="text" name="destination" value="${model.destination!}" data-options="validType:'length[0,200]'" />
-		</div>
-	</div>
+        <label class="control-label">目的地：</label>
+        <div class="controls">
+            <input id="destination" type="text" name="destination" value="${model.destination!}" data-options="validType:'length[0,200]'" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">中转站：</label>
+        <div class="controls"><#-- 使用【卸货港】字段存储国内运输特有的【中转站】 -->
+            <input id="stopover" type="text" name="dischargePort" value="${model.dischargePort!}" data-options="validType:'length[0,200]'" />
+        </div>
+    </div>
 	<br/><#-- 换行 -->
-	<div class="control-group">
-		<label class="control-label">承运人：</label>
-		<div class="controls">
-	    	<input id="carrier" type="text" name="carrier.id" value="${model.carrier.id!}" />
-		</div>
-	</div>
-	<div class="control-group">
-		<label class="control-label">船代：</label>
-		<div class="controls">
-	    	<input id="shipping_agent" type="text" name="shippingAgent.id" value="${model.shippingAgent.id!}" />
-		</div>
-	</div>
+    <div class="control-group">
+        <label class="control-label">出发日：</label>
+        <div class="controls">
+            <input type="text" name="departureDate" <#if model.departureDate??>value="${model.departureDate?date}"</#if> class="easyui-datebox" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">到达日：</label>
+        <div class="controls">
+            <input type="text" name="destinationDate" <#if model.destinationDate??>value="${model.destinationDate?date}"</#if> class="easyui-datebox" />
+        </div>
+    </div>
 </fieldset>
 </div><#-- end : easyui-panel -->
 <div class="bottom-bar fixed-bar">

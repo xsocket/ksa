@@ -25,7 +25,7 @@ $(function(){
     initCombobox( "#vehicle_type", ksa.buildUrl( "/data/combo", "bd-data-bytype", { typeId : '08-vehicle' } ), { valueField : "name" } );
     /* ------------ 航线信息 ------------ */ 
     // 出发地、目的地
-    initCombobox( "#destination, #departure",  ksa.buildUrl( "/data/combo", "bd-data-bytype", { typeId : '30-state' } ), { valueField : "name" } );
+    initCombobox( "#destination, #departure, #stopover",  ksa.buildUrl( "/data/combo", "bd-data-bytype", { typeId : '30-state' } ), { valueField : "name" } );
     // 海运航线
     initCombobox( "#route_sea", ksa.buildUrl( "/data/combo", "bd-data-bytype", { typeId : '33-route-sea' } ), { valueField : "name" } );
     // 港口信息
