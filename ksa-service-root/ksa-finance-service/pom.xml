@@ -5,7 +5,7 @@
   <parent>
     <groupId>com.ksa</groupId>
     <artifactId>ksa-service-root</artifactId>
-    <version>3.8.4</version>
+    <version>3.8.6</version>
   </parent>
 
   <artifactId>ksa-finance-service</artifactId>
@@ -22,7 +22,7 @@
     <dependency>
       <groupId>com.ksa</groupId>
       <artifactId>ksa-finance-dao</artifactId>
-      <version>3.8.4</version>
+      <version>3.8.6</version>
     </dependency>
   </dependencies>
 </project>
