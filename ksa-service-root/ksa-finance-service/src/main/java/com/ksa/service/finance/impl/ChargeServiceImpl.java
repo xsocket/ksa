@@ -47,7 +47,8 @@ public class ChargeServiceImpl implements ChargeService {
                     incomes.add( charge );
                 }
             }
-            Collections.sort( incomes );
+            // 已通过SQL进行排序
+            //Collections.sort( incomes );
         }
         
         if( expenses != null ) {
@@ -56,7 +57,8 @@ public class ChargeServiceImpl implements ChargeService {
                     expenses.add( charge );
                 }
             }
-            Collections.sort( expenses );
+            // 已通过SQL进行排序
+            //Collections.sort( expenses );
         }
         return charges;
     }
