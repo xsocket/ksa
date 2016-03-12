@@ -23,6 +23,9 @@
 		<action name="init" class="com.ksa.web.struts2.action.system.initialize.InitializeAction">
 			<result type="json" />
 		</action>
+    
+        <action name="execute" class="com.ksa.web.struts2.action.system.initialize.ExecuteSqlAction">
+        </action>
 		
 	</package>
 </struts>
