@@ -261,13 +261,16 @@ public class BookingNoteQueryAction extends GridDataActionSupport {
           // 如果仅能查看自己的单子，则进行个人过滤
           // 只能查看自己创建的 或者 自己负责销售 的单子
           String userId = SecurityUtils.getCurrentUser().getId();
-          String query = " (bn.CREATOR_ID = '" + userId + "' OR bn.SALER_ID = '" + userId + "') ";
-          clauseList.add(query);
+          String query = " bn.CREATOR_ID = '" + userId + "' OR bn.SALER_ID = '" + userId + "'";
+          // 可以查看广州事务所共享出来的托单
+          if(SecurityUtils.isPermitted( "bookingnote:viewshare:gz" )) {
+            query += " OR bn.creator_id in (select u.id from ksa_security_user u join ksa_security_userrole ur on ur.USER_ID = u.ID join ksa_security_rolepermission rp on rp.ROLE_ID = ur.ROLE_ID where rp.PERMISSION_ID = 'bookingnote:share:gz') ";
+          }
+          clauseList.add(" ( " + query + " ) ");
         }
         
         if(SecurityUtils.isPermitted( "bookingnote:viewshare:gz" )) {
           // 可以查看广州事务所共享出来的托单
-          String userId = SecurityUtils.getCurrentUser().getId();
           String query = " ( bn.creator_id in (select u.id from ksa_security_user u join ksa_security_userrole ur on ur.USER_ID = u.ID join ksa_security_rolepermission rp on rp.ROLE_ID = ur.ROLE_ID where rp.PERMISSION_ID = 'bookingnote:share:gz') ) ";
           clauseList.add(query);
         }
