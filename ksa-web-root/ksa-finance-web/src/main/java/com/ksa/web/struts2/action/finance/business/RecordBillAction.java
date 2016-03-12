@@ -1,9 +1,9 @@
 package com.ksa.web.struts2.action.finance.business;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -47,9 +47,9 @@ public class RecordBillAction extends DefaultActionSupport implements ModelDrive
         List<Charge> noteCharges = chargeService.loadBookingNoteCharges( bookingNote.getId() );
         
         if( noteCharges != null && noteCharges.size() > 0 ) {
-            Map<String, Charge> incomeMap = new HashMap<String, Charge>();
-            Map<String, Charge> expenseMap = new HashMap<String, Charge>();
-            Set<String> chargeTypeSet = new HashSet<String>();
+            Map<String, Charge> incomeMap = new LinkedHashMap<String, Charge>();
+            Map<String, Charge> expenseMap = new LinkedHashMap<String, Charge>();
+            Set<String> chargeTypeSet = new LinkedHashSet<String>();
             for( Charge c : noteCharges ) {
                 String key = c.getType();
                 if( !chargeTypeSet.contains( key ) ) {
@@ -124,7 +124,7 @@ public class RecordBillAction extends DefaultActionSupport implements ModelDrive
         }
         
         // 将charge排序
-        Arrays.sort( charge );
+      //  Arrays.sort( charge );
         
         return SUCCESS + bookingNote.getType();
     }

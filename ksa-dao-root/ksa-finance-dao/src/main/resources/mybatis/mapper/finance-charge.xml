@@ -108,14 +108,14 @@
 			<if test="nature != null">
 				AND NATURE = ${nature}
 			</if>
-        ORDER BY c.BOOKINGNOTE_ID, c.TARGET_ID, c.CURRENCY_ID
+        ORDER BY DIRECTION desc, c.BOOKINGNOTE_ID, c.TARGET_ID, c.CURRENCY_ID
 	</select>
 	
 	<!-- 按费用结算对账单查找对应的费用数据 -->
 	<select id="select-finance-charge-byaccount" resultMap="result-finance-charge-withnote">
 		<include refid="select-finance-charge-basic" />
 		WHERE c.ACCOUNT_ID = #{id}
-        ORDER BY c.BOOKINGNOTE_ID, c.TARGET_ID, c.CURRENCY_ID
+        ORDER BY DIRECTION desc, c.BOOKINGNOTE_ID, c.TARGET_ID, c.CURRENCY_ID
 	</select>
 	
 	<!-- 完整费用信息的查询 -->
