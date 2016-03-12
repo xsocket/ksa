@@ -3,6 +3,19 @@
 
 ## 变更日志：
 
+### v3.8.6
+- 在托单编辑页面，增加箱型箱量自动刷新的功能；
+- 在 *国内运输* 类型的托单页面，去除 *航线* 等不必要的数据内容；
+- 在查询费用时，加入统一的排序标准；
+- 新增 *托单共享* 与 *查看共享托单* 的权限，解决广州分事务所的托单查看与共享问题；
+
+```
+-- 增加新的权限数据
+insert into KSA_SECURITY_PERMISSION ( ID, NAME, DESCRIPTION ) values ( 'bookingnote:share:gz', '托单共享-广州', '将广州事务所的托单共享出来，供有权限的人员查看和编辑。' );
+insert into KSA_SECURITY_PERMISSION ( ID, NAME, DESCRIPTION ) values ( 'bookingnote:viewshare:gz', '托单查看-广州共享', '查看广州事务所共享出来的托单。' );
+
+```
+
 ### v3.8.5
 - 修复版本v3.8.4托单数据过滤未过滤“退单管理”页面的问题；
 - 另外加入五种业务类型：KB-捆包业务、RH-内联行、CC-仓储业务、BC-搬场业务、TL-公铁联运
