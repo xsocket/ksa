@@ -36,7 +36,10 @@ create table KSA_SECURITY_PERMISSION (
     primary key ( ID )
 );	
 
-		insert into KSA_SECURITY_PERMISSION ( ID, NAME, DESCRIPTION ) values ( 'bookingnote:edit:view', 	'托单查看', '可以查看所有的业务托单，但是并没有编辑的权限。' );
+    insert into KSA_SECURITY_PERMISSION ( ID, NAME, DESCRIPTION ) values ( 'bookingnote:share:gz', '托单共享-广州', '将广州事务所的托单共享出来，供有权限的人员查看和编辑。' );
+    insert into KSA_SECURITY_PERMISSION ( ID, NAME, DESCRIPTION ) values ( 'bookingnote:viewshare:gz', '托单查看-广州共享', '查看广州事务所共享出来的托单。' );
+    insert into KSA_SECURITY_PERMISSION ( ID, NAME, DESCRIPTION ) values ( 'bookingnote:viewall',   '托单查看-全部', '可以查看所有的业务托单，但是并没有编辑的权限。' );
+		insert into KSA_SECURITY_PERMISSION ( ID, NAME, DESCRIPTION ) values ( 'bookingnote:edit:view', 	'托单查看-个人', '可以查看所有的业务托单，但是并没有编辑的权限。' );
 		insert into KSA_SECURITY_PERMISSION ( ID, NAME, DESCRIPTION ) values ( 'bookingnote:print', 		'托单打印', '可以打印提单、订舱通知等业务相关的文档。' );
 		insert into KSA_SECURITY_PERMISSION ( ID, NAME, DESCRIPTION ) values ( 'bookingnote:edit', 		'托单编辑', '可以新增和修改所有的业务托单，但是没有删除的权限。' );
 		insert into KSA_SECURITY_PERMISSION ( ID, NAME, DESCRIPTION ) values ( 'bookingnote:delete', 		'托单删除', '可以删除托单（并非真正删除，而是将托单置于已删除状态）。' );		
@@ -198,6 +201,13 @@ CREATE TABLE KSA_SECURITY_ROLEPERMISSION (
 		insert into KSA_SECURITY_ROLEPERMISSION ( ROLE_ID, PERMISSION_ID ) values ( 'accountant-supervisor', 'bd:partner' );
 		insert into KSA_SECURITY_ROLEPERMISSION ( ROLE_ID, PERMISSION_ID ) values ( 'accountant-supervisor', 'bd:data' );
 		insert into KSA_SECURITY_ROLEPERMISSION ( ROLE_ID, PERMISSION_ID ) values ( 'accountant-supervisor', 'bd:currency' );
+
+    -- view-all 权限
+    insert into KSA_SECURITY_ROLEPERMISSION ( ROLE_ID, PERMISSION_ID ) values ( 'operator-supervisor', 'bookingnote:viewall' );
+    insert into KSA_SECURITY_ROLEPERMISSION ( ROLE_ID, PERMISSION_ID ) values ( 'accountant', 'bookingnote:viewall' );
+    insert into KSA_SECURITY_ROLEPERMISSION ( ROLE_ID, PERMISSION_ID ) values ( 'accountant-supervisor', 'bookingnote:viewall' );
+    insert into KSA_SECURITY_ROLEPERMISSION ( ROLE_ID, PERMISSION_ID ) values ( 'manager', 'bookingnote:viewall' );
+    insert into KSA_SECURITY_ROLEPERMISSION ( ROLE_ID, PERMISSION_ID ) values ( 'administrator', 'bookingnote:viewall' );
 		
 		
 -- ----------------------- BD -------------------------		
