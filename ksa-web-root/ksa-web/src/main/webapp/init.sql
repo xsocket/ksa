@@ -1024,7 +1024,7 @@ create table KSA_FINANCE_CHARGE (
   	PRICE					numeric(20,5)					comment  '单价',
   	QUANTITY			int(10)								comment  '数量',
   	AMOUNT				numeric(20,5)	not null		comment  '金额',
-  	CREATED_DATE	date					not null		comment  '创建日期',
+  	CREATED_DATE	datetime				not null		comment  '创建日期',
   	NOTE 					varchar(2000)	not null		comment  '备注',
   	CREATOR_ID 		varchar(36)						comment  '创建人标识',
   	ACCOUNT_ID		varchar(36)						comment  '所属对账单标识',
