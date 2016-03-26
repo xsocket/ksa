@@ -16,9 +16,9 @@
 <div id="account_tab" class="easyui-tabs" data-options="fit:true,border:false">  
 	<div title="${directionName}信息" data-options="<#if selected==0>selected:true,</#if>href:'<@s.url value="/dialog/finance/account/account.action?id=${model.id!}" />'">  
 	</div><#-- end tab-panel 业务基本信息 -->
-<@shiro.hasAnyPermissions name="finance:account-check,finance:account-settle">
 	<div title="${directionName}导出" data-options="<#if selected==1>selected:true,</#if>href:'<@s.url value="/dialog/finance/account/account-excel.action?id=${model.id!}" />'">  
 	</div><#-- end tab-panel 业务基本信息 -->
+<@shiro.hasAnyPermissions name="finance:account-check,finance:account-settle">
 	<div title="开票确认" data-options="<#if selected==2>selected:true,</#if>href:'<@s.url value="/dialog/finance/account/invoice.action?id=${model.id!}" />'">  
 	</div><#-- end tab-panel 业务基本信息 -->
 </@shiro.hasAnyPermissions>

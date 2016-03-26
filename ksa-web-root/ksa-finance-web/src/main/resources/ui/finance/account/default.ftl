@@ -46,9 +46,7 @@
 	<button id="return_checked" class="btn btn-danger hide"><i class="icon-ban-circle icon-white"></i> 重新开票</button>
 	</@shiro.hasPermission>
 	<span style="margin-left:50px;"></span>
-	<@shiro.hasAnyPermissions name="finance:account-check,finance:account-settle">
 	<button id="btn_download" class="btn btn-success"><i class="icon-download-alt icon-white"></i> 导出${accountName!}</button>
-	</@shiro.hasAnyPermissions>
 	<button id="btn_add" class="btn btn-primary"><i class="icon-white icon-plus"></i> 新建... (N)</button>
 	<button id="btn_edit" class="btn btn-warning"><i class="icon-white icon-edit"></i> 编辑... (E)</button>
 	<button id="btn_delete" class="btn btn-danger"><i class="icon-white icon-trash"></i> 删除 (D)</button>
