@@ -119,6 +119,7 @@ create table KSA_FINANCE_CHARGE (
   	BOOKINGNOTE_ID	varchar(36)	not null		comment  '所属托单标识',
   	DIRECTION			int(1) default 1 not null		comment  '收支方向:1表示收入,-1表示支出',
   	NATURE				int(1) default 1 not null		comment  '国内/境外:1表示国内,-1表示境外',
+    RANK             int(3) default 0 not null       comment  '费用录入排序编号',
   	primary key ( ID ),
   	
   	-- 外键关联合作伙伴

@@ -13,6 +13,7 @@
 		<result column="NOTE" property="note" javaType="String"/>
 		<result column="DIRECTION" property="direction" javaType="int" />
 		<result column="NATURE" property="nature" javaType="int" />
+        <result column="RANK" property="rank" javaType="int" />
 		<!-- 结算对象 -->
 		<association column="TARGET_ID" property="target"   javaType="com.ksa.model.bd.Partner">
 			<id column="TARGET_ID" property="id" />
@@ -50,11 +51,11 @@
 	<insert id="insert-finance-charge" parameterType="com.ksa.model.finance.Charge">
 		INSERT INTO KSA_FINANCE_CHARGE 
 						( ID, TARGET_ID,	 TYPE,		CURRENCY_ID, 	PRICE, QUANTITY,	AMOUNT, 		CREATED_DATE, 		NOTE, 		
-						CREATOR_ID,	ACCOUNT_ID, BOOKINGNOTE_ID, DIRECTION, NATURE )
+						CREATOR_ID,	ACCOUNT_ID, BOOKINGNOTE_ID, DIRECTION, NATURE, RANK )
 		VALUES ( 	#{id}, #{target.id,jdbcType=VARCHAR},  #{type,jdbcType=VARCHAR}, 	#{currency.id,jdbcType=VARCHAR}, 	
 					#{price,jdbcType=NUMERIC}, #{quantity,jdbcType=NUMERIC}, #{amount},  #{createdDate,jdbcType=DATE}, 	#{note,jdbcType=VARCHAR}, 	
 						#{creator.id,jdbcType=VARCHAR},	#{account.id,jdbcType=VARCHAR}, #{bookingNote.id,jdbcType=VARCHAR},  
-					#{direction,jdbcType=NUMERIC}, #{nature,jdbcType=NUMERIC}  )	
+					#{direction,jdbcType=NUMERIC}, #{nature,jdbcType=NUMERIC}, #{rank,jdbcType=NUMERIC}  )	
 	</insert>
 	
 	<!-- 修改费用数据 -->
@@ -70,7 +71,8 @@
 			NOTE 						= #{note,jdbcType=VARCHAR},
 			ACCOUNT_ID			= #{account.id,jdbcType=VARCHAR},
 			DIRECTION				= #{direction,jdbcType=NUMERIC},
-			NATURE					= #{nature,jdbcType=NUMERIC}
+			NATURE					= #{nature,jdbcType=NUMERIC},
+            RANK                    = #{rank,jdbcType=NUMERIC}
 		WHERE ID 	= #{id}
 	</update>
 	
@@ -108,14 +110,14 @@
 			<if test="nature != null">
 				AND NATURE = ${nature}
 			</if>
-        ORDER BY c.CREATED_DATE
+        ORDER BY DIRECTION desc, c.RANK
 	</select>
 	
 	<!-- 按费用结算对账单查找对应的费用数据 -->
 	<select id="select-finance-charge-byaccount" resultMap="result-finance-charge-withnote">
 		<include refid="select-finance-charge-basic" />
 		WHERE c.ACCOUNT_ID = #{id}
-        ORDER BY c.CREATED_DATE
+        ORDER BY DIRECTION desc, c.RANK
 	</select>
 	
 	<!-- 完整费用信息的查询 -->

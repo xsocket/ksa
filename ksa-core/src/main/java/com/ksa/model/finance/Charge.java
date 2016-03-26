@@ -43,6 +43,8 @@ public class Charge extends FinanceModel implements Comparable<Charge> {
     protected Account account = new Account();
     /** 所属托单 */
     protected BookingNote bookingNote = new BookingNote();
+    /** 费用录入的序号 */
+    protected int rank = 0;
     
     /** 是否已经汇总入结算对账单 */
     public boolean isSettle() {
@@ -178,6 +180,14 @@ public class Charge extends FinanceModel implements Comparable<Charge> {
      */
     public String getCode() {
         return type;
+    }
+
+    public int getRank() {
+      return rank;
+    }
+
+    public void setRank(int rank) {
+      this.rank = rank;
     }
 
     @Override

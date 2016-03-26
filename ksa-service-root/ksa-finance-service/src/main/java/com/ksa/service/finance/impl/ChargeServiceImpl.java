@@ -172,6 +172,7 @@ public class ChargeServiceImpl implements ChargeService {
         // 托单的新费用列表
         List<Charge> newCharges = new ArrayList<Charge>();
         if( charges != null && charges.size() > 0 ) {
+            setRank( charges );
             newCharges.addAll( charges );
         }
         Map<String, Charge> newChargeMap = getChargeMap( newCharges );  // 过滤掉了新增费用( 没有 id 属性的费用 )
@@ -238,6 +239,14 @@ public class ChargeServiceImpl implements ChargeService {
         return saveBookingNoteCharges( note, incomes, expenses, 0 );
     }    */
     
+    // 设置录入顺序，解决排序问题
+    private void setRank(List<Charge> charges) {
+      int rank = 1;
+      for(Charge c : charges) {
+        c.setRank(rank++);
+      }
+    }
+    
     @Override
     public List<Charge> saveBookingNoteCharges( BookingNote note, List<Charge> incomes, List<Charge> expenses ) throws RuntimeException {
         if( BookingNoteChargeState.isChecking( note.getState() ) ) {
@@ -250,9 +259,11 @@ public class ChargeServiceImpl implements ChargeService {
         // 托单的新费用列表
         List<Charge> newCharges = new ArrayList<Charge>();
         if( incomes != null && incomes.size() > 0 ) {
+            setRank( incomes );
             newCharges.addAll( incomes );
         }
         if( expenses != null && expenses.size() > 0 ) {
+            setRank( expenses );
             newCharges.addAll( expenses );
         }
         Map<String, Charge> newChargeMap = getChargeMap( newCharges );  // 过滤掉了新增费用( 没有 id 属性的费用 )
@@ -328,9 +339,11 @@ public class ChargeServiceImpl implements ChargeService {
         // 托单的新费用列表
         List<Charge> newCharges = new ArrayList<Charge>();
         if( incomes != null && incomes.size() > 0 ) {
+            setRank( incomes );
             newCharges.addAll( incomes );
         }
         if( expenses != null && expenses.size() > 0 ) {
+            setRank( expenses );
             newCharges.addAll( expenses );
         }
         Map<String, Charge> newChargeMap = getChargeMap( newCharges );  // 过滤掉了新增费用( 没有 id 属性的费用 )
