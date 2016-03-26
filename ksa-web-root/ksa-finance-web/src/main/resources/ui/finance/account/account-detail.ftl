@@ -75,16 +75,22 @@
 	<span class="title">状态：<b style="color:#51A351;">结算完毕</b></span>
 <#elseif stack.findValue("${stateClass}@isChecked(${state})")>
 	<span class="title">状态：<b style="color:#04C;"><#if model.direction == 1>收款中<#else>付款中</#if></b></span>
+	<@shiro.hasPermission name="finance:account-settle">
 	<button id="go_settled" class="btn btn-success pull-left"><i class="icon-lock icon-white"></i> 结算完毕</button>
 	<button id="return_checked" class="btn btn-danger pull-left"><i class="icon-ban-circle icon-white"></i> 重开发票</button>
+	</@shiro.hasPermission>
 <#elseif stack.findValue("${stateClass}@isChecking(${state})")>
 	<span class="title">状态：<b style="color:#FAA732;">开票中</b></span>
+	<@shiro.hasPermission name="finance:account-check">
 	<button id="go_checked" class="btn btn-info pull-left"><i class="icon-check icon-white"></i> 确认<#if model.direction == 1>收款<#else>付款</#if></button>
 	<button id="return_checking" class="btn btn-danger pull-left"><i class="icon-ban-circle icon-white"></i> 重新审核</button>
+	</@shiro.hasPermission>
 <#elseif stack.findValue("${stateClass}@isProcessing(${state})")>
 	<span class="title">状态：<b style="color:#04C;">审核中</b></span>	
+	<@shiro.hasPermission name="finance:account-check">
 	<button id="go_checking" class="btn btn-success pull-left"><i class="icon-ok-circle icon-white"></i> 审核通过</button>
 	<button id="return_processing" class="btn btn-danger pull-left"><i class="icon-ban-circle icon-white"></i> 审核不通过</button>
+	</@shiro.hasPermission>
 <#elseif stack.findValue("${stateClass}@isNone(${state})")>
 	<#if model.id??>
 	<span class="title">状态：<b style="color:#BD362F;">待审核</b></span>
