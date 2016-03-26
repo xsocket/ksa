@@ -70,7 +70,10 @@
 	</div><#-- end center -->
 </div>
 <div class="bottom-bar fixed-bar">
+<@shiro.hasAnyPermissions name="finance:account-check,finance:account-settle">
 	<button id="btn_download" class="btn btn-success pull-left" style="margin-right:10px;"><i class="icon-download-alt icon-white"></i> 导出</button>
+</@shiro.hasAnyPermissions>
+	
 <#if stack.findValue("${stateClass}@isSettled(${state})")>
 	<span class="title">状态：<b style="color:#51A351;">结算完毕</b></span>
 <#elseif stack.findValue("${stateClass}@isChecked(${state})")>
