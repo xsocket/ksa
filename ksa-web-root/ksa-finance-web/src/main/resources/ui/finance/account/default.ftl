@@ -48,7 +48,7 @@
 	<span style="margin-left:50px;"></span>
 	<button id="btn_download" class="btn btn-success"><i class="icon-download-alt icon-white"></i> 导出${accountName!}</button>
 	<button id="btn_add" class="btn btn-primary"><i class="icon-white icon-plus"></i> 新建... (N)</button>
-	<button id="btn_edit" class="btn btn-warning"><i class="icon-white icon-edit"></i> 编辑... (E)</button>
+	<button id="btn_edit" class="btn btn-warning"><i class="icon-white icon-edit"></i> 编辑/查看... (E)</button>
 	<button id="btn_delete" class="btn btn-danger"><i class="icon-white icon-trash"></i> 删除 (D)</button>
 </div>
 <div id="data_container">

@@ -23,10 +23,10 @@ $(function(){
             }
        },
        onClickRow:function(){
-           $("#go_processing, #go_checking, #return_processing, #go_checked, #go_settled,#return_checked, #return_checking").hide();
+           $("#btn_delete,#go_processing, #go_checking, #return_processing, #go_checked, #go_settled,#return_checked, #return_checking").hide();
            var row = $grid.datagrid( "getSelected" );
            var state = parseState( row.state );
-           if( state == STATE_NONE ) { $("#go_processing").show(); } 
+           if( state == STATE_NONE ) { $("#btn_delete, #go_processing").show(); } 
            else if( state == STATE_PROCESSING ) { $("#go_checking, #return_processing").show(); } 
            else if( state == STATE_CHECKING ) { $("#go_checked, #return_checking").show(); }
            else if( state == STATE_CHECKED ) { $("#go_settled, #return_checked").show(); }

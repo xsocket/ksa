@@ -50,12 +50,8 @@ public class AccountServiceImpl implements AccountService {
         }
         
         // 当发票拿去销账的对应结算单已经确认结算完毕后，不能删除
-        /*if( AccountState.isChecking( temp.getState() ) ) {
-            throw new IllegalStateException( String.format( "账单已在审核中，无法删除。", temp.getCode() ) );
-        }*/
-        // 结算单处理逻辑变化
-        if( AccountState.isProcessing( temp.getState() ) ) {
-            throw new IllegalStateException( String.format( "结算单已审核，无法删除。", temp.getCode() ) );
+        if( !AccountState.isNone( temp.getState() ) ) {
+            throw new IllegalStateException( String.format( "结算单已审核通过，无法删除。", temp.getCode() ) );
         }
         
         // 删除
