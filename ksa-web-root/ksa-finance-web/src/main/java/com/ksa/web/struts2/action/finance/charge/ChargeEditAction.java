@@ -25,7 +25,6 @@ public class ChargeEditAction extends ChargeAction implements ModelDriven<Bookin
     protected String doExecute() throws Exception {
         BookingNoteService service = ServiceContextUtils.getService( BookingNoteService.class );
         bookingNote = service.loadBookingNoteById( bookingNote.getId() );
-        
         if( StringUtils.hasText( template ) ) {
             //  以模板的方式添加
             ChargeService chargeService = ServiceContextUtils.getService( ChargeService.class );
@@ -67,7 +66,7 @@ public class ChargeEditAction extends ChargeAction implements ModelDriven<Bookin
                 rates = ServiceContextUtils.getService( AccountService.class ).loadAccountCurrencyRates( account );
             } else {
                 CurrencyRateService rateService = ServiceContextUtils.getService( CurrencyRateService.class );
-                rates = rateService.loadLatestCurrencyRates();
+                rates = rateService.loadLatestCurrencyRates(bookingNote.getChargeDate());
             }
         }
         return serializeList( rates );
