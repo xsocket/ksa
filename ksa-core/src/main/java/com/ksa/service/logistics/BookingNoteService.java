@@ -50,4 +50,12 @@ public interface BookingNoteService {
      * @throws RuntimeException
      */
     BookingNote removeBookingNote( BookingNote note ) throws RuntimeException;
+    
+    /**
+     * 变更托单类型。
+     * @param note 将要被变更类型的托单
+     * @return 变更类型成功后的托单
+     * @throws RuntimeException
+     */
+    BookingNote changeBookingNoteType( BookingNote note ) throws RuntimeException;
 }

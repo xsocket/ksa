@@ -259,6 +259,13 @@
 		  	STATE = #{state,jdbcType=NUMERIC}
 		WHERE ID = #{id,jdbcType=VARCHAR}
 	</update>
+  
+    <update id="update-logistics-bookingnote-type" parameterType="com.ksa.model.logistics.BookingNote">
+        UPDATE KSA_LOGISTICS_BOOKINGNOTE SET
+            TYPE = #{type,jdbcType=VARCHAR},
+            CODE = #{code,jdbcType=VARCHAR}
+        WHERE ID = #{id,jdbcType=VARCHAR}
+    </update>
 	
 	<!-- 更新记账日期 -->
 	<update id="update-logistics-bookingnote-chargedate" parameterType="com.ksa.model.logistics.BookingNote">

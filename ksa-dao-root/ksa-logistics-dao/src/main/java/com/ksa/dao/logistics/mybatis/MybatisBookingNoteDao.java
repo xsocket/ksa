@@ -35,6 +35,11 @@ public class MybatisBookingNoteDao extends AbstractMybatisDao implements Booking
     }
     
     @Override
+    public int updateBookingNoteType( BookingNote note ) throws RuntimeException {
+      return this.session.update( "update-logistics-bookingnote-type", note );
+    }
+    
+    @Override
     public int updateBookingNoteChargeDate( BookingNote note ) throws RuntimeException {
         return this.session.update( "update-logistics-bookingnote-chargedate", note );
     }

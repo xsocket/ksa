@@ -20,6 +20,33 @@ $(function(){
         }
     });
     
+    // 变更业务类型事件
+    $("#btn_modify_type ul a").click( function() {
+    	var row = $grid.datagrid( "getSelected" );
+        if( ! row ) {
+            $.messager.warning("请选择一条数据后，再进行类型变更操作。");
+            return;
+        }
+        var type = $(this).attr("name");
+        $.messager.confirm( "确定变更托单 '" + row.code + "' 的业务类型为【" + $(this).text() + "】吗？", function( ok ){
+            if( ok ) { 
+                $.ajax({
+                    url: ksa.buildUrl( "/dialog/logistics/bookingnote", "change-type" ),
+                    data: { "id" : row.id, "type" : type },
+                    success: function( result ) {
+                        try {
+                            if (result.status == "success") { 
+                                $.messager.success( result.message );
+                                $grid.datagrid( "reload" );
+                            } 
+                            else { $.messager.error( result.message ); }
+                        } catch (e) { }
+                    }
+                }); 
+            }
+        } );
+    });
+    
     // 添加事件
     $("#btn_add ul a").click( function() {
         $.open({

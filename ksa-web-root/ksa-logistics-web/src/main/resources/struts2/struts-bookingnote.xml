@@ -61,5 +61,10 @@
 			<result name="input" type="json" />
 			<result name="error" type="json" />
 		</action>
+        <action name="change-type" class="com.ksa.web.struts2.action.logistics.bookingnote.BookingNoteChangeTypeAction">
+            <result name="success" type="json" />
+            <result name="input" type="json" />
+            <result name="error" type="json" />
+        </action>
 	</package>
 </struts>

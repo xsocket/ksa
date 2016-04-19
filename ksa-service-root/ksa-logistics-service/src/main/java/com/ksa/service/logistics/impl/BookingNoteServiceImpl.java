@@ -236,6 +236,47 @@ public class BookingNoteServiceImpl implements BookingNoteService {
         return temp;
     }
     
+    public BookingNote changeBookingNoteType( BookingNote note ) throws RuntimeException {
+      BookingNote bn = bookingNoteDao.selectBookingNoteById( note.getId() );
+      if( bn == null ) {
+          throw new IllegalArgumentException( String.format( "标识为 '%s' 的托单不存在。", note.getId() ) );
+      }
+      
+      String type = note.getType();
+      if( BookingNote.TYPE_SEA_EXPORT.equalsIgnoreCase( type ) ) {
+          bn.setType( BookingNote.TYPE_SEA_EXPORT );
+      } else if( BookingNote.TYPE_SEA_IMPORT.equalsIgnoreCase( type ) ) {
+          bn.setType( BookingNote.TYPE_SEA_IMPORT );
+      } else if( BookingNote.TYPE_AIR_EXPORT.equalsIgnoreCase( type ) ) {
+          bn.setType( BookingNote.TYPE_AIR_EXPORT );
+      } else if( BookingNote.TYPE_AIR_IMPORT.equalsIgnoreCase( type ) ) {
+          bn.setType( BookingNote.TYPE_AIR_IMPORT );
+      } else if( BookingNote.TYPE_NATIVE.equalsIgnoreCase( type ) ) {
+          bn.setType( BookingNote.TYPE_NATIVE );
+      } else if( BookingNote.TYPE_KB.equalsIgnoreCase( type ) ) {
+          bn.setType( BookingNote.TYPE_KB );
+      } else if( BookingNote.TYPE_BC.equalsIgnoreCase( type ) ) {
+          bn.setType( BookingNote.TYPE_BC );
+      } else if( BookingNote.TYPE_CC.equalsIgnoreCase( type ) ) {
+          bn.setType( BookingNote.TYPE_CC );
+      } else if( BookingNote.TYPE_RH.equalsIgnoreCase( type ) ) {
+          bn.setType( BookingNote.TYPE_RH );
+      } else if( BookingNote.TYPE_TL.equalsIgnoreCase( type ) ) {
+          bn.setType( BookingNote.TYPE_TL );
+      } else {
+          throw new IllegalArgumentException( String.format( "不存在类型为 '%s' 的托单。", type ) );
+      }
+      bn.setCode( BOOKING_NOTE_CODE_PREFIX + bn.getType() + bn.getSerialNumber() );
+      
+      // 变更托单类型
+      int length = bookingNoteDao.updateBookingNoteType( bn );
+      if( length != 1 ) {
+          throw new IllegalStateException( String.format( "变更托单类型时发生异常，期望变更 1 条数据，实际变更了 %d 条数据。", length ) );
+      }
+      
+      return bn;
+  }
+    
     
     public void setBookingNoteDao( BookingNoteDao bookingNoteDao ) {
         this.bookingNoteDao = bookingNoteDao;

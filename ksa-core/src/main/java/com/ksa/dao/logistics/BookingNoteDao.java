@@ -13,6 +13,7 @@ public interface BookingNoteDao {
     int insertBookingNote( BookingNote note ) throws RuntimeException;
     int updateBookingNote( BookingNote note ) throws RuntimeException;
     int updateBookingNoteState( BookingNote note ) throws RuntimeException;
+    int updateBookingNoteType( BookingNote note ) throws RuntimeException;
     int updateBookingNoteChargeDate( BookingNote note ) throws RuntimeException;
     int deleteBookingNote( BookingNote note ) throws RuntimeException;
     BookingNote selectBookingNoteById( String id ) throws RuntimeException;
