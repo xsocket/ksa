@@ -63,7 +63,7 @@ public class BackupTask extends TimerTask {
             // FIXME 这里没有检查url的合法性，直接使用了
             StringBuilder sb = new StringBuilder();
             String backupFilename = generateBackupFilename();
-            sb.append( "cmd /c mysqldump -h" ).append( hostAndDb[0] )  // 一定要加 -h localhost(或是服务器IP地址)
+            sb.append( "mysqldump -h" ).append( hostAndDb[0] )  // 一定要加 -h localhost(或是服务器IP地址)
                 .append( " -u" ).append( db.getUsername() )
                 .append( " -p" ).append( db.getPassword() )
                 .append( " " ).append( hostAndDb[1] )

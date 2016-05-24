@@ -2,6 +2,7 @@ package com.ksa.dao;
 
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.slf4j.Logger;
@@ -19,7 +20,7 @@ public class DateQueryClause extends AbstractQueryClause implements QueryClause 
     
     @Override
     protected String getParsedValue( String value ) throws Exception {
-        DateFormat format = DateFormat.getDateInstance( DateFormat.MEDIUM );
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date date = null;
         try {
             date = format.parse( value );
