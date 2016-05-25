@@ -1,6 +1,7 @@
 package com.ksa.model.logistics;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -67,7 +68,7 @@ public class WarehouseNoting extends BaseLogisticsModel {
 
     @Override
     public void initialModel( BookingNote bookingNote ) {
-        DateFormat dateFormat = DateFormat.getDateInstance();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         this.bookingNote = bookingNote;
         
         this.createdDate = dateFormat.format( new Date() );

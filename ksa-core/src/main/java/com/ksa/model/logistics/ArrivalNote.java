@@ -1,6 +1,7 @@
 package com.ksa.model.logistics;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.ksa.util.StringUtils;
@@ -10,7 +11,7 @@ public class ArrivalNote extends BaseLogisticsModel {
 
     private static final long serialVersionUID = 2741955471843294574L;
 
-    private static DateFormat format = DateFormat.getDateInstance();
+    private static DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     
     protected BookingNote bookingNote;
 

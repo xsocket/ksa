@@ -1,10 +1,9 @@
 package com.ksa.dao.finance.mybatis;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
-
-import junit.framework.Assert;
 
 import org.junit.Test;
 
@@ -16,6 +15,8 @@ import com.ksa.model.bd.Partner;
 import com.ksa.model.finance.Charge;
 import com.ksa.model.logistics.BookingNote;
 import com.ksa.model.security.User;
+
+import junit.framework.Assert;
 
 
 public class MybatisChargeDaoTest extends MybatisDaoTest {
@@ -43,7 +44,7 @@ public class MybatisChargeDaoTest extends MybatisDaoTest {
         Charge charge = new Charge();
         String id = UUID.randomUUID().toString();
         Date now = new Date( 2000, 2, 2 );
-        DateFormat df = DateFormat.getDateInstance();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         charge.setId( id );
         charge.setDirection( 1 );
         charge.setTarget( TEST_PARTNER1 );

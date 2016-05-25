@@ -1,6 +1,7 @@
 package com.ksa.model.logistics;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import org.springframework.util.StringUtils;
 
@@ -60,7 +61,7 @@ public class Manifest extends BaseLogisticsModel {
             sb.append( bookingNote.getRouteName() ).append( " " );
         }
         if( bookingNote.getDepartureDate() != null ) {
-            DateFormat df = DateFormat.getDateInstance();
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             sb.append( df.format( bookingNote.getDepartureDate() ) );
         }
         this.flightDate = sb.toString();

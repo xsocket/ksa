@@ -1,7 +1,7 @@
 package com.ksa.web.struts2.action.finance.charge;
 
-import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -134,7 +134,7 @@ public class ChargeAction extends DefaultActionSupport implements ModelDriven<Bo
         if( StringUtils.hasText( date ) ) {
             try {
                 date += "-01";
-                Date d = DateFormat.getDateInstance( DateFormat.SHORT  ).parse( date );
+                Date d = new SimpleDateFormat("yyyy-MM-dd").parse( date );
                 getModel().setChargeDate( d );
             } catch( ParseException e ) {
                 logger.warn( "提交的记账月份格式错误，忽略这个值。", e );

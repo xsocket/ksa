@@ -1,6 +1,6 @@
 package com.ksa.model.logistics;
 
-import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.util.StringUtils;
@@ -108,7 +108,7 @@ public class BillOfLading extends BaseLogisticsModel {
             this.loadingPort = bookingNote.getLoadingPort();
         }
         
-        this.publishDate = DateFormat.getDateInstance().format( new Date() );
+        this.publishDate = new SimpleDateFormat("yyyy-MM-dd").format( new Date() );
         // 船名航次
         if( StringUtils.hasText( bookingNote.getRouteName() ) ) {
             this.vesselVoyage = bookingNote.getRouteName() + " ";
