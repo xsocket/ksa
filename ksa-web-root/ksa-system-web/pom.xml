@@ -39,10 +39,5 @@
       <artifactId>ksa-finance-service</artifactId>
       <version>${project.version}</version>
     </dependency>
-    <dependency>
-      <groupId>com.microsoft.sqlserver</groupId>
-      <artifactId>sqljdbc</artifactId>
-      <version>1.0.809.102</version>
-    </dependency>
   </dependencies>
 </project>
