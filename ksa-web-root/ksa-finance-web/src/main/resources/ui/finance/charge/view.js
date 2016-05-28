@@ -1,3 +1,19 @@
+ 
+
+var STATE_PROCESSING = "对账中";
+var STATE_UNACCOUNT = "未开单";
+var STATE_SETTLED = "已支付";
+// 解析托单的状态 返回可读的状态值
+function parseAccountState( state ) {
+    if( state == -1 ) {
+        return STATE_UNACCOUNT;
+    } else if( (state & 0x20) > 0 ) {
+        return STATE_SETTLED;
+    } else {
+        return STATE_PROCESSING;
+    }
+};
+
 $(function(){
     // 基本信息只读
     $("div.form-inline input").attr("readonly", "readonly");
@@ -126,6 +142,7 @@ $(function(){
         });
     }
     
+    
     /* 初始化费用表格 */
     function initGrid( target, direction ) {
         return target.datagrid({
@@ -135,18 +152,28 @@ $(function(){
             fitColumns:false,
             pagination:false,
             columns:[ [
-                { field:'target', title:'结算对象', width:170,   sortable:true, 
+                { field:'target', title:'结算对象', width:150,   sortable:true, 
                     formatter: function(v, data){ return data.target.name + "<input type='hidden' name='id' value='" + ( data.id != null ? data.id : "" ) + "' /><input type='hidden' name='target.id' value='" + data.target.id + "' />" ; },
                     sorter:function(t1,t2){
                         var n1 = (t1.name?t1.name:""),  n2 = (t2.name?t2.name:"");
                         return (n1==n2?0:(n1>n2?1:-1));
                     }
                 },
-                { field:'type', title:'费用项目', width:55,   sortable:true, 
+                { field:'accountState', title:'状态', width:45, hidden:false, align:"center",
+	                formatter: function(v, data){ return parseAccountState( v ); }, 
+	                styler : function(v,row) {
+	                    var state = parseAccountState( v );
+	                    var css = "font-weight:bold;";
+	                    if( state == window.STATE_SETTLED ) { return css + "color:#51A351"; } 
+	                    else if( state == window.STATE_PROCESSING ) { return css + "color:#04C"; }
+	                    else if( state == window.STATE_UNACCOUNT ) { return css + "color:#FAA732"; }
+	                } 
+                },
+                { field:'type', title:'费用项目', width:50,   sortable:true, 
                         formatter: function(v, data){ return v + "<input type='hidden' name='type' value='" + v + "' />" ; } },
-                { field:'direction', title:'收/支', width:40,   sortable:true, hidden:true, 
+                { field:'direction', title:'收/支', width:40,   sortable:true, hidden:true,  align:"center",
                     formatter: function(v, data){ return parseChargeDirection( data.direction ) + "<input type='hidden' name='direction' value='" + v + "' />";  } },
-                { field:'nature', title:'内/外', width:40,   sortable:true, align:"center", 
+                { field:'nature', title:'内/外', width:40,   sortable:true, align:"center", align:"center",
                     formatter: function(v, data){ return parseChargeNature( data.nature ) + "<input type='hidden' name='nature' value='" + v + "' />";  } },
                 { field:'currency', title:'币种', width:40,   sortable:true, align:"center", 
                     formatter: function(v, data){ return data.currency.name + "<input type='hidden' name='currency.id' value='" + data.currency.id + "' />"; },
@@ -160,10 +187,10 @@ $(function(){
                     formatter: function(v, data){ if( v ) { return v + "<input type='hidden' name='price' value='" + v + "' />"; } else { return ""; } } },
                 { field:'quantity', title:'数量', width:35, sortable:true, align:"right", hidden:true, 
                     formatter: function(v, data){ if( v ) { return v + "<input type='hidden' name='quantity' value='" + v + "' />"; } else { return ""; } } },
-                { field:'amount', title:'金额', width:65,   sortable:true, align:"right", 
+                { field:'amount', title:'金额', width:55,   sortable:true, align:"right", 
                            styler:function(v,data){ if ( data.direction == 1 ){ return 'color:#BD362F;font-weight:bold;'; } return 'color:#51A351;font-weight:bold;'; },
                            formatter: function(v, data){ return parseFloat( v ).toFixed( 2 ) + "<input type='hidden' name='amount' value='" + v + "' />" ; } },
-                { field:'creator', title:'操作员', width:50,   sortable:true, align:"center", 
+                { field:'creator', title:'操作员', width:40,   sortable:true, align:"center", 
                     formatter: function(v, data){ return data.creator.name + "<input type='hidden' name='creator.id' value='" + data.creator.id + "' />" ; } },
                 { field:'createdDate', title:'创建日期', width:80, sortable:true, align:"center", hidden:true,
                     formatter : function(v, data) {  data.createdDate = ksa.utils.dateFormatter( data.createdDate ); return data.createdDate + "<input type='hidden' name='createdDate' value='" + data.createdDate + "' />" ; } },
