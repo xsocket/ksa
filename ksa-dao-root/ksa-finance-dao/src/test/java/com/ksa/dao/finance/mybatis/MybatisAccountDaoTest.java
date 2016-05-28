@@ -3,8 +3,6 @@ package com.ksa.dao.finance.mybatis;
 import java.util.Date;
 import java.util.UUID;
 
-import junit.framework.Assert;
-
 import org.junit.Test;
 
 import com.ksa.dao.MybatisDaoTest;
@@ -12,6 +10,8 @@ import com.ksa.dao.finance.AccountDao;
 import com.ksa.model.bd.Partner;
 import com.ksa.model.finance.Account;
 import com.ksa.model.security.User;
+
+import junit.framework.Assert;
 
 
 public class MybatisAccountDaoTest extends MybatisDaoTest {

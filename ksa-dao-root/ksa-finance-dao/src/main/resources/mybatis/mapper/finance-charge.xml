@@ -33,13 +33,37 @@
 		</association>
 		<association column="ACCOUNT_ID" property="account"   javaType="com.ksa.model.finance.Account">
 			<id column="ACCOUNT_ID" property="id" />
-			<id column="ACCOUNT_STATE" property="state" />
+			<result column="ACCOUNT_STATE" property="state" />
 		</association>
 	</resultMap>
 	
 	<!-- 费用信息: 附加了托单信息 -->
-	<resultMap type="com.ksa.model.finance.Charge" id="result-finance-charge-withnote" extends="result-finance-charge-basic" autoMapping="false">	
+	<resultMap type="com.ksa.model.finance.Charge" id="result-finance-charge-withnote2" extends="result-finance-charge-basic" autoMapping="false">	
 		<association column="BOOKINGNOTE_ID" property="bookingNote" select="select-finance-bookingnote-basic-byid" />
+	</resultMap>
+	
+	<!-- 费用信息: 附加了托单信息 -->
+	<resultMap type="com.ksa.model.finance.Charge" id="result-finance-charge-withnote" extends="result-finance-charge-basic">        
+        <association column="BOOKINGNOTE_ID" property="bookingNote" javaType="com.ksa.model.logistics.BookingNote">
+          <id column="BOOKINGNOTE_ID" property="id" javaType="String" />
+          <result column="BN_SERIAL_NUMBER" property="serialNumber" javaType="int" />
+          <result column="BN_CODE" property="code" javaType="String" />
+          <result column="BN_TYPE" property="type" javaType="String" />
+          <result column="BN_CREATED_DATE" property="createdDate" javaType="Date" />
+          <result column="BN_CHARGE_DATE" property="chargeDate" javaType="Date" />
+          <result column="BN_INVOICE_NUMBER" property="invoiceNumber" javaType="String" />
+          
+          <result column="BN_CARGO_NAME" property="cargoName" javaType="String" /> 
+          
+          <result column="BN_DEPARTURE" property="departure" javaType="String" />
+          <result column="BN_DEPARTURE_PORT" property="departurePort" javaType="String" />
+          <result column="BN_DEPARTURE_DATE" property="departureDate" javaType="Date" />
+          <result column="BN_DESTINATION" property="destination" javaType="String"/>
+          <result column="BN_DESTINATION_PORT" property="destinationPort" javaType="String"/>
+          <result column="BN_DESTINATION_DATE" property="destinationDate" javaType="Date" />
+          
+          <result column="BN_STATE" property="state" javaType="int"/>
+        </association>
 	</resultMap>
 	<!-- 完整费用信息: 附加了托单信息 和 对账/结算单信息 -->
 	<resultMap type="com.ksa.model.finance.Charge" id="result-finance-charge" extends="result-finance-charge-basic" autoMapping="false">	
@@ -114,7 +138,7 @@
 	</select>
 	
 	<!-- 按费用结算对账单查找对应的费用数据 -->
-	<select id="select-finance-charge-byaccount" resultMap="result-finance-charge-withnote">
+	<select id="select-finance-charge-byaccount" resultMap="result-finance-charge-withnote2">
 		<include refid="select-finance-charge-basic" />
 		WHERE c.ACCOUNT_ID = #{id}
         ORDER BY DIRECTION desc, c.RANK
@@ -122,8 +146,22 @@
 	
 	<!-- 完整费用信息的查询 -->
 	<sql id="select-finance-charge"> 
-		<include refid="select-finance-charge-basic"/>
-		LEFT JOIN KSA_LOGISTICS_BOOKINGNOTE		bn ON bn.ID = c.BOOKINGNOTE_ID
+		SELECT c.*,
+			p.NAME as TARGET_NAME,
+			d.CODE as CURRENCY_CODE, d.NAME as CURRENCY_NAME, d.RANK as CURRENCY_RANK,
+			u.NAME as CREATOR_NAME,
+			a.STATE as ACCOUNT_STATE,
+            bn.SERIAL_NUMBER as BN_SERIAL_NUMBER, bn.CODE as BN_CODE, bn.TYPE as BN_TYPE,
+            bn.CREATED_DATE as BN_CREATED_DATE, bn.CHARGE_DATE as BN_CHARGE_DATE, bn.INVOICE_NUMBER as BN_INVOICE_NUMBER,
+            bn.CARGO_NAME as BN_CARGO_NAME, bn.DEPARTURE as BN_DEPARTURE, bn.DEPARTURE_PORT as BN_DEPARTURE_PORT,
+            bn.DEPARTURE_DATE as BN_DEPARTURE_DATE, bn.DESTINATION as BN_DESTINATION, bn.DESTINATION_PORT as BN_DESTINATION_PORT,
+            bn.DESTINATION_DATE as BN_DESTINATION_DATE, bn.STATE as BN_STATE
+		FROM KSA_FINANCE_CHARGE c 
+			LEFT JOIN KSA_BD_PARTNER		p   ON p.ID = c.TARGET_ID 
+			LEFT JOIN KSA_BD_DATA 			d	 ON d.ID = c.CURRENCY_ID
+			LEFT JOIN KSA_SECURITY_USER 	u   ON u.ID = c.CREATOR_ID 
+			LEFT JOIN KSA_FINANCE_ACCOUNT a ON a.ID = c.ACCOUNT_ID 
+		    LEFT JOIN KSA_LOGISTICS_BOOKINGNOTE bn ON bn.ID = c.BOOKINGNOTE_ID
 	</sql>
 	<!-- 完整的费用查询 -->
 	<select id="grid-finance-charge-query" resultMap="result-finance-charge-withnote">
@@ -156,5 +194,4 @@
 					</foreach>
 			</if>
 	</select>
-	
 </mapper>

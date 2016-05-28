@@ -80,7 +80,7 @@ public class ChargeQueryAction extends BookingNoteQueryAction {
             }
             
             try {
-                List<Charge> gridDataList = sqlSession.selectList( getQueryDataStatement(), paras, new RowBounds( this.page, this.rows ) );
+                List<Charge> gridDataList = sqlSession.selectList( getQueryDataStatement(), paras, new RowBounds( this.page, 1000 ) );
                 if( gridDataList != null && !gridDataList.isEmpty() ) {
                     Set<String> idSet = new HashSet<String>();  // 不重复添加 BookingNote
                     TreeSet<BookingNote> noteSet = new TreeSet<BookingNote>();
