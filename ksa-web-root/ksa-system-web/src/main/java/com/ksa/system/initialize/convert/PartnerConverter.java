@@ -40,7 +40,7 @@ public class PartnerConverter {
             partner.setName( kehu.getZhongWMC() );
             partner.setAlias( StringUtils.hasText( kehu.getTiDan() ) ? kehu.getTiDan()  : "" );
             partner.setAddress( StringUtils.hasText( kehu.getZhongWDZ() ) ? kehu.getZhongWDZ()  : "" );
-            partner.setImportant( kehu.isChangYong() );
+            partner.setImportant( kehu.isChangYong() ? 1 : 0 );
             partner.setNote( StringUtils.hasText( kehu.getBeiZhu() ) ? kehu.getBeiZhu()  : "" );
             partner.setSaler( saler );
             if( StringUtils.hasText(  kehu.getFuKuanZQ() ) ) {

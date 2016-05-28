@@ -16,7 +16,7 @@ public class PartnerDeleteAction extends PartnerAction implements JsonAction {
     public String doExecute() throws Exception {
         PartnerService service = ServiceContextUtils.getService( PartnerService.class );
         partner = service.removePartner( partner );
-        String message = String.format( "成功删除合作伙伴信息：'%s'。", partner.getName() );
+        String message = String.format( "成功冻结合作伙伴：'%s'。", partner.getName() );
         addActionMessage( message );
         result = new JsonResult( SUCCESS, message, partner );
         return SUCCESS;

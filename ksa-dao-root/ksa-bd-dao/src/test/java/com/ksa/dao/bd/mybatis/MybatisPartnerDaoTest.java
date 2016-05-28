@@ -23,7 +23,7 @@ public class MybatisPartnerDaoTest extends MybatisDaoTest {
         Assert.assertEquals( "", data.getNote() );
         Assert.assertEquals( 30, data.getPp() );
         Assert.assertEquals( 1, data.getRank() );
-        Assert.assertTrue( data.getImportant() );
+        Assert.assertTrue( data.getImportant() == 1 );
         Assert.assertEquals( "test-user-1", data.getSaler().getId() );
         String[] extras = data.getExtras();
         Assert.assertEquals( 2, extras.length );
@@ -51,7 +51,7 @@ public class MybatisPartnerDaoTest extends MybatisDaoTest {
         partner.setNote( "note" );
         partner.setPp( 30 );
         partner.setRank( 100 );
-        partner.setImportant( false );
+        partner.setImportant( 0 );
         partner.getSaler().setId( "test-user-1" );
         
         PartnerType type1 = new PartnerType();
@@ -74,7 +74,7 @@ public class MybatisPartnerDaoTest extends MybatisDaoTest {
         Assert.assertEquals( "note", temp.getNote() );
         Assert.assertEquals( 30, temp.getPp() );
         Assert.assertEquals( 100, temp.getRank() );
-        Assert.assertFalse( temp.getImportant() );
+        Assert.assertTrue( temp.getImportant() == 0 );
         Assert.assertEquals( "test-user-1", temp.getSaler().getId() );
         
         String[] extras = temp.getExtras();
@@ -98,7 +98,7 @@ public class MybatisPartnerDaoTest extends MybatisDaoTest {
         partner.setAlias( "alias1" );
         partner.setAddress( "address1" );
         partner.setNote( "note1" );
-        partner.setImportant( true );
+        partner.setImportant( 1 );
         partner.setPp( 300 );
         partner.setRank( 1000 );
         partner.getSaler().setId( "test-user-2" );
@@ -116,7 +116,7 @@ public class MybatisPartnerDaoTest extends MybatisDaoTest {
         Assert.assertEquals( "note1", temp.getNote() );
         Assert.assertEquals( 300, temp.getPp() );
         Assert.assertEquals( 1000, temp.getRank() );
-        Assert.assertTrue( temp.getImportant() );
+        Assert.assertTrue( temp.getImportant() == 1 );
         Assert.assertEquals( "test-user-2", temp.getSaler().getId() );
         
         extras = temp.getExtras();
@@ -132,7 +132,7 @@ public class MybatisPartnerDaoTest extends MybatisDaoTest {
         // 测试删除
         dao.deletePartner( partner );
         Partner temp3 = dao.selectPartnerById( id );
-        Assert.assertNull( temp3 );
+        Assert.assertTrue(temp3.getImportant() == -1 );
     }
 
 }

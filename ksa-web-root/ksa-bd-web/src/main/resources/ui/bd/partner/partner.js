@@ -75,6 +75,14 @@ $(function(){
         $("div:odd", "#text_container").addClass("odd");
     };
     
+    $("#txtLock").click(function(){
+    	if($("#txtLock").is(':checked')) {
+    		$("#txtImpotant").attr("checked",null);
+    		$("#divState").hide();
+    	} else {
+    		$("#divState").show();
+    	}
+    });
 
     // 初始化附加提单信息的增删操作
     $("#extra_add").click(function(){

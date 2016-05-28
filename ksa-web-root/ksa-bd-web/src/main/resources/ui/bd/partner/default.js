@@ -4,11 +4,16 @@ $(function(){
     var $grid = null;
     $grid = $('#data-grid').datagrid({
         url: ksa.buildUrl( "/data/grid", "bd-partner-all" ),
-        height: $(window).height() - 105,
+        height: $(window).height() - 105,        
         pageSize: 20,
         columns:[ [
-            { field:'important', title:'常用',      width:25,   sortable:true, align:'center', 
-                formatter: function(value){ if( value ) { return "<i class='icon-ok'></i>"; } else { return ""; } } },
+            { field:'important', title:'状态',      width:25,   sortable:true, align:'center', 
+                formatter: function(value) { 
+                	if( value > 0 ) { return "<i class='icon-ok'></i>"; } 
+                	else if( value < 0 ) { return "<i class='icon-remove'></i>"; } 
+                	else { return ""; } 
+                } 
+            },
             { field:'code',         title:'代码',      width:100,   sortable:true },
             { field:'name',        title:'名称',      width:100, sortable:true },
             { field:'alias',          title:'抬头',      width:200, sortable:true },
@@ -65,7 +70,7 @@ $(function(){
             return;
         }
         
-        $.messager.confirm( "确定删除合作伙伴 '" + row.name + "' 吗？", function( ok ){
+        $.messager.confirm( "确定冻结合作伙伴 '" + row.name + "' 吗？", function( ok ){
             if( ok ) { 
                 $.ajax({
                     url: ksa.buildUrl( "/dialog/bd/partner", "delete" ),

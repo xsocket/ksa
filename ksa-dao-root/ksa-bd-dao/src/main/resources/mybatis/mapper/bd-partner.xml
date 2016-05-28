@@ -18,7 +18,7 @@
 		<result column="ADDRESS" property="address" javaType="String" />
 		<result column="PP" property="pp" javaType="int"/>
 		<result column="NOTE" property="note" javaType="String"/>
-		<result column="IMPORTANT" property="important" javaType="boolean"/>
+		<result column="IMPORTANT" property="important" javaType="int"/>
 		<result column="RANK" property="rank" javaType="int"/>
 		<association column="SALER_ID" property="saler" javaType="com.ksa.model.security.User">
 			<id column="SALER_ID" property="id" />
@@ -56,10 +56,12 @@
 		WHERE ID 		= #{id}
 	</update>
 	
-	<!-- 删除合作伙伴数据 -->
-	<delete id="delete-bd-partner" >
-		DELETE FROM KSA_BD_PARTNER WHERE ID = #{id}
-	</delete>
+	<!-- 删除合作伙伴数据，改为冻结 -->
+	<update id="delete-bd-partner" >
+        UPDATE KSA_BD_PARTNER SET
+          IMPORTANT = -1
+        WHERE ID    = #{id}
+	</update>
 	
 	<sql id="select-bd-partner">
 		SELECT a.ID, a.CODE, a.NAME,  a.ALIAS, a.ADDRESS, a.PP, a.NOTE, a.IMPORTANT, a.RANK, 
@@ -109,12 +111,15 @@
 	<select id="combo-bd-partner-all" resultMap="result-bd-partner-combo">
 		SELECT ID, CODE, NAME, PP
 		FROM KSA_BD_PARTNER
+        WHERE IMPORTANT >= 0
+        ORDER BY RANK ASC, IMPORTANT DESC
 	</select>
 	
 	<select id="combo-bd-partner-bytype" resultMap="result-bd-partner-combo">
 		SELECT d.ID, d.CODE, d.NAME, d.PP
 		FROM KSA_BD_PARTNER d JOIN KSA_BD_PARTNER_TYPE t ON d.ID = t.PARTNER_ID
-		WHERE t.TYPE_ID = #{typeId}
+		WHERE d.IMPORTANT >= 0 AND t.TYPE_ID = #{typeId}
+        ORDER BY d.RANK ASC, d.IMPORTANT DESC
 	</select>
 	
 </mapper>

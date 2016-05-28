@@ -27,7 +27,7 @@
 	</div>
 	<button id="btn-add" class="btn btn-primary"><i class="icon-white icon-plus"></i> 新建... (N)</button>
 	<button id="btn-edit" class="btn btn-warning"><i class="icon-white icon-edit"></i> 编辑... (E)</button>
-	<button id="btn-delete" class="btn btn-danger"><i class="icon-white icon-trash"></i> 删除 (D)</button>
+	<button id="btn-delete" class="btn btn-danger"><i class="icon-white icon-trash"></i> 冻结 (D)</button>
 </div>
 <table id="data-grid"></table>
 </body>

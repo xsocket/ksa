@@ -93,10 +93,10 @@
 	    				class="easyui-numberbox input-mini" data-options="min:0,required:true"  />				
 				</div>
 			</div>
-			<div class="control-group">
+			<div id="divState" class="control-group" <#if partner.important == -1>style="display:none"</#if>>
 				<label class="control-label" for="important">常用：</label>
 				<div class="controls">
-			    	<input type="checkbox" name="important" value="true" <#if partner.important>checked="checked"</#if>>			
+			    	<input id="txtImpotant" type="checkbox" name="important" value="1" <#if partner.important == 1>checked="checked"</#if>>			
 				</div>
 			</div>
 			<br class="clearfix"/>
@@ -112,6 +112,10 @@
 	</div>
 </div>
 <div class="bottom-bar fixed-bar">
+	<span style="margin:3px 20px 0 0; float:left;">
+		<b for="important">冻结：</b>
+		<input id="txtLock" style="margin:0" type="checkbox" name="important" value="-1" <#if partner.important == -1>checked="checked"</#if>>
+	</span>
 	<button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i> 保存</button>
 	<button id="dialog_close" class="btn btn-danger"><i class="icon-off icon-white"></i> 关闭</button>
 </div>

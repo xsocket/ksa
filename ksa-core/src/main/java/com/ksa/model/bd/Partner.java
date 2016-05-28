@@ -35,7 +35,7 @@ public class Partner extends BaseModel {
     /** 排序 */
     protected int rank;
     /** 是否常用 */
-    protected boolean important;
+    protected int important;
     /** 提单中常用的附加信息 */
     protected String[] extras;
     
@@ -134,15 +134,11 @@ public class Partner extends BaseModel {
         this.rank = rank;
     }
     
-    public boolean getImportant() {
+    public int getImportant() {
         return important;
     }
     
-    public boolean isImportant() {
-        return important;
-    }
-    
-    public void setImportant( boolean important ) {
+    public void setImportant( int important ) {
         this.important = important;
     }
     
