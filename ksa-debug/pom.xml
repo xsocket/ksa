@@ -23,6 +23,10 @@
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+        </dependency>
 		<!-- 默认调试所用的数据库环境 -->
 		<dependency>
 			<groupId>com.h2database</groupId>
@@ -38,6 +42,8 @@
 		    <artifactId>mysql-connector-java</artifactId>
 		    <version>5.1.18</version>
 		</dependency>
+    
+        
 		
 		<!-- spring -->
 		<dependency>

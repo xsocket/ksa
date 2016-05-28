@@ -50,7 +50,7 @@ var CHARGE_QUERY_CONDITION = [
     } },
     { title:"币种", name:"CURRENCY", type:"combo", option:{url : ksa.buildUrl( "/data/combo", "bd-data-bytype", { typeId : '00-currency' } )} },
     { title:"创建日期", name:"INPUT_DATE", type:"combo",  type:"date" },
-    { title:"操作员", name:"INPUTOR", type:"combo", option:{url:ksa.buildUrl( "/data/combo", "security-user-all" ),codeField : "id" }  },
+    { title:"操作员", name:"INPUTOR", type:"combo", option:{url:ksa.buildUrl( "/data/combo", "security-user-all" ),codeField : "id", multiple:true,editable:false }  },
 
      // { title:"结算/对账单号", name:"ACCOUNT_CODE", type:"text" },
      

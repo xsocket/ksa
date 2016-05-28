@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import com.ksa.context.ServiceContextUtils;
 import com.ksa.dao.AbstractQueryClause;
 import com.ksa.dao.DateQueryClause;
+import com.ksa.dao.MultiIdsQueryClause;
 import com.ksa.dao.QueryClause;
 import com.ksa.dao.TextQueryClause;
 import com.ksa.dao.mybatis.session.RowBounds;
@@ -76,54 +77,14 @@ public class BookingNoteQueryAction extends GridDataActionSupport {
                 return super.getParsedValue( value.toUpperCase() );
             }
         } );
-        preparedQueryClauses.put( "TYPE", new AbstractQueryClause( "bn.TYPE" ) {
-            @Override
-            public Collection<String> compute(String[] values) {
-                Collection<String> clauses = super.compute( values );
-                if( clauses != null && clauses.size() > 0 ) {
-                    StringBuilder sb = new StringBuilder( 16 * clauses.size() );
-                    sb.append( " ( " );
-                    int i = 0;
-                    for( String clause : clauses ) {
-                        if( i++ > 0 ) {
-                            sb.append( " OR " );
-                        }
-                        sb.append( clause );
-                    }
-                    sb.append( " ) " );
-                    clauses.clear();
-                    clauses.add( sb.toString() );
-                }
-                return clauses;
-            };
-        } );
-        preparedQueryClauses.put( "TYPE_SUB", new AbstractQueryClause( "bn.TYPE_SUB" ) {
-            @Override
-            public Collection<String> compute(String[] values) {
-                Collection<String> clauses = super.compute( values );
-                if( clauses != null && clauses.size() > 0 ) {
-                    StringBuilder sb = new StringBuilder( 16 * clauses.size() );
-                    sb.append( " ( " );
-                    int i = 0;
-                    for( String clause : clauses ) {
-                        if( i++ > 0 ) {
-                            sb.append( " OR " );
-                        }
-                        sb.append( clause );
-                    }
-                    sb.append( " ) " );
-                    clauses.clear();
-                    clauses.add( sb.toString() );
-                }
-                return clauses;
-            };
-        } );
+        preparedQueryClauses.put( "TYPE", new MultiIdsQueryClause( "bn.TYPE" ) );
+        preparedQueryClauses.put( "TYPE_SUB", new MultiIdsQueryClause( "bn.TYPE_SUB" ) );
         preparedQueryClauses.put( "CUSTOMER_ID", new TextQueryClause( "bn.CUSTOMER_ID" ) );
         preparedQueryClauses.put( "INVOICE_NUMBER", new TextQueryClause( "bn.INVOICE_NUMBER" ) );
         preparedQueryClauses.put( "CREATED_DATE", new DateQueryClause( "bn.CREATED_DATE" ) );
         preparedQueryClauses.put( "CHARGE_DATE", new DateQueryClause( "bn.CHARGE_DATE" ) );
-        preparedQueryClauses.put( "SALER_ID", new TextQueryClause( "bn.SALER_ID" ) );
-        preparedQueryClauses.put( "CREATOR_ID", new TextQueryClause( "bn.CREATOR_ID" ) );
+        preparedQueryClauses.put( "SALER_ID", new MultiIdsQueryClause( "bn.SALER_ID" ) );
+        preparedQueryClauses.put( "CREATOR_ID", new MultiIdsQueryClause( "bn.CREATOR_ID" ) );
         preparedQueryClauses.put( "CARRIER_ID", new TextQueryClause( "bn.CARRIER_ID" ) );
         preparedQueryClauses.put( "SHIPPING_AGENT_ID", new TextQueryClause( "bn.SHIPPING_AGENT_ID" ) );
         preparedQueryClauses.put( "AGENT_ID", new TextQueryClause( "bn.AGENT_ID" ) );

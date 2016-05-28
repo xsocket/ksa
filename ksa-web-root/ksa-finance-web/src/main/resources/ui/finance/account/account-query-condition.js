@@ -15,7 +15,7 @@ var ACCOUNT_QUERY_CONDITION = [
     { title:"开单日期", name:"ACCOUNT_DATE", type:"combo",  type:"date" },
     { title:"付款截止日", name:"ACCOUNT_DEADLINE", type:"combo",  type:"date" },
     { title:"结清日期", name:"ACCOUNT_PAYMENT", type:"combo",  type:"date" },
-    { title:"创建人", name:"ACCOUNT_INPUTOR", type:"combo", option:{url:ksa.buildUrl( "/data/combo", "security-user-all" ),codeField : "id" }  },
+    { title:"创建人", name:"ACCOUNT_INPUTOR", type:"combo", option:{url:ksa.buildUrl( "/data/combo", "security-user-all", multiple:true,editable:false ),codeField : "id" }  },
 
      { title:"托单编号", name:"CODE", type:"text" },
      { title:"业务类型", name:"TYPE", init: function( target, condition ) {

@@ -24,5 +24,5 @@ var INVOICE_QUERY_CONDITION = [
     } },
     { title:"币种", name:"CURRENCY", type:"combo", option:{url : ksa.buildUrl( "/data/combo", "bd-data-bytype", { typeId : '00-currency' } )} },
     { title:"开票日期", name:"CREATED_DATE", type:"combo",  type:"date" },
-    { title:"操作员", name:"INPUTOR", type:"combo", option:{url:ksa.buildUrl( "/data/combo", "security-user-all" ),codeField : "id" }  }
+    { title:"操作员", name:"INPUTOR", type:"combo", option:{url:ksa.buildUrl( "/data/combo", "security-user-all", multiple:true,editable:false ),codeField : "id" }  }
 ];
