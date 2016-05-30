@@ -115,6 +115,11 @@ public class ChargeQueryAction extends BookingNoteQueryAction {
         Map<String, Object> paras = context.getParameters();
         if( direction != null && ! paras.containsKey( "direction" ) ) {
             paras.put( "DIRECTION", new String[] { direction.toString() } );
+            
+            // 收入结算单需要费用经过审核
+            if(direction == 1) {
+              paras.put( "CHARGE_STATE", new String[] { "8" } );
+            }
         }
         if( nature != null && ! paras.containsKey( "nature" ) ) {
             paras.put( "NATURE", new String[] { nature.toString() } );
@@ -127,9 +132,6 @@ public class ChargeQueryAction extends BookingNoteQueryAction {
             this.sort = "bn.serial_number";
             this.order = "desc";
         } 
-        // 只显示已经审核通过的费用
-        // FIXME 修改为以参数形式传入
-        paras.put( "CHARGE_STATE", new String[] { "8" } );
         
         return super.getParameters();
     }
