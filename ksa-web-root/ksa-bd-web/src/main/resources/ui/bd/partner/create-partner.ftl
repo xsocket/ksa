@@ -90,7 +90,7 @@
 			<div class="control-group">
 				<label class="control-label" for="important">常用：</label>
 				<div class="controls">
-			    	<input type="checkbox" name="important" value="true" <#if partner.important>checked="checked"</#if>>			
+			    	<input type="checkbox" name="important" value="1">			
 				</div>
 			</div>
 			<br class="clearfix"/>
