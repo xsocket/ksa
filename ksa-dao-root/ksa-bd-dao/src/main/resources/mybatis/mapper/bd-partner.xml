@@ -111,9 +111,16 @@
 	<select id="combo-bd-partner-all" resultMap="result-bd-partner-combo">
 		SELECT ID, CODE, NAME, PP
 		FROM KSA_BD_PARTNER
-        WHERE IMPORTANT >= 0
         ORDER BY RANK ASC, IMPORTANT DESC
 	</select>
+  
+    <!-- combobox 相关查询 -->
+    <select id="combo-bd-partner-without-lock" resultMap="result-bd-partner-combo">
+      SELECT ID, CODE, NAME, PP
+      FROM KSA_BD_PARTNER
+      WHERE IMPORTANT >= 0
+      ORDER BY RANK ASC, IMPORTANT DESC
+    </select>
 	
 	<select id="combo-bd-partner-bytype" resultMap="result-bd-partner-combo">
 		SELECT d.ID, d.CODE, d.NAME, d.PP

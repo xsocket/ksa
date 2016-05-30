@@ -1,7 +1,7 @@
 $(function(){
     var width = $("#customer").parent().width() * 0.95;
     initCombobox( "#saler", ksa.buildUrl( "/data/combo", "security-user-all" ), { codeField : "id", width : 400 } );
-    initCombobox( "#customer", ksa.buildUrl( "/data/combo", "bd-partner-all" ), { width: width } ); 
+    initCombobox( "#customer", ksa.buildUrl( "/data/combo", "bd-partner-without-lock" ), { width: width } ); 
     initCombobox( "#destination",  ksa.buildUrl( "/data/combo", "bd-data-bytype", { typeId : '30-state' } ), { valueField : "name", width: width } );
     initCombobox( "#loading_port, #discharge_port", ksa.buildUrl( "/data/combo", "bd-data-bytype", { typeId : '32-port-air' } ), { valueField : "name", width: width } );
     function initCombobox( selector, url, options ) {

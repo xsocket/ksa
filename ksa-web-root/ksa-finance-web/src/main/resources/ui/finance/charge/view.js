@@ -384,7 +384,7 @@ $(function(){
     function getChargeWindow() {
         if( $window == null ) {
             // 初始化编辑页面的选择框
-            $("#customer").combobox({ url : ksa.buildUrl( "/data/combo", "bd-partner-all" ) });
+            $("#customer").combobox({ url : ksa.buildUrl( "/data/combo", "bd-partner-without-lock" ) });
             $("#charge_type").combobox({ url : ksa.buildUrl( "/data/combo", "bd-data-bytype", { typeId : '10-charge' } ) });
             $("#currency").combobox({ url : ksa.buildUrl( "/data/combo", "bd-data-bytype", { typeId : '00-currency' } ) });    
             $("#charge_nature").combobox();

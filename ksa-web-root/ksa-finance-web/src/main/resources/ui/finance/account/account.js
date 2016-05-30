@@ -6,7 +6,7 @@ $(function(){
     
     // 结算对象选择框
     $("#target").combobox({
-        url : ksa.buildUrl( "/data/combo", "bd-partner-all" ),
+        url : ksa.buildUrl( "/data/combo", "bd-partner-without-lock" ),
         onSelect : function( record ){
             $rateGrid.datagrid( "load", { id: $("#account_id").val(), "target.id": record.id } );
             // 自动更新编码

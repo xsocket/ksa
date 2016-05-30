@@ -5,7 +5,7 @@ $(function(){
     // 销售担当
     initCombobox( "#saler", ksa.buildUrl( "/data/combo", "security-user-all" ), { codeField : "id" } );
     /* ------------ 合作伙伴信息 ------------ */ 
-    initCombobox( "#customer, #shipper, #consignee, #notify", ksa.buildUrl( "/data/combo", "bd-partner-all" ) ); 
+    initCombobox( "#customer, #shipper, #consignee, #notify", ksa.buildUrl( "/data/combo", "bd-partner-without-lock" ) ); 
     // 报关行
     initCombobox( "#chb", ksa.buildUrl( "/data/combo", "bd-partner-bytype", { typeId : '20-department-bgh' } ) );
     // 代理商
