@@ -161,7 +161,7 @@ $(function(){
                 { field:'accountState', title:'状态', width:45, hidden:false, align:"center",
 	                formatter: function(v, data){ return parseAccountState( v, data.direction ); }, 
 	                styler : function(v,data) {
-	                    var state = parseAccountState( data, data.direction );
+	                    var state = parseAccountState( v, data.direction );
 	                    var css = "font-weight:bold;";
 	                    if( state == window.STATE_SETTLED1 || state == window.STATE_SETTLED2 ) { return css + "color:#51A351"; } 
 	                    else if( state == window.STATE_PROCESSING ) { return css + "color:#04C"; }
