@@ -16,7 +16,7 @@ var CHARGE_TABLE_SHOW_COLUMN = {
         'bn.charge_date' : true,
         'bn.type' : false,
         'bn.created_date' : true,
-        'bn.customer_name' : true,
+        'bn.customer_name' : false,
 //        'bn.invoice_number' : true,
 //        'bn.creator_name' : true,
 //        'bn.saler_name' : false,

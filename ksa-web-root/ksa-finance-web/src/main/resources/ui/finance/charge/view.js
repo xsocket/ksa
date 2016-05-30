@@ -8,11 +8,8 @@ var STATE_SETTLED2 = "已支付";
 function parseAccountState( state, direction ) {
     if( state == -1 ) {
         return STATE_UNACCOUNT;
-    } else if( (state & 0x20) > 0 ) {
-        return direction == 1 ? STATE_SETTLED1 : STATE_SETTLED2;
     } else {
-        //return STATE_PROCESSING;
-    	return STATE_UNACCOUNT;
+    	return direction == 1 ? STATE_SETTLED1 : STATE_SETTLED2;
     }
 };
 
