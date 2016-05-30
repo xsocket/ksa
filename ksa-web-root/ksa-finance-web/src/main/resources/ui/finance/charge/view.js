@@ -2,15 +2,17 @@
 
 var STATE_PROCESSING = "对账中";
 var STATE_UNACCOUNT = "未开单";
-var STATE_SETTLED = "已支付";
+var STATE_SETTLED1 = "已收款";
+var STATE_SETTLED2 = "已支付";
 // 解析托单的状态 返回可读的状态值
-function parseAccountState( state ) {
+function parseAccountState( state, direction ) {
     if( state == -1 ) {
         return STATE_UNACCOUNT;
     } else if( (state & 0x20) > 0 ) {
-        return STATE_SETTLED;
+        return direction == 1 ? STATE_SETTLED1 : STATE_SETTLED2;
     } else {
-        return STATE_PROCESSING;
+        //return STATE_PROCESSING;
+    	return STATE_UNACCOUNT;
     }
 };
 
@@ -160,11 +162,11 @@ $(function(){
                     }
                 },
                 { field:'accountState', title:'状态', width:45, hidden:false, align:"center",
-	                formatter: function(v, data){ return parseAccountState( v ); }, 
-	                styler : function(v,row) {
-	                    var state = parseAccountState( v );
+	                formatter: function(v, data){ return parseAccountState( v, data.direction ); }, 
+	                styler : function(v,data) {
+	                    var state = parseAccountState( data, data.direction );
 	                    var css = "font-weight:bold;";
-	                    if( state == window.STATE_SETTLED ) { return css + "color:#51A351"; } 
+	                    if( state == window.STATE_SETTLED1 || state == window.STATE_SETTLED2 ) { return css + "color:#51A351"; } 
 	                    else if( state == window.STATE_PROCESSING ) { return css + "color:#04C"; }
 	                    else if( state == window.STATE_UNACCOUNT ) { return css + "color:#FAA732"; }
 	                } 
