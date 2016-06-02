@@ -32,7 +32,7 @@
 			<div class="control-group">
 				<label class="control-label">开单日期：</label>
 				<div class="controls">
-			    	<input id="createdDate" type="text" name="createdDate" value="${model.createdDate?date}" readonly="readonly" />
+			    	<input id="createdDate" type="text" name="createdDate" class="easyui-datebox" <#if model.createdDate??>value="${model.createdDate?date}"</#if> />
 				</div>
 			</div>
 			<div class="control-group">

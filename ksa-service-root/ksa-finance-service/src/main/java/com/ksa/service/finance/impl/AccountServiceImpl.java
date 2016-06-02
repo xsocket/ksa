@@ -72,6 +72,7 @@ public class AccountServiceImpl implements AccountService {
             }
             if( AccountState.isNone( temp.getState() ) || AccountState.isProcessing( temp.getState() ) ) {
                 // 审核前的结算单，还未进入流程前 可以任意修改
+                temp.setCreatedDate( account.getCreatedDate() );
                 temp.setDeadline( account.getDeadline() );
                 temp.setPaymentDate( account.getPaymentDate() );
                 temp.setNote( account.getNote() );
