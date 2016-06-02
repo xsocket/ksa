@@ -20,7 +20,8 @@ $(function(){
     // 查看是否开出结算单
     var accountId = false;
     var accountState = 0;
-    var charges = $.merge( $.merge( [], INCOMES ), EXPENSES );
+    //var charges = $.merge( $.merge( [], INCOMES ), EXPENSES );
+    var charges = $.merge( [], INCOMES );	// 结算单状态不考虑支付费用
     for( var i = 0; i < charges.length; i++ ) {
         var c = charges[i];
         if( c.account.id ) {
