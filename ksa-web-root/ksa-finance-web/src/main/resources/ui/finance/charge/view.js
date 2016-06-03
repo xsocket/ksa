@@ -1,15 +1,15 @@
- 
-
-var STATE_PROCESSING = "对账中";
+var STATE_PROCESSING = "已开单";
 var STATE_UNACCOUNT = "未开单";
 var STATE_SETTLED1 = "已收款";
 var STATE_SETTLED2 = "已支付";
 // 解析托单的状态 返回可读的状态值
 function parseAccountState( state, direction ) {
-    if( state == -1 ) {
+	if( state == -1 ) {
         return STATE_UNACCOUNT;
+    } else if( (state & 0x20) > 0 ) {
+        return direction == 1 ? STATE_SETTLED1 : STATE_SETTLED2;
     } else {
-    	return direction == 1 ? STATE_SETTLED1 : STATE_SETTLED2;
+        return STATE_PROCESSING;
     }
 };
 
