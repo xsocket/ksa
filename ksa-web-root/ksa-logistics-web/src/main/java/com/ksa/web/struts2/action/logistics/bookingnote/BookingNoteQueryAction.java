@@ -69,6 +69,39 @@ public class BookingNoteQueryAction extends GridDataActionSupport {
                 return result;
             }
         } );
+        preparedQueryClauses.put( "CHARGE_TYPE_4BN", new AbstractQueryClause( "bn.ID" ) {
+          @Override
+          public Collection<String> compute( String[] values ) {
+              
+              if( values == null || values.length <= 0 ) {
+                  return Collections.emptyList();
+              }
+              
+              Set<String> params = new HashSet<String>();
+              for( String v : values ) {
+                  if( StringUtils.hasText( v ) ) {
+                      params.add( "'" + v.trim() + "'" );
+                  }
+              }
+              
+              if( params.size() <= 0 ) {
+                  return Collections.emptyList();
+              }
+              
+              StringBuilder sb = new StringBuilder( 200 + 20 * params.size() );
+              sb.append( " ( bn.ID IN (SELECT cc.BOOKINGNOTE_ID FROM KSA_FINANCE_CHARGE cc WHERE cc.TYPE IN (" );
+              int i = 0;
+              for( String param : params ) {
+                  if( i > 0 ) sb.append( "," );
+                  sb.append( param );
+                  i++;
+              }
+              sb.append( ") ) ) " );
+              Collection<String> result = new ArrayList<String>( 1 );
+              result.add( sb.toString() );
+              return result;
+          }
+      } );
         //preparedQueryClauses.put( "ACCOUNT_STATE", new AccountStateQueryClause() );  
         preparedQueryClauses.put( "STATE", new BookingNoteStateQueryClause() );        
         preparedQueryClauses.put( "CODE", new TextQueryClause( "bn.CODE" ) { 

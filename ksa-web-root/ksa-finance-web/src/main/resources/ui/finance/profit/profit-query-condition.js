@@ -37,6 +37,7 @@ var PROFIT_QUERY_CONDITION = [
     { title:"结算单号", name:"ACCOUNT_CODE", type:"text" },
     { title:"接单日期", name:"CREATED_DATE", type:"date" },
     { title:"客户", name:"CUSTOMER_ID", type:"combo", option:{url:ksa.buildUrl( "/data/combo", "bd-partner-all" )} },
+    { title:"费用项目", name:"CHARGE_TYPE_4BN", type:"combo", option:{ url : ksa.buildUrl( "/data/combo", "bd-data-bytype", { typeId : '10-charge' } ), valueField : "name" } },
     { title:"发票号", name:"INVOICE_NUMBER", type:"text" },
     { title:"操作员", name:"CREATOR_ID", type:"combo", option:{url:ksa.buildUrl( "/data/combo", "security-user-all" ),codeField : "id", multiple:true,editable:false }  },
     { title:"销售担当", name:"SALER_ID", type:"combo", option:{url:ksa.buildUrl( "/data/combo", "security-user-all" ),codeField : "id", multiple:true,editable:false } },
