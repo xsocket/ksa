@@ -199,7 +199,7 @@ $(function(){
                         	var hidden = "<input type='hidden' name='note' value='" + v + "' />";
                         	return (v=="") ? hidden : "<i class='icon-list-alt' title='" + v + "'></i>" + hidden ; } }
            ] ],
-           onDblClickRow : function(){ edit( target ); },
+           onDblClickRow : function(){ if(!READONLY) edit( target ); },
            toolbar : ( READONLY || (accountId != false) ) ? null : [{
                text:'添加 ...',
                id: 'add_charge' + direction,
@@ -240,6 +240,10 @@ $(function(){
             parent.$.messager.warning("请选择一条数据后，再进行编辑操作。");
             return;
         }
+        if(row.accountState != -1) {
+        	parent.$.messager.warning("该费用当前 '" + parseAccountState( row.accountState, row.direction ) + "' ，不能修改。");
+            return;
+        }
         editChargeData( row, function(data){
             data.creator = CURRENT_USER;
             target.datagrid( "updateRow", {
@@ -256,7 +260,10 @@ $(function(){
             parent.$.messager.warning("请选择一条数据后，再进行删除操作。");
             return;
         }
-        
+        if(row.accountState != -1) {
+        	parent.$.messager.warning("该费用当前 '" + parseAccountState( row.accountState, row.direction ) + "' ，不能删除。");
+            return;
+        }
         parent.$.messager.confirm( "确定删除费用 '" + row.type + "' 吗？", function( ok ){
             if( ok ) { target.datagrid( "deleteRow", target.datagrid("getRowIndex",row) ); markDirty( target ); }
         } );
