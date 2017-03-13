@@ -17,7 +17,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<struts.version>2.3.1</struts.version>
+		<struts.version>2.3.31</struts.version>
 		<sitemesh3.version>3.0-alpha-2</sitemesh3.version>
 		<shiro.version>1.2.0</shiro.version>
 	</properties>
