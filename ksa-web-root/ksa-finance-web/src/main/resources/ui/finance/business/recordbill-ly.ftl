@@ -2520,8 +2520,8 @@
     <#assign totalExpense = total.expense />
     <#assign totalProfit = totalIncome - totalExpense />
     <#assign totalProfitRate = 0 />
-    <#if totalExpense &gt; 0.1>
-    	<#assign totalProfitRate = totalProfit / totalExpense />
+    <#if totalIncome &gt; 0.1>
+    	<#assign totalProfitRate = totalProfit / totalIncome />
     </#if>
     <Cell ss:MergeAcross="1" ss:StyleID="s109"><Data ss:Type="String">利润</Data><NamedCell ss:Name="Print_Area"/></Cell>
     <Cell ss:MergeAcross="2" ss:StyleID="m45093144"><Data ss:Type="String">${totalProfit?string("0.###")}</Data><NamedCell ss:Name="Print_Area"/></Cell>
