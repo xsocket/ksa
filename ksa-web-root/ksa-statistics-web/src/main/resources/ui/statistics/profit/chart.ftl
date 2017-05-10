@@ -9,14 +9,14 @@
 <script type="text/javascript">
 	$.ajax({
         url: "<@s.url namespace="/data/chart/profit" action="${chart!'Column2D'}" />",
-        data: "${stack.findValue("@org.apache.struts2.ServletActionContext@getRequest().queryString")!}",
+        data: "${queryString!}",
         success: function( xml ) {
             try {
                 var chart = new FusionCharts( APPLICATION_CONTEXTPATH + "/rs/charts/${chart!"MSColumn2D"}.swf?ChartNoDataText=暂时没有任何数据可以显示", "ChartId", $(window).width() - 10, $(window).height() - 12, "0", "0");
                 chart.addParam( "wmode", "Opaque" );
 			    chart.setDataXML( xml );		   
 			    chart.render("chart_container");
-            } catch (e) { }
+            } catch (e) { console.log(e); }
         }
     }); 
 </script>

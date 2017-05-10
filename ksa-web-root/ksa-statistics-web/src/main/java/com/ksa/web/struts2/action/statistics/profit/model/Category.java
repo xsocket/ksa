@@ -11,7 +11,8 @@ public class Category {
     protected String label;
 
     public String getLabel() {
-        return label;
+        // filter
+        return label == null ? "" : label.replaceAll("&", "");
     }
 
     public void setLabel( String label ) {
