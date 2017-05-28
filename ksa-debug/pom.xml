@@ -5,7 +5,7 @@
    <parent>
 		<groupId>com.ksa</groupId>
 		<artifactId>ksa-root</artifactId>
-		<version>3.8.9</version>
+		<version>3.9.0</version>
 	</parent>
 
 	<artifactId>ksa-debug</artifactId>
