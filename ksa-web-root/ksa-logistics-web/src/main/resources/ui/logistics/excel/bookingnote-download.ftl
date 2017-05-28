@@ -110,6 +110,11 @@
     <Cell><Data ss:Type="String">退单日期</Data></Cell>
     <Cell><Data ss:Type="String">税单号</Data></Cell>
     <Cell><Data ss:Type="String">快件单号</Data></Cell>
+    <Cell><Data ss:Type="String">中文品名</Data></Cell>
+    <Cell><Data ss:Type="String">英文品名</Data></Cell>
+    <Cell><Data ss:Type="String">HS CODE</Data></Cell>
+    <Cell><Data ss:Type="String">申报要素</Data></Cell>
+    <Cell><Data ss:Type="String">价格</Data></Cell>
    </Row>
    <#list bookingNotes as note>
 	   <#assign isSea = true />
@@ -118,7 +123,7 @@
 	   </#if>
    <Row ss:AutoFitHeight="0">
     <Cell><Data ss:Type="String">${note.code!}</Data></Cell>
-    <Cell><Data ss:Type="String"><#if note.type=="SE">海运出口<#elseif note.type=="SI">海运进口<#elseif note.type=="AE">空运出口<#elseif note.type=="AI">空运进口<#elseif note.type=="LY">国内运输<#else>未知类型</#if></Data></Cell>
+    <Cell><Data ss:Type="String"><#if note.type=="SE">海运出口<#elseif note.type=="SI">海运进口<#elseif note.type=="AE">空运出口<#elseif note.type=="AI">空运进口<#elseif note.type=="LY">国内运输<#elseif note.type=="ZJ">代办证件<#elseif note.type=="KB">捆包业务<#elseif note.type=="RH">内航线<#elseif note.type=="BC">搬场业务<#elseif note.type=="CC">仓储业务<#elseif note.type=="TL">公铁联运<#else>未知类型</#if></Data></Cell>
     <Cell><Data ss:Type="String"><#if note.createdDate??>${note.createdDate?date}</#if></Data></Cell>
     <Cell><Data ss:Type="String">${note.customer.name!}</Data></Cell>
     <Cell><Data ss:Type="String">${note.shipper.name!}</Data></Cell>
@@ -143,6 +148,11 @@
     <Cell><Data ss:Type="String"><#if note.returnDate??>${note.returnDate?date}</#if></Data></Cell>
     <Cell><Data ss:Type="String">${note.taxCode!}</Data></Cell>
     <Cell><Data ss:Type="String">${note.expressCode!}</Data></Cell>
+    <Cell><Data ss:Type="String">${note.cargoName!}</Data></Cell>
+    <Cell><Data ss:Type="String">${note.cargoNameEng!}</Data></Cell>
+    <Cell><Data ss:Type="String">${note.hsCode!}</Data></Cell>
+    <Cell><Data ss:Type="String">${note.keyContent!}</Data></Cell>
+    <Cell><Data ss:Type="String">${note.cargoPrice!}</Data></Cell>
    </Row>
    </#list>
   </Table>

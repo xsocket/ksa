@@ -12,7 +12,11 @@
 		<result column="CHARGE_DATE" property="chargeDate" javaType="Date" />	<!-- 记账日期 -->
 		<result column="INVOICE_NUMBER" property="invoiceNumber" javaType="String" />
 		
-		<result column="CARGO_NAME" property="cargoName" javaType="String" />	
+		<result column="CARGO_NAME" property="cargoName" javaType="String" />
+        <result column="CARGO_NAME_ENG" property="cargoNameEng" javaType="String" />
+        <result column="CARGO_PRICE" property="cargoPrice" javaType="String" />
+        <result column="HS_CODE" property="hsCode" javaType="String" />
+        <result column="KEY_CONTENT" property="keyContent" javaType="String" />	
 		<result column="CARGO_NOTE" property="cargoNote" javaType="String" />
 		<result column="CARGO_DESCRIPTION" property="cargoDescription" javaType="String" />
 		<result column="CARGO_CONTAINER" property="cargoContainer" javaType="String" />
@@ -68,7 +72,11 @@
 		<result column="CHARGE_DATE" property="chargeDate" javaType="Date" />	<!-- 记账日期 -->
 		<result column="INVOICE_NUMBER" property="invoiceNumber" javaType="String" />
 		
-		<result column="CARGO_NAME" property="cargoName" javaType="String" />	
+		<result column="CARGO_NAME" property="cargoName" javaType="String" />
+        <result column="CARGO_NAME_ENG" property="cargoNameEng" javaType="String" />
+        <result column="CARGO_PRICE" property="cargoPrice" javaType="String" />
+        <result column="HS_CODE" property="hsCode" javaType="String" />
+        <result column="KEY_CONTENT" property="keyContent" javaType="String" />	
 		<result column="CARGO_NOTE" property="cargoNote" javaType="String" />
 		<result column="CARGO_DESCRIPTION" property="cargoDescription" javaType="String" />
 		<result column="CARGO_CONTAINER" property="cargoContainer" javaType="String" />
@@ -171,7 +179,8 @@
 		INSERT INTO KSA_LOGISTICS_BOOKINGNOTE
 						(  ID, 	CODE, 	TYPE, TYPE_SUB,		SERIAL_NUMBER, 	CUSTOMER_ID, INVOICE_NUMBER, CREATED_DATE,  	CHARGE_DATE,					
 						SALER_ID, CREATOR_ID, CARRIER_ID, SHIPPING_AGENT_ID, AGENT_ID,
-						CARGO_NAME, CARGO_NOTE, CARGO_CONTAINER, CARGO_DESCRIPTION, SHIPPING_MARK, VOLUMN, WEIGHT, QUANTITY, UNIT,QUANTITY_DESCRIPTION,
+						CARGO_NAME, CARGO_NAME_ENG, CARGO_PRICE, HS_CODE, KEY_CONTENT,
+                        CARGO_NOTE, CARGO_CONTAINER, CARGO_DESCRIPTION, SHIPPING_MARK, VOLUMN, WEIGHT, QUANTITY, UNIT,QUANTITY_DESCRIPTION,
 						TITLE, MAWB, HAWB, SHIPPER_ID, CONSIGNEE_ID, NOTIFY_ID,
 						DEPARTURE, DEPARTURE_PORT, DEPARTURE_DATE, DESTINATION, DESTINATION_PORT, DESTINATION_DATE, LOADING_PORT, DISCHARGE_PORT, DELIVER_DATE,
 						ROUTE, ROUTE_NAME, ROUTE_CODE,
@@ -181,7 +190,8 @@
 						VEHICLE_TEAM_ID, VEHICLE_TYPE, VEHICLE_NUMBER, STATE )
 		VALUES ( 	#{id,jdbcType=VARCHAR},  #{code,jdbcType=VARCHAR}, 	#{type,jdbcType=VARCHAR}, 	#{subType,jdbcType=VARCHAR},	#{serialNumber}, #{customer.id,jdbcType=VARCHAR},#{invoiceNumber,jdbcType=VARCHAR},#{createdDate,jdbcType=DATE},#{chargeDate,jdbcType=DATE},
 			 		#{saler.id,jdbcType=VARCHAR}, #{creator.id,jdbcType=VARCHAR}, #{carrier.id,jdbcType=VARCHAR}, #{shippingAgent.id,jdbcType=VARCHAR}, #{agent.id,jdbcType=VARCHAR}, 
-			 		#{cargoName,jdbcType=VARCHAR},#{cargoNote,jdbcType=VARCHAR},#{cargoContainer,jdbcType=VARCHAR},#{cargoDescription,jdbcType=VARCHAR},#{shippingMark,jdbcType=VARCHAR}, #{volumn,jdbcType=NUMERIC}, #{weight,jdbcType=NUMERIC}, #{quantity,jdbcType=NUMERIC},#{unit,jdbcType=VARCHAR},#{quantityDescription,jdbcType=VARCHAR},
+			 		#{cargoName,jdbcType=VARCHAR},#{cargoNameEng,jdbcType=VARCHAR},#{cargoPrice,jdbcType=VARCHAR},#{hsCode,jdbcType=VARCHAR},#{keyContent,jdbcType=VARCHAR},
+                    #{cargoNote,jdbcType=VARCHAR},#{cargoContainer,jdbcType=VARCHAR},#{cargoDescription,jdbcType=VARCHAR},#{shippingMark,jdbcType=VARCHAR}, #{volumn,jdbcType=NUMERIC}, #{weight,jdbcType=NUMERIC}, #{quantity,jdbcType=NUMERIC},#{unit,jdbcType=VARCHAR},#{quantityDescription,jdbcType=VARCHAR},
 			 		#{title,jdbcType=VARCHAR}, #{mawb,jdbcType=VARCHAR}, #{hawb,jdbcType=VARCHAR}, #{shipper.id,jdbcType=VARCHAR},#{consignee.id,jdbcType=VARCHAR},#{notify.id,jdbcType=VARCHAR},
 			 		#{departure,jdbcType=VARCHAR},#{departurePort,jdbcType=VARCHAR}, #{departureDate,jdbcType=DATE},#{destination,jdbcType=VARCHAR},#{destinationPort,jdbcType=VARCHAR},#{destinationDate,jdbcType=DATE},#{loadingPort,jdbcType=VARCHAR}, #{dischargePort,jdbcType=VARCHAR}, #{deliverDate,jdbcType=DATE}, 
 			 		#{route,jdbcType=VARCHAR},#{routeName,jdbcType=VARCHAR},#{routeCode,jdbcType=VARCHAR},
@@ -206,6 +216,10 @@
 		  	AGENT_ID						= #{agent.id,jdbcType=VARCHAR},
 		  	
 		  	CARGO_NAME					= #{cargoName,jdbcType=VARCHAR},
+            CARGO_NAME_ENG       = #{cargoNameEng,jdbcType=VARCHAR},
+            CARGO_PRICE          = #{cargoPrice,jdbcType=VARCHAR},
+            KEY_CONTENT          = #{keyContent,jdbcType=VARCHAR},
+            HS_CODE              = #{hsCode,jdbcType=VARCHAR},
 		  	CARGO_NOTE					= #{cargoNote,jdbcType=VARCHAR},
 		  	CARGO_DESCRIPTION  	= #{cargoDescription,jdbcType=VARCHAR},
 		  	CARGO_CONTAINER  		= #{cargoContainer,jdbcType=VARCHAR},

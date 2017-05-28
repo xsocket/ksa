@@ -16,6 +16,12 @@ import com.ksa.model.security.User;
  * @author 麻文强
  * 
  * @since v0.0.1
+ * 
+ * 
+ALTER TABLE ksa_logistics_bookingnote Add column HS_CODE varchar(200) AFTER `CARGO_NAME`;
+ALTER TABLE ksa_logistics_bookingnote Add column KEY_CONTENT varchar(1000) AFTER `CARGO_NAME`;
+ALTER TABLE ksa_logistics_bookingnote Add column CARGO_PRICE varchar(200) AFTER `CARGO_NAME`; 
+ALTER TABLE ksa_logistics_bookingnote Add column CARGO_NAME_ENG varchar(1000) AFTER `CARGO_NAME`;
  */
 public class BookingNote extends BaseModel implements Comparable<BookingNote> {
 
@@ -106,6 +112,17 @@ public class BookingNote extends BaseModel implements Comparable<BookingNote> {
     // -------------- 货物信息 -------------- //
     /** 品名 */
     protected String cargoName;
+    
+    /** 英文品名 */
+    protected String cargoNameEng;
+       
+    protected String hsCode;
+    
+    /** 关键要素 */
+    protected String keyContent;
+    
+    /** 价格 */
+    protected String cargoPrice;
 
     /** 备注 */
     protected String cargoNote;
@@ -743,6 +760,38 @@ public class BookingNote extends BaseModel implements Comparable<BookingNote> {
     
     public void setReturnDate2( Date returnDate2 ) {
         this.returnDate2 = returnDate2;
+    }
+
+    public String getCargoNameEng() {
+      return cargoNameEng;
+    }
+
+    public void setCargoNameEng(String cargoNameEng) {
+      this.cargoNameEng = cargoNameEng;
+    }
+
+    public String getHsCode() {
+      return hsCode;
+    }
+
+    public void setHsCode(String hsCode) {
+      this.hsCode = hsCode;
+    }
+
+    public String getKeyContent() {
+      return keyContent;
+    }
+
+    public void setKeyContent(String keyContent) {
+      this.keyContent = keyContent;
+    }
+
+    public String getCargoPrice() {
+      return cargoPrice;
+    }
+
+    public void setCargoPrice(String cargoPrice) {
+      this.cargoPrice = cargoPrice;
     }
 
     @Override

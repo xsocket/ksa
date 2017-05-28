@@ -187,6 +187,31 @@
 		</div>
 	</div> <br/>
 	<div class="control-group">
+		<label class="control-label">英文品名：</label>
+		<div class="controls">
+			<textarea name="cargoNameEng" rows="3"
+				class="easyui-validatebox input-xxlarge" data-options="required:false,validType:'length[0,1000]'">${model.cargoNameEng!}</textarea>
+		</div>
+	</div> <br/>
+	<div class="control-group">
+		<label class="control-label">价格：</label>
+		<div class="controls">
+	    	<input type="text" name="cargoPrice" value="${model.cargoPrice!}" />
+		</div>
+	</div>
+	<div class="control-group">
+		<label class="control-label">HScode：</label>
+		<div class="controls">
+	    	<input type="text" name="hsCode" value="${model.hsCode!}" />
+		</div>
+	</div> <br/>
+	<div class="control-group">
+		<label class="control-label">申报要素：</label>
+		<div class="controls">
+			<textarea name="keyContent" rows="3" class="input-xxlarge">${model.keyContent!}</textarea>
+		</div>
+	</div> <br/>
+	<div class="control-group">
 		<label class="control-label">唛头：</label>
 		<div class="controls">
 			<textarea name="shippingMark" rows="2" class="input-xxlarge">${model.shippingMark!}</textarea>
