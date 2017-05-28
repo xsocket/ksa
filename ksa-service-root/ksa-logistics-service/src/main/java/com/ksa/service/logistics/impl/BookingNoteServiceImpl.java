@@ -50,6 +50,9 @@ public class BookingNoteServiceImpl implements BookingNoteService {
         } else if( BookingNote.TYPE_NATIVE.equalsIgnoreCase( type ) ) {
             bn.setType( BookingNote.TYPE_NATIVE );
             bn.setSerialNumber( queryNativeBookingNoteCount() + 1 );
+        } else if( BookingNote.TYPE_ZJ.equalsIgnoreCase( type ) ) {
+            bn.setType( BookingNote.TYPE_ZJ );
+            bn.setSerialNumber( queryNotNativeBookingNoteCount() + 1 );
         } else if( BookingNote.TYPE_KB.equalsIgnoreCase( type ) ) {
             bn.setType( BookingNote.TYPE_KB );
             bn.setSerialNumber( queryNativeBookingNoteCount() + 1 );

@@ -44,6 +44,7 @@ function GET_BOOKINGNOTE_TABLE_COLUMN( showColumn ) {
                        case "LY" : type = "国内运输"; break; case "KB" : type = "捆包业务"; break;
                        case "RH" : type = "内航线"; break; case "CC" : type = "仓储业务"; break;
                        case "BC" : type = "搬场业务"; break; case "TL" : type = "公铁联运"; break;
+                       case "ZJ" : type = "证件代办"; break;
                    }
                    if( data.subType && data.subType != "" ) {
                        type = type + "( " + data.subType + " )";

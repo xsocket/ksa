@@ -21,3 +21,7 @@ target/
 .project
 .classpath
 .settings/
+
+# IDEA
+*.iml
+.idea/
