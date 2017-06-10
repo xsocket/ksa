@@ -24,6 +24,7 @@
             <result name="successCC" type="freemarker-stream">/ui/finance/business/recordbill-ex.ftl</result>
             <result name="successRH" type="freemarker-stream">/ui/finance/business/recordbill-ex.ftl</result>
             <result name="successTL" type="freemarker-stream">/ui/finance/business/recordbill-ex.ftl</result>
+            <result name="successZJ" type="freemarker-stream">/ui/finance/business/recordbill-im.ftl</result>
 		</action>
 	</package>
 	
