@@ -266,6 +266,8 @@ public class BookingNoteServiceImpl implements BookingNoteService {
           bn.setType( BookingNote.TYPE_RH );
       } else if( BookingNote.TYPE_TL.equalsIgnoreCase( type ) ) {
           bn.setType( BookingNote.TYPE_TL );
+      } else if( BookingNote.TYPE_ZJ.equalsIgnoreCase( type ) ) {
+        bn.setType( BookingNote.TYPE_ZJ );
       } else {
           throw new IllegalArgumentException( String.format( "不存在类型为 '%s' 的托单。", type ) );
       }
