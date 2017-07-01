@@ -29,6 +29,8 @@ public class TypeValueGetter extends AbstractBookingNoteValueGetter {
                 return "内航线";
             } else if( BookingNote.TYPE_TL.equalsIgnoreCase( type ) ) {
                 return "公铁联运";
+            } else if( BookingNote.TYPE_ZJ.equalsIgnoreCase( type ) ) {
+              return "证件代办";
             } 
         }
         return "其他";
