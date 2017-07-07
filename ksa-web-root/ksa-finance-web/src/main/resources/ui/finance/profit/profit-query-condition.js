@@ -31,6 +31,7 @@ var PROFIT_QUERY_CONDITION = [
         input.append("<option value='CC'>仓储业务</option>");
         input.append("<option value='BC'>搬场业务</option>");
         input.append("<option value='TL'>公铁联运</option>");
+        input.append("<option value='ZJ'>证件代办</option>");
         $(target).append(input);
         input.combobox( {multiple:true,editable:false} );
     } },
