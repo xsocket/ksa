@@ -41,6 +41,7 @@ public class AccountExcelAction extends AccountAction {
         TYPE_SORTED_MAP.put( BookingNote.TYPE_BC, 7 );
         TYPE_SORTED_MAP.put( BookingNote.TYPE_RH, 8 );
         TYPE_SORTED_MAP.put( BookingNote.TYPE_TL, 9 );
+        TYPE_SORTED_MAP.put( BookingNote.TYPE_ZJ, 10 );
     }
     
     protected List<BookingNote> bookingNotes;
