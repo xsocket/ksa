@@ -159,9 +159,11 @@
 <#if !readonly>	<#-- 只读状态不允许修改保存  -->
 	<button id="dialog_save" class="btn btn-primary"><i class="icon-ok icon-white"></i> 保存</button>
 <#else>
+<#-- 
 	<@shiro.hasPermission name="finance:charge-check">
 	<button id="dialog_save" class="btn btn-primary"><i class="icon-ok icon-white"></i> 保存</button>
 	</@shiro.hasPermission>
+-->
 </#if>
 	<button id="dialog_close" class="btn btn-danger"><i class="icon-off icon-white"></i> 关闭</button>
 </div>

@@ -37,7 +37,7 @@ $(function(){
     var $grid2 = initGrid( $( "table#expense_datagrid" ), -1 ).datagrid('loadData', EXPENSES);
     
     var chargeDateChanged = false;
-    if( !READONLY || CHECK_PERMISSION ) {
+    if( !READONLY ) {
         $("#chargeDate").datebox({
             monthMode:true,
             // 只显示月份
